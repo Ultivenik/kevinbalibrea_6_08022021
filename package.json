@@ -1,0 +1,30 @@
+{
+  "name": "P6_fisheye",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ultivenik/kevinbalibrea_6_08022021.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ultivenik/kevinbalibrea_6_08022021/issues"
+  },
+  "homepage": "https://github.com/Ultivenik/kevinbalibrea_6_08022021#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "eslint": "^7.19.0",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  }
+}
