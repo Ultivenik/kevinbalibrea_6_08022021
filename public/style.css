@@ -30,20 +30,19 @@ body{
     border-radius:20px;
     padding: .3% 1%;
 }
-.tag a, .main-title{
+.tag a, .main-title, .city{
     color: #901C1C;
 }
 .main .main-title{
     position: absolute;
     font-weight: 400;
-    top: 5%;
+    top: 6%;
     right: 7%;
     font-size: 3em;
 }
 .profiles{
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
 }
 .profile{
@@ -51,11 +50,11 @@ body{
     display: flex;
     flex-direction: column;
     width: 30%;
+    height: 35em;
 }
 .profile img{
     width: 17em;
     height: 17em;
-    overflow: hidden;
     display: block;
     margin: auto;
     border-radius: 50%;
@@ -65,6 +64,21 @@ body{
 .profile h2{
     font-size: 45px;
     color: #D3573C;
+    margin-top: 5%;
     -webkit-text-stroke: 1px black;
     text-shadow: 0 7px 6px rgba(0, 0, 0, 0.2) ;
+}
+.profile p{
+    margin: 1%;
+}
+.profile .tag{
+    margin: .5%;
+    display: inline-block;
+}
+.quote{
+    font-size: 12px;
+}
+.price{
+    color: #757575;
+    font-size: 12px;
 }
