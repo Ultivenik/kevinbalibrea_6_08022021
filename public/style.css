@@ -51,6 +51,15 @@ body{
     flex-direction: column;
     width: 30%;
     height: 35em;
+    position: relative;
+}
+.img-profile-link{
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 50%;
+    width: 17em;
+    height: 17em;
+    margin: 0 auto;
 }
 .profile img{
     width: 17em;
@@ -60,6 +69,24 @@ body{
     border-radius: 50%;
     object-fit: cover;
     object-position: 63% 24%;
+}
+.img-1{
+    scale: 1.4;
+}
+.img-3{
+    scale: 2.7;
+}
+.img-4{
+    scale: 2.5;
+}
+.img-5{
+    scale: 2.5;
+    margin: 65% 23% !important;
+
+}
+.img-6{
+    scale: 1.8;
+    margin: 15% 8% !important;
 }
 .profile h2{
     font-size: 45px;
