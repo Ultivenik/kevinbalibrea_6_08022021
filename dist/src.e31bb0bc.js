@@ -819,11 +819,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var Categories = function Categories() {
   _classCallCheck(this, Categories);
-
-  _defineProperty(this, "tags", ["Portrait", "Art", "Fashion", "Architecture", "Travel", "Sport", "Animals", "Events"]);
 };
 
 exports.default = Categories;
+
+_defineProperty(Categories, "tags", ["Portrait", "Art", "Fashion", "Architecture", "Travel", "Sport", "Animals", "Events"]);
 },{}],"../js/Events.js":[function(require,module,exports) {
 "use strict";
 
@@ -851,17 +851,26 @@ var Events = /*#__PURE__*/function () {
 
   _createClass(Events, null, [{
     key: "filter",
-    value: function filter(profile) {
+    value: function filter(
+    /*DOMTag,*/
+    profile) {
       var photographersInfo = _FishEyeDataFR.default.photographers;
-      var tagsInfo = new _Categories.default();
-      var tagsToLowerCase = tagsInfo.tags.map(function (item) {
+
+      var tagsToLowerCase = _Categories.default.tags.map(function (item) {
         return item.toLowerCase();
       });
+
+      var arr = []; // DOMTag.addEventListener('click', () => {
+
       photographersInfo.map(function (tag) {
-        if (!tag.tags.includes(tagsToLowerCase)) {
+        arr.push(tag.tags);
+        arr.flat();
+        console.log(arr);
+
+        if (!tagsToLowerCase.includes(tag.tags)) {
           profile.classList.toggle('hide');
         }
-      });
+      }); // })
     }
   }]);
 
@@ -895,21 +904,21 @@ var Assembly = /*#__PURE__*/function () {
   }
 
   _createClass(Assembly, null, [{
-    key: "header",
-    value: function header() {
-      var header = document.createElement("header");
+    key: "DOMConstructHeader",
+    value: function DOMConstructHeader() {
       var logoLink = document.createElement('a');
       var logoImg = document.createElement('img');
+      var header = document.createElement("header");
       var headerNav = document.createElement("nav");
-      var filterTag = new _Categories.default();
-      document.body.prepend(header);
-      header.appendChild(logoLink);
-      logoLink.appendChild(logoImg);
-      header.appendChild(headerNav);
-      header.classList.add("header");
       logoLink.href = "index.html";
       logoImg.src = "./logo.png";
-      filterTag.tags.map(function (tag) {
+      header.classList.add("header");
+      document.body.prepend(header);
+      logoLink.appendChild(logoImg);
+      header.appendChild(logoLink);
+      header.appendChild(headerNav);
+
+      _Categories.default.tags.map(function (tag) {
         var spanNav = document.createElement("span");
         var linkNav = document.createElement("a");
         linkNav.href = "#";
@@ -931,8 +940,8 @@ var Assembly = /*#__PURE__*/function () {
       return sectionContainer;
     }
   }, {
-    key: "DOMConstruct",
-    value: function DOMConstruct(photographer) {
+    key: "DOMConstructMainProfiles",
+    value: function DOMConstructMainProfiles(photographer) {
       var figure = document.createElement("figure");
       var profileLink = document.createElement('a');
       var profileImg = document.createElement('img');
@@ -952,10 +961,6 @@ var Assembly = /*#__PURE__*/function () {
       profileImg.src = photographer.portrait;
       profileImg.alt = "photo profil de ".concat(photographer.name);
       profileImg.classList.add("img-".concat(photographer.id));
-      profileTitle.innerHTML = photographer.name;
-      profiltCity.innerHTML = "".concat(photographer.city, " ") + "".concat(photographer.country);
-      profileQuote.innerHTML = photographer.tagline;
-      profilePrice.innerHTML = photographer.price + '€';
       photographer.tags.map(function (tag) {
         var profileSpan = document.createElement('span');
         var profileSpanLink = document.createElement('a');
@@ -965,6 +970,10 @@ var Assembly = /*#__PURE__*/function () {
         profileSpan.appendChild(profileSpanLink);
         profileFigcaption.appendChild(profileSpan);
       });
+      profileTitle.innerHTML = photographer.name;
+      profiltCity.innerHTML = "".concat(photographer.city, " ") + "".concat(photographer.country);
+      profileQuote.innerHTML = photographer.tagline;
+      profilePrice.innerHTML = photographer.price + '€';
       figure.appendChild(profileLink);
       profileLink.appendChild(profileImg);
       figure.appendChild(profileTitle);
@@ -973,6 +982,52 @@ var Assembly = /*#__PURE__*/function () {
       profileFigcaption.appendChild(profileQuote);
       profileFigcaption.appendChild(profilePrice);
       return figure;
+    }
+  }, {
+    key: "DOMConstructProfilesSection",
+    value: function DOMConstructProfilesSection(ID) {
+      this.DOMConstructHeader();
+      document.querySelector("nav").remove();
+      var infoProfile = document.createElement('section');
+      var IDName = document.createElement("h2");
+      var IDLocation = document.createElement("p");
+      var IDTagline = document.createElement("p");
+      var btnContact = document.createElement('button');
+      infoProfile.appendChild(IDName);
+      infoProfile.appendChild(IDLocation);
+      infoProfile.appendChild(IDTagline);
+      ID.tags.map(function (tag) {
+        var profileSpan = document.createElement('span');
+        var profileSpanLink = document.createElement('a');
+        profileSpanLink.href = "#";
+        profileSpan.classList.add("tag");
+        profileSpanLink.innerHTML = "#" + tag;
+        profileSpan.appendChild(profileSpanLink);
+        infoProfile.appendChild(profileSpan);
+      });
+      infoProfile.appendChild(btnContact);
+      var IDImg = document.createElement('img');
+      IDImg.src = ID.portrait;
+      IDImg.alt = "photo profil de ".concat(ID.name);
+      infoProfile.appendChild(IDImg);
+      IDName.innerHTML = ID.name;
+      IDLocation.innerHTML = "".concat(ID.city) + "".concat(ID.country);
+      IDTagline.innerHTML = ID.tagline;
+      btnContact.innerHTML = "Contactez-moi";
+      infoProfile.classList.add("profileID");
+      IDName.classList.add("name");
+      IDLocation.classList.add("city");
+      IDTagline.classList.add("quote");
+      btnContact.classList.add('btn-contact');
+      IDImg.classList.add("img-profile-link");
+      return infoProfile;
+    }
+  }, {
+    key: "DOMConstructGalery",
+    value: function DOMConstructGalery() {
+      var infoGallery = document.createElement("section");
+      document.createElement("label");
+      document.createElement("input");
     }
   }]);
 
@@ -997,13 +1052,20 @@ function init() {
   //stocker les données des photographes du fichier JSON
   var photographersInfo = _FishEyeDataFR.default.photographers; //creation du DOM header
 
-  _Assembly.default.header(); //Création d'instances de classes et ajout dans le DOM
+  _Assembly.default.DOMConstructHeader(); //Création d'instances de classes et ajout dans le DOM
 
 
   var photographersProfile = photographersInfo.map(function (photographerInfo) {
     var photographer = _PhotographerFactory.default.create(photographerInfo);
 
-    return _Assembly.default.DOMConstruct(photographer);
+    return _Assembly.default.DOMConstructMainProfiles(photographer);
+  });
+  var photographersID = photographersInfo.map(function (photographerInfo) {
+    console.log(photographerInfo);
+
+    var photographer = _PhotographerFactory.default.create(photographerInfo);
+
+    return _Assembly.default.DOMConstructProfilesSection(photographer);
   }); //Construction du container et envoi des enfant dans le parent
 
   var main = _Assembly.default.DOMConstructMain();
@@ -1011,13 +1073,18 @@ function init() {
   photographersProfile.map(function (profile) {
     main.appendChild(profile);
   });
-  var tagNav = document.querySelectorAll('.tag');
-  var profiles = document.querySelectorAll('.profile');
-  tagNav.forEach(function (item) {
-    profiles.forEach(function (o) {
-      item.addEventListener('click', _Events.default.filter(o));
-    });
-  });
+  photographersID.map(function (ID) {
+    main.appendChild(ID);
+  }); // let tagsNav = document.querySelectorAll('.tag')
+  // let profiles = document.querySelectorAll('.profile')
+  // tagsNav.forEach(tagNav =>{
+  //    tagNav.addEventListener('click', () => {
+  //       profiles.forEach(profile =>{
+  //          Events.filter(profile)
+  //       })
+  //    })
+  // })
+
   var media = _FishEyeDataFR.default.media;
 } // Evenemment d'initiation du document
 
@@ -1051,7 +1118,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50963" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52246" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

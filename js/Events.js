@@ -2,19 +2,25 @@ import info from '../FishEyeDataFR.json'
 import Categories from './Categories'
 
 export default class Events {
-    static filter(profile)
+    static filter(/*DOMTag,*/ profile)
     {
         let photographersInfo = info.photographers
-        let tagsInfo = new Categories()
-
-        let tagsToLowerCase = tagsInfo.tags.map(item => {
+        let tagsToLowerCase = Categories.tags.map(item => {
             return item.toLowerCase()
         })
+        let arr = []
 
-        photographersInfo.map(tag =>{
-            if (!tag.tags.includes(tagsToLowerCase)) {
-                profile.classList.toggle('hide')
-            }
-        })
+        // DOMTag.addEventListener('click', () => {
+            photographersInfo.map(tag =>{
+                arr.push(tag.tags)
+                arr.flat()
+
+                console.log(arr);
+
+                if (!tagsToLowerCase.includes(tag.tags)) {
+                    profile.classList.toggle('hide')
+                }
+            })
+        // })
     }
 }

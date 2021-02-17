@@ -2,24 +2,24 @@ import Events from './Events'
 import Categories from './Categories'
 
 export default class Assembly {
-    static header()
+    static DOMConstructHeader()
     {
-        let header = document.createElement("header")
         let logoLink = document.createElement('a')
         let logoImg = document.createElement('img')
+        let header = document.createElement("header")
         let headerNav = document.createElement("nav")
-        let filterTag = new Categories()
 
-        document.body.prepend(header)
-        header.appendChild(logoLink)
-        logoLink.appendChild(logoImg)
-        header.appendChild(headerNav)
-
-        header.classList.add("header")
         logoLink.href = "index.html"
         logoImg.src = "./logo.png"
 
-        filterTag.tags.map(tag =>{
+        header.classList.add("header")
+
+        document.body.prepend(header)
+        logoLink.appendChild(logoImg)
+        header.appendChild(logoLink)
+        header.appendChild(headerNav)
+
+        Categories.tags.map(tag =>{
             let spanNav = document.createElement("span")
             let linkNav = document.createElement("a")
 
@@ -47,7 +47,7 @@ export default class Assembly {
         return sectionContainer
     }
 
-    static DOMConstruct(photographer)
+    static DOMConstructMainProfiles(photographer)
     {
         let figure = document.createElement("figure")
         let profileLink = document.createElement('a')
@@ -72,11 +72,6 @@ export default class Assembly {
         profileImg.alt = `photo profil de ${photographer.name}`
         profileImg.classList.add(`img-${photographer.id}`)
 
-        profileTitle.innerHTML = photographer.name
-        profiltCity.innerHTML = `${photographer.city} ` + `${photographer.country}`
-        profileQuote.innerHTML = photographer.tagline
-        profilePrice.innerHTML = photographer.price + '€'
-
         photographer.tags.map(tag =>{
             let profileSpan = document.createElement('span')
             let profileSpanLink = document.createElement('a')
@@ -88,6 +83,11 @@ export default class Assembly {
             profileFigcaption.appendChild(profileSpan)
         })
 
+        profileTitle.innerHTML = photographer.name
+        profiltCity.innerHTML = `${photographer.city} ` + `${photographer.country}`
+        profileQuote.innerHTML = photographer.tagline
+        profilePrice.innerHTML = photographer.price + '€'
+
         figure.appendChild(profileLink)
         profileLink.appendChild(profileImg)
         figure.appendChild(profileTitle)
@@ -97,5 +97,57 @@ export default class Assembly {
         profileFigcaption.appendChild(profilePrice)
 
         return figure
+    }
+
+    static DOMConstructProfilesSection(ID)
+    {
+        this.DOMConstructHeader()
+        document.querySelector("nav").remove()
+        let infoProfile = document.createElement('section')
+        let IDName = document.createElement("h2")
+        let IDLocation = document.createElement("p")
+        let IDTagline = document.createElement("p")
+        let btnContact = document.createElement('button')
+
+        infoProfile.appendChild(IDName)
+        infoProfile.appendChild(IDLocation)
+        infoProfile.appendChild(IDTagline)
+        ID.tags.map(tag =>{
+            let profileSpan = document.createElement('span')
+            let profileSpanLink = document.createElement('a')
+
+            profileSpanLink.href = "#"
+            profileSpan.classList.add(`tag`)
+            profileSpanLink.innerHTML ="#" + tag
+            profileSpan.appendChild(profileSpanLink)
+            infoProfile.appendChild(profileSpan)
+        })
+        infoProfile.appendChild(btnContact)
+
+        let IDImg = document.createElement('img')
+        IDImg.src = ID.portrait
+        IDImg.alt = `photo profil de ${ID.name}`
+        infoProfile.appendChild(IDImg)
+
+        IDName.innerHTML = ID.name
+        IDLocation.innerHTML = `${ID.city}` + `${ID.country}`
+        IDTagline.innerHTML = ID.tagline
+        btnContact.innerHTML = "Contactez-moi"
+
+        infoProfile.classList.add("profileID")
+        IDName.classList.add("name")
+        IDLocation.classList.add("city")
+        IDTagline.classList.add("quote")
+        btnContact.classList.add('btn-contact')
+        IDImg.classList.add("img-profile-link")
+
+        return infoProfile
+    }
+
+    static DOMConstructGalery()
+    {
+        let infoGallery = document.createElement("section")
+        document.createElement("label")
+        document.createElement("input")
     }
 }

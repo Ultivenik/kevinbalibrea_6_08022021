@@ -1,5 +1,5 @@
 export default class Categories{
-    tags = [
+    static tags = [
         "Portrait",
         "Art",
         "Fashion",

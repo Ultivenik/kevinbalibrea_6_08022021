@@ -7,27 +7,40 @@ function init() {
    //stocker les données des photographes du fichier JSON
    let photographersInfo = info.photographers
    //creation du DOM header
-   Assembly.header()
+   Assembly.DOMConstructHeader()
    //Création d'instances de classes et ajout dans le DOM
    let photographersProfile = photographersInfo.map(photographerInfo =>{
       let photographer = PhotographerFactory.create(photographerInfo)
-      return Assembly.DOMConstruct(photographer)
+      return (
+         Assembly.DOMConstructMainProfiles(photographer)
+      )
+   })
+
+   let photographersID = photographersInfo.map(photographerInfo =>{
+      console.log(photographerInfo)
+      let photographer = PhotographerFactory.create(photographerInfo)
+      return (
+         Assembly.DOMConstructProfilesSection(photographer)
+      )
    })
    //Construction du container et envoi des enfant dans le parent
    let main = Assembly.DOMConstructMain()
    photographersProfile.map(profile =>{
       main.appendChild(profile)
    })
-
-   let tagNav = document.querySelectorAll('.tag')
-   let profiles = document.querySelectorAll('.profile')
-
-   tagNav.forEach(item=>{
-      profiles.forEach(o =>{
-         item.addEventListener('click', Events.filter(o))
-      })
+   photographersID.map(ID =>{
+      main.appendChild(ID)
    })
+   // let tagsNav = document.querySelectorAll('.tag')
+   // let profiles = document.querySelectorAll('.profile')
 
+   // tagsNav.forEach(tagNav =>{
+   //    tagNav.addEventListener('click', () => {
+   //       profiles.forEach(profile =>{
+   //          Events.filter(profile)
+   //       })
+   //    })
+   // })
 
    let media = info.media
 }
