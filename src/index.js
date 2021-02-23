@@ -1,48 +1,46 @@
 import info from '../FishEyeDataFR.json'
-import PhotographerFactory from '../js/photographers/PhotographerFactory'
-import Assembly from "../js/Assembly.js";
-import Events from '../js/Events'
+import PhotographerFactory from './component/photographers/PhotographerFactory'
+import MainPage from "./component/MainPage";
+import ElementFactory from './component/ElementFactory'
 
-function init() {
-   //stocker les données des photographes du fichier JSON
-   let photographersInfo = info.photographers
-   //creation du DOM header
-   Assembly.DOMConstructHeader()
-   //Création d'instances de classes et ajout dans le DOM
-   let photographersProfile = photographersInfo.map(photographerInfo =>{
-      let photographer = PhotographerFactory.create(photographerInfo)
-      return (
-         Assembly.DOMConstructMainProfiles(photographer)
-      )
-   })
+//stocker les données des photographes du fichier JSON
+const photographersInfo = info.photographers
+const media = info.media
 
+function name(params) {
    let photographersID = photographersInfo.map(photographerInfo =>{
       console.log(photographerInfo)
       let photographer = PhotographerFactory.create(photographerInfo)
       return (
-         Assembly.DOMConstructProfilesSection(photographer)
+         MainPage.DOMConstructProfilesSection(photographer)
       )
    })
+
+      photographersID.map(ID =>{
+      main.appendChild(ID)
+   })
+}
+
+function init() {
+   //creation du DOM header
+   MainPage.DOMConstructHeader()
+   //Création d'instances de classes et ajout dans le DOM
+   let photographersProfile = photographersInfo.map(photographerInfo =>{
+      let photographer = PhotographerFactory.create(photographerInfo)
+      return (
+         MainPage.DOMConstructMainProfiles(photographer)
+      )
+   })
+
    //Construction du container et envoi des enfant dans le parent
-   let main = Assembly.DOMConstructMain()
+   let main = MainPage.DOMConstructMain()
    photographersProfile.map(profile =>{
       main.appendChild(profile)
    })
-   photographersID.map(ID =>{
-      main.appendChild(ID)
+
+   document.querySelectorAll("nav > .tag > a").forEach(tag => {
+      tag.addEventListener('click', MainPage.sortingProfile)
    })
-   // let tagsNav = document.querySelectorAll('.tag')
-   // let profiles = document.querySelectorAll('.profile')
-
-   // tagsNav.forEach(tagNav =>{
-   //    tagNav.addEventListener('click', () => {
-   //       profiles.forEach(profile =>{
-   //          Events.filter(profile)
-   //       })
-   //    })
-   // })
-
-   let media = info.media
 }
 // Evenemment d'initiation du document
 document.addEventListener("DOMContentLoaded", init)
