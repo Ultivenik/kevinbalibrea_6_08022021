@@ -112,27 +112,24 @@ export default class MainPage {
     {
         let tag = e.target.innerHTML
         tag = tag.toLowerCase().substring(1, tag.length)
-        let photographersTags = info.photographers.map(item=>{return item.tags})
+        let photographers = info.photographers.map(item=> {return item})
         let idArray = []
 
-        document.querySelectorAll('.profile').forEach(profiles => {
-            if (!photographersTags.includes(tag)) {
-                idArray.push(profiles.id)
-                console.log(idArray);
+        photographers.map( photographer => {
+            let photographerProfile = document.querySelector(`#profile-${photographer.id}`)
+            console.log(photographerProfile)
+            if (photographer.tags.includes(tag) === false) {
+                idArray.push(photographer.id)
             }
+            photographerProfile.style.removeProperty("display")
         })
 
-        // let arr = []
-
-        // photographersInfo.map(tag =>{
-        //     arr.push(tag.tags)
-        //     arr.flat()
-
-        //     if (!tagsToLowerCase.includes(tag.tags)) {
-        //         profile.classList.toggle('hide')
-        //     }
-        // })
+        idArray.forEach(id => {
+            let photographerCard = document.querySelector(`#profile-${id}`)
+            photographerCard.style.display = "none"
+        })
     }
+
     //method template main landing page
     static DOMConstructMain()
     {
@@ -161,7 +158,7 @@ export default class MainPage {
 
 
         figure.classList.add("profile")
-        figure.id = photographer.id
+        figure.id = "profile-" + photographer.id
         profileLink.classList.add("img-profile-link")
         profileTitle.classList.add("name")
         profileFigcaption.classList.add("info-profile")

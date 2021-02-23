@@ -801,24 +801,25 @@ var MainPage = /*#__PURE__*/function () {
       var tag = e.target.innerHTML;
       tag = tag.toLowerCase().substring(1, tag.length);
 
-      var photographersTags = _FishEyeDataFR.default.photographers.map(function (item) {
-        return item.tags;
+      var photographers = _FishEyeDataFR.default.photographers.map(function (item) {
+        return item;
       });
 
       var idArray = [];
-      document.querySelectorAll('.profile').forEach(function (profiles) {
-        if (!photographersTags.includes(tag)) {
-          idArray.push(profiles.id);
-          console.log(idArray);
+      photographers.map(function (photographer) {
+        var photographerProfile = document.querySelector("#profile-".concat(photographer.id));
+        console.log(photographerProfile);
+
+        if (photographer.tags.includes(tag) === false) {
+          idArray.push(photographer.id);
         }
-      }); // let arr = []
-      // photographersInfo.map(tag =>{
-      //     arr.push(tag.tags)
-      //     arr.flat()
-      //     if (!tagsToLowerCase.includes(tag.tags)) {
-      //         profile.classList.toggle('hide')
-      //     }
-      // })
+
+        photographerProfile.style.removeProperty("display");
+      });
+      idArray.forEach(function (id) {
+        var photographerCard = document.querySelector("#profile-".concat(id));
+        photographerCard.style.display = "none";
+      });
     } //method template main landing page
 
   }, {
@@ -845,7 +846,7 @@ var MainPage = /*#__PURE__*/function () {
       var profileQuote = document.createElement('p');
       var profilePrice = document.createElement('p');
       figure.classList.add("profile");
-      figure.id = photographer.id;
+      figure.id = "profile-" + photographer.id;
       profileLink.classList.add("img-profile-link");
       profileTitle.classList.add("name");
       profileFigcaption.classList.add("info-profile");
@@ -1149,7 +1150,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55689" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56372" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
