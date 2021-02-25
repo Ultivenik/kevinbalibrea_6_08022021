@@ -1,6 +1,4 @@
 import info from './../../FishEyeDataFR.json'
-import Categories from './ElementFactory'
-import Photographer from './photographers/Photographer'
 
 export default class MainPage {
     static tags = [
@@ -117,7 +115,6 @@ export default class MainPage {
 
         photographers.map( photographer => {
             let photographerProfile = document.querySelector(`#profile-${photographer.id}`)
-            console.log(photographerProfile)
             if (photographer.tags.includes(tag) === false) {
                 idArray.push(photographer.id)
             }
@@ -134,16 +131,21 @@ export default class MainPage {
     static DOMConstructMain()
     {
         let main = document.createElement("main")
-        main.classList.add("main")
         let sectionContainer = document.createElement("section")
+        let mainTitle = document.createElement("h1")
 
+        main.classList.add("main")
         sectionContainer.classList.add("profiles")
+        mainTitle.classList.add("main-title")
+        mainTitle.innerHTML = "Nos photographes"
 
         document.body.appendChild(main)
         main.appendChild(sectionContainer)
+        main.prepend(mainTitle)
 
         return sectionContainer
     }
+
     //method template profiles
     static DOMConstructMainProfiles(photographer)
     {
@@ -156,8 +158,8 @@ export default class MainPage {
         let profileQuote = document.createElement('p')
         let profilePrice = document.createElement('p')
 
-
         figure.classList.add("profile")
+        figure.setAttribute("data-portraitId", photographer.id)
         figure.id = "profile-" + photographer.id
         profileLink.classList.add("img-profile-link")
         profileTitle.classList.add("name")
@@ -198,6 +200,4 @@ export default class MainPage {
 
         return figure
     }
-
-
 }
