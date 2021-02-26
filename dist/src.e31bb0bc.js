@@ -754,60 +754,7 @@ var MainPage = /*#__PURE__*/function () {
 
   _createClass(MainPage, null, [{
     key: "DOMConstructHeader",
-    value: // static DomElementContainer(element, classType)
-    // {
-    //     const domElement = document.createElement(element)
-    //     domElement.classList.add(classType)
-    //     return domElement
-    // }
-    // static DomElementContent(element, classType, content)
-    // {
-    //     const domElement = document.createElement(element)
-    //     domElement.classList.add(classType)
-    //     domElement.innerHTML = content
-    //     return domElement
-    // }
-    // static ImageDOM(classImg, sourceImg, altIMG)
-    // {
-    //     const domElement = document.createElement('img')
-    //     domElement.classList.add(classImg)
-    //     domElement.src = sourceImg
-    //     domElement.alt = altIMG
-    //     return domElement
-    // }
-    // static LinksDOM(classLink, href, content)
-    // {
-    //     const domElement = document.createElement('a')
-    //     domElement.classList.add(classLink)
-    //     domElement.href = href
-    //     domElement.innerHTML = content
-    //     return domElement
-    // }
-    // static tagMap()
-    // {
-    //     const tag = this.tags.map(tag =>{
-    //         let spanNav = document.createElement("span")
-    //         let linkNav = document.createElement("a")
-    //         linkNav.href = "#"
-    //         spanNav.classList.add("tag")
-    //         linkNav.innerHTML = "#" + tag
-    //         spanNav.appendChild(linkNav)
-    //         return spanNav
-    //     })
-    //     return tag
-    // }
-    // static profilesLinkMap(photographer)
-    // {
-    //     photographer.tags.map(tag =>{
-    //         let profileSpan = document.createElement('span')
-    //         let profileSpanLink = document.createElement('a')
-    //         profileSpanLink.href = "#"
-    //         profileSpan.classList.add(`tag`)
-    //         profileSpanLink.innerHTML ="#" + tag
-    //         return profileSpan
-    //     })
-    // }
-    // method template header
+    value: // method template header
     function DOMConstructHeader() {
       var logoLink = document.createElement('a');
       var logoImg = document.createElement('img');
@@ -884,9 +831,9 @@ var MainPage = /*#__PURE__*/function () {
       var profileQuote = document.createElement('p');
       var profilePrice = document.createElement('p');
       figure.classList.add("profile");
-      figure.setAttribute("data-portraitId", photographer.id);
       figure.id = "profile-" + photographer.id;
       profileLink.classList.add("img-profile-link");
+      profileLink.setAttribute("data-portraitId", photographer.id);
       profileTitle.classList.add("name");
       profileFigcaption.classList.add("info-profile");
       profiltCity.classList.add("city");
@@ -1059,19 +1006,7 @@ var getPhotographerById = function getPhotographerById(id) {
   return photographersInfo.find(function (photographer) {
     return photographer.id === Number(id);
   });
-}; // function name(params) {
-//    let photographersID = photographersInfo.map(photographerInfo =>{
-//       console.log(photographerInfo)
-//       let photographer = PhotographerFactory.create(photographerInfo)
-//       return (
-//          MainPage.DOMConstructProfilesSection(photographer)
-//       )
-//    })
-//       photographersID.map(ID =>{
-//       main.appendChild(ID)
-//    })
-// }
-
+};
 
 function init() {
   //creation du DOM header
@@ -1092,7 +1027,7 @@ function init() {
   document.querySelectorAll("nav > .tag > a").forEach(function (tag) {
     tag.addEventListener('click', _MainPage.default.sortingProfile);
   });
-  document.querySelectorAll(".profile").forEach(function (profile) {
+  document.querySelectorAll(".profile .img-profile-link").forEach(function (profile) {
     profile.addEventListener('click', function (evt) {
       var id = evt.currentTarget.getAttribute("data-portraitId");
 
@@ -1131,7 +1066,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50626" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53617" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
