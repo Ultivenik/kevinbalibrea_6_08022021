@@ -1,6 +1,4 @@
 import info from './../../FishEyeDataFR.json'
-import Categories from './ElementFactory'
-import Photographer from './photographers/Photographer'
 
 export default class MainPage {
     static tags = [
@@ -13,68 +11,6 @@ export default class MainPage {
         "Animals",
         "Events",
     ]
-
-    // static DomElementContainer(element, classType)
-    // {
-    //     const domElement = document.createElement(element)
-    //     domElement.classList.add(classType)
-    //     return domElement
-    // }
-
-    // static DomElementContent(element, classType, content)
-    // {
-    //     const domElement = document.createElement(element)
-    //     domElement.classList.add(classType)
-    //     domElement.innerHTML = content
-    //     return domElement
-    // }
-
-    // static ImageDOM(classImg, sourceImg, altIMG)
-    // {
-    //     const domElement = document.createElement('img')
-    //     domElement.classList.add(classImg)
-    //     domElement.src = sourceImg
-    //     domElement.alt = altIMG
-    //     return domElement
-    // }
-
-    // static LinksDOM(classLink, href, content)
-    // {
-    //     const domElement = document.createElement('a')
-    //     domElement.classList.add(classLink)
-    //     domElement.href = href
-    //     domElement.innerHTML = content
-    //     return domElement
-    // }
-
-    // static tagMap()
-    // {
-    //     const tag = this.tags.map(tag =>{
-    //         let spanNav = document.createElement("span")
-    //         let linkNav = document.createElement("a")
-
-    //         linkNav.href = "#"
-    //         spanNav.classList.add("tag")
-
-    //         linkNav.innerHTML = "#" + tag
-    //         spanNav.appendChild(linkNav)
-    //         return spanNav
-    //     })
-    //     return tag
-    // }
-
-    // static profilesLinkMap(photographer)
-    // {
-    //     photographer.tags.map(tag =>{
-    //         let profileSpan = document.createElement('span')
-    //         let profileSpanLink = document.createElement('a')
-
-    //         profileSpanLink.href = "#"
-    //         profileSpan.classList.add(`tag`)
-    //         profileSpanLink.innerHTML ="#" + tag
-    //         return profileSpan
-    //     })
-    // }
 
 // method template header
     static DOMConstructHeader()
@@ -117,7 +53,6 @@ export default class MainPage {
 
         photographers.map( photographer => {
             let photographerProfile = document.querySelector(`#profile-${photographer.id}`)
-            console.log(photographerProfile)
             if (photographer.tags.includes(tag) === false) {
                 idArray.push(photographer.id)
             }
@@ -134,16 +69,21 @@ export default class MainPage {
     static DOMConstructMain()
     {
         let main = document.createElement("main")
-        main.classList.add("main")
         let sectionContainer = document.createElement("section")
+        let mainTitle = document.createElement("h1")
 
+        main.classList.add("main")
         sectionContainer.classList.add("profiles")
+        mainTitle.classList.add("main-title")
+        mainTitle.innerHTML = "Nos photographes"
 
         document.body.appendChild(main)
         main.appendChild(sectionContainer)
+        main.prepend(mainTitle)
 
         return sectionContainer
     }
+
     //method template profiles
     static DOMConstructMainProfiles(photographer)
     {
@@ -156,10 +96,10 @@ export default class MainPage {
         let profileQuote = document.createElement('p')
         let profilePrice = document.createElement('p')
 
-
         figure.classList.add("profile")
         figure.id = "profile-" + photographer.id
         profileLink.classList.add("img-profile-link")
+        profileLink.setAttribute("data-portraitId", photographer.id)
         profileTitle.classList.add("name")
         profileFigcaption.classList.add("info-profile")
         profiltCity.classList.add("city")
@@ -198,6 +138,4 @@ export default class MainPage {
 
         return figure
     }
-
-
 }

@@ -1,23 +1,14 @@
 import info from '../FishEyeDataFR.json'
 import PhotographerFactory from './component/photographers/PhotographerFactory'
-import MainPage from "./component/MainPage";
-import ElementFactory from './component/ElementFactory'
+import MainPage from "./component/MainPage"
+import ProfilPages from './component/ProfilPages'
 
 //stocker les données des photographes du fichier JSON
 const photographersInfo = info.photographers
 const media = info.media
-
-function name(params) {
-   let photographersID = photographersInfo.map(photographerInfo =>{
-      console.log(photographerInfo)
-      let photographer = PhotographerFactory.create(photographerInfo)
-      return (
-         MainPage.DOMConstructProfilesSection(photographer)
-      )
-   })
-
-      photographersID.map(ID =>{
-      main.appendChild(ID)
+const getPhotographerById = (id) =>{
+   return photographersInfo.find((photographer) =>{
+      return photographer.id === Number(id)
    })
 }
 
@@ -40,6 +31,12 @@ function init() {
 
    document.querySelectorAll("nav > .tag > a").forEach(tag => {
       tag.addEventListener('click', MainPage.sortingProfile)
+   })
+   document.querySelectorAll(".profile .img-profile-link").forEach(profile =>{
+      profile.addEventListener('click', (evt) =>{
+         const id = evt.currentTarget.getAttribute("data-portraitId")
+         ProfilPages.changePage(getPhotographerById(id))
+      })
    })
 }
 // Evenemment d'initiation du document
