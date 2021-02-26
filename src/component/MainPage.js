@@ -12,68 +12,6 @@ export default class MainPage {
         "Events",
     ]
 
-    // static DomElementContainer(element, classType)
-    // {
-    //     const domElement = document.createElement(element)
-    //     domElement.classList.add(classType)
-    //     return domElement
-    // }
-
-    // static DomElementContent(element, classType, content)
-    // {
-    //     const domElement = document.createElement(element)
-    //     domElement.classList.add(classType)
-    //     domElement.innerHTML = content
-    //     return domElement
-    // }
-
-    // static ImageDOM(classImg, sourceImg, altIMG)
-    // {
-    //     const domElement = document.createElement('img')
-    //     domElement.classList.add(classImg)
-    //     domElement.src = sourceImg
-    //     domElement.alt = altIMG
-    //     return domElement
-    // }
-
-    // static LinksDOM(classLink, href, content)
-    // {
-    //     const domElement = document.createElement('a')
-    //     domElement.classList.add(classLink)
-    //     domElement.href = href
-    //     domElement.innerHTML = content
-    //     return domElement
-    // }
-
-    // static tagMap()
-    // {
-    //     const tag = this.tags.map(tag =>{
-    //         let spanNav = document.createElement("span")
-    //         let linkNav = document.createElement("a")
-
-    //         linkNav.href = "#"
-    //         spanNav.classList.add("tag")
-
-    //         linkNav.innerHTML = "#" + tag
-    //         spanNav.appendChild(linkNav)
-    //         return spanNav
-    //     })
-    //     return tag
-    // }
-
-    // static profilesLinkMap(photographer)
-    // {
-    //     photographer.tags.map(tag =>{
-    //         let profileSpan = document.createElement('span')
-    //         let profileSpanLink = document.createElement('a')
-
-    //         profileSpanLink.href = "#"
-    //         profileSpan.classList.add(`tag`)
-    //         profileSpanLink.innerHTML ="#" + tag
-    //         return profileSpan
-    //     })
-    // }
-
 // method template header
     static DOMConstructHeader()
     {
@@ -159,9 +97,9 @@ export default class MainPage {
         let profilePrice = document.createElement('p')
 
         figure.classList.add("profile")
-        figure.setAttribute("data-portraitId", photographer.id)
         figure.id = "profile-" + photographer.id
         profileLink.classList.add("img-profile-link")
+        profileLink.setAttribute("data-portraitId", photographer.id)
         profileTitle.classList.add("name")
         profileFigcaption.classList.add("info-profile")
         profiltCity.classList.add("city")

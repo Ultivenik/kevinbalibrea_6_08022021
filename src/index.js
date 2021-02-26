@@ -11,19 +11,6 @@ const getPhotographerById = (id) =>{
       return photographer.id === Number(id)
    })
 }
-// function name(params) {
-//    let photographersID = photographersInfo.map(photographerInfo =>{
-//       console.log(photographerInfo)
-//       let photographer = PhotographerFactory.create(photographerInfo)
-//       return (
-//          MainPage.DOMConstructProfilesSection(photographer)
-//       )
-//    })
-
-//       photographersID.map(ID =>{
-//       main.appendChild(ID)
-//    })
-// }
 
 function init() {
    //creation du DOM header
@@ -45,7 +32,7 @@ function init() {
    document.querySelectorAll("nav > .tag > a").forEach(tag => {
       tag.addEventListener('click', MainPage.sortingProfile)
    })
-   document.querySelectorAll(".profile").forEach(profile =>{
+   document.querySelectorAll(".profile .img-profile-link").forEach(profile =>{
       profile.addEventListener('click', (evt) =>{
          const id = evt.currentTarget.getAttribute("data-portraitId")
          ProfilPages.changePage(getPhotographerById(id))
