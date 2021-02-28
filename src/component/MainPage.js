@@ -22,6 +22,7 @@ export default class MainPage {
 
         logoLink.href = "index.html"
         logoImg.src = "./logo.png"
+        logoImg.alt = "Fisheye Home page"
 
         header.classList.add("header")
 

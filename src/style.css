@@ -33,6 +33,9 @@ body{
 .tag a, .main-title, .city{
     color: #901C1C;
 }
+.main{
+    width: 100%;
+}
 .main .main-title{
     position: absolute;
     font-weight: 400;

@@ -1,5 +1,4 @@
 import Photographer from "./Photographer";
-import ElementFactory from '../ElementFactory'
 
 
 export default class PhotographerFactory{
