@@ -64,7 +64,7 @@ export default class HeaderFactory
         tag = tag.toLowerCase().substring(1, tag.length)
         let photographers = info.photographers.map(item=> {return item})
         let idArray = []
-
+        // if the tag on navbar is the same of profile tag the profile stay displayed
         photographers.map( photographer => {
             let photographerProfile = document.querySelector(`#profile-${photographer.id}`)
             if (photographer.tags.includes(tag) === false) {
@@ -72,7 +72,7 @@ export default class HeaderFactory
             }
             photographerProfile.style.removeProperty("display")
         })
-
+        // if the profile haven't the clicked tag, it's deleted
         idArray.forEach(id => {
             let photographerCard = document.querySelector(`#profile-${id}`)
             photographerCard.style.display = "none"

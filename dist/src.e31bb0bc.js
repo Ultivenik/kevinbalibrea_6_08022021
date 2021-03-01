@@ -723,7 +723,8 @@ var HeaderFactory = /*#__PURE__*/function () {
         return item;
       });
 
-      var idArray = [];
+      var idArray = []; // if the tag on navbar is the same of profile tag the profile stay displayed
+
       photographers.map(function (photographer) {
         var photographerProfile = document.querySelector("#profile-".concat(photographer.id));
 
@@ -732,7 +733,8 @@ var HeaderFactory = /*#__PURE__*/function () {
         }
 
         photographerProfile.style.removeProperty("display");
-      });
+      }); // if the profile haven't the clicked tag, it's deleted
+
       idArray.forEach(function (id) {
         var photographerCard = document.querySelector("#profile-".concat(id));
         photographerCard.style.display = "none";
@@ -874,7 +876,8 @@ var GalleryFactory = /*#__PURE__*/function () {
       label.innerHTML = "Trier par";
       var select = document.createElement("select");
       select.classList.add("select");
-      var optArray = ["Popularité", "Date", "Titre"];
+      var optArray = ["Popularité", "Date", "Titre"]; //filtering photo by occurency
+
       select.addEventListener('change', function (e) {
         var likesArr = [];
         var dateArr = [];
@@ -912,7 +915,8 @@ var GalleryFactory = /*#__PURE__*/function () {
       GalleryFactory.createOptions(optArray, select);
       GalleryFactory.createMedia(media, infoGallery, photographer);
       return infoGallery;
-    }
+    } // creating option DOM method
+
   }, {
     key: "createOptions",
     value: function createOptions(optArray, select) {
@@ -923,7 +927,8 @@ var GalleryFactory = /*#__PURE__*/function () {
         option.text = optContent;
         select.appendChild(option);
       }
-    }
+    } // create photo gallery method
+
   }, {
     key: "createMedia",
     value: function createMedia(media, infoGallery, photographer) {

@@ -14,6 +14,7 @@ export default class GalleryFactory{
         select.classList.add("select")
 
         let optArray = ["Popularité", "Date", "Titre"]
+        //filtering photo by occurency
         select.addEventListener('change', (e) => {
             let likesArr = []
             let dateArr = []
@@ -46,7 +47,7 @@ export default class GalleryFactory{
 
         return infoGallery
     }
-
+    // creating option DOM method
     static createOptions(optArray, select)
     {
         for (let i = 0; i < optArray.length; i++) {
@@ -57,7 +58,7 @@ export default class GalleryFactory{
             select.appendChild(option)
         }
     }
-
+    // create photo gallery method
     static createMedia(media, infoGallery, photographer)
     {
         media.map(photo =>{
