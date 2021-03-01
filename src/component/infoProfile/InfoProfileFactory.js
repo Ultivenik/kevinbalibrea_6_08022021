@@ -68,4 +68,8 @@ export default class InfoProfileFactory
         IDImg.alt = `photo profil de ${photographer.name}`
         infoProfile.appendChild(IDImg)
     }
+    static createContactForm()
+    {
+        
+    }
 }

@@ -832,6 +832,9 @@ var InfoProfileFactory = /*#__PURE__*/function () {
       IDImg.alt = "photo profil de ".concat(photographer.name);
       infoProfile.appendChild(IDImg);
     }
+  }, {
+    key: "createContactForm",
+    value: function createContactForm() {}
   }]);
 
   return InfoProfileFactory;
@@ -869,39 +872,34 @@ var GalleryFactory = /*#__PURE__*/function () {
       infoGallery.classList.add("gallery");
       var label = document.createElement("label");
       label.innerHTML = "Trier par";
-      var input = document.createElement("select");
-      input.classList.add("select");
+      var select = document.createElement("select");
+      select.classList.add("select");
       var optArray = ["Popularité", "Date", "Titre"];
-      input.addEventListener('change', function (e) {
+      select.addEventListener('change', function (e) {
         var likesArr = [];
         var dateArr = [];
         var titleArr = [];
-        media.forEach(function (item) {
-          likesArr.push(item.likes);
-          dateArr.push(item.date);
-          titleArr.push(item.image);
-          var likes = likesArr.sort(function (a, b) {
-            return b - a;
-          });
-          var date = dateArr.sort(function (a, b) {
-            return b > a;
-          });
-          var title = titleArr.sort(function (a, b) {
-            return b < a;
-          });
-          console.log(title);
-
+        media.map(function (item) {
           switch (e.target.value) {
             case "Popularité":
-              return likes;
+              likesArr.push(item.likes);
+              likesArr.sort(function (a, b) {
+                return b - a;
+              });
               break;
 
             case "Date":
-              return date;
+              dateArr.push(item.date);
+              dateArr.sort(function (a, b) {
+                return b > a;
+              });
               break;
 
             case "Titre":
-              return title;
+              titleArr.push(item.image);
+              titleArr.sort(function (a, b) {
+                return b < a;
+              });
               break;
 
             default:
@@ -910,20 +908,20 @@ var GalleryFactory = /*#__PURE__*/function () {
         });
       });
       infoGallery.appendChild(label);
-      infoGallery.appendChild(input);
-      GalleryFactory.createOptions(optArray, input);
+      infoGallery.appendChild(select);
+      GalleryFactory.createOptions(optArray, select);
       GalleryFactory.createMedia(media, infoGallery, photographer);
       return infoGallery;
     }
   }, {
     key: "createOptions",
-    value: function createOptions(optArray, input) {
+    value: function createOptions(optArray, select) {
       for (var i = 0; i < optArray.length; i++) {
         var optContent = optArray[i];
         var option = document.createElement("option");
         option.value = optContent;
         option.text = optContent;
-        input.appendChild(option);
+        select.appendChild(option);
       }
     }
   }, {
@@ -1433,7 +1431,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61454" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63836" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -10,31 +10,27 @@ export default class GalleryFactory{
         let label = document.createElement("label")
         label.innerHTML = "Trier par"
 
-        let input = document.createElement("select")
-        input.classList.add("select")
+        let select = document.createElement("select")
+        select.classList.add("select")
 
         let optArray = ["Popularité", "Date", "Titre"]
-        input.addEventListener('change', (e) => {
+        select.addEventListener('change', (e) => {
             let likesArr = []
             let dateArr = []
             let titleArr = []
-            media.forEach(item =>{
-                likesArr.push(item.likes)
-                dateArr.push(item.date)
-                titleArr.push(item.image)
-                let likes = likesArr.sort((a, b) => b - a)
-                let date = dateArr.sort((a, b) => b > a)
-                let title = titleArr.sort((a, b) => b < a)
-                console.log(title);
+            media.map(item =>{
                 switch (e.target.value) {
                     case "Popularité":
-                        return likes
+                        likesArr.push(item.likes)
+                        likesArr.sort((a, b) => b - a)
                         break;
                     case "Date":
-                        return date
+                        dateArr.push(item.date)
+                        dateArr.sort((a, b) => b > a)
                         break;
                     case "Titre":
-                        return title
+                        titleArr.push(item.image)
+                        titleArr.sort((a, b) => b < a)
                         break;
                     default:
                         break;
@@ -43,22 +39,22 @@ export default class GalleryFactory{
         })
 
         infoGallery.appendChild(label)
-        infoGallery.appendChild(input)
+        infoGallery.appendChild(select)
 
-        GalleryFactory.createOptions(optArray, input)
+        GalleryFactory.createOptions(optArray, select)
         GalleryFactory.createMedia(media, infoGallery, photographer)
 
         return infoGallery
     }
 
-    static createOptions(optArray, input)
+    static createOptions(optArray, select)
     {
         for (let i = 0; i < optArray.length; i++) {
             const optContent = optArray[i];
             let option = document.createElement("option")
             option.value = optContent
             option.text = optContent
-            input.appendChild(option)
+            select.appendChild(option)
         }
     }
 
