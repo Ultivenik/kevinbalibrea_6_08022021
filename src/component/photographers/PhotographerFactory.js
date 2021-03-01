@@ -1,5 +1,4 @@
-import Photographer from "./Photographer";
-
+import Photographer from "./Photographer"
 
 export default class PhotographerFactory{
     static create(photographerInfo)

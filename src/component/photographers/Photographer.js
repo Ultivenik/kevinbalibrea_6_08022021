@@ -1,5 +1,3 @@
-import info from '../../../FishEyeDataFR.json'
-
 export default class Photographer {
     constructor({
         photoPath = `/SamplePhotos/Photographers_ID_Photos/`,

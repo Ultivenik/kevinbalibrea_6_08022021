@@ -473,7 +473,7 @@ module.exports = {
   }, {
     "id": 95234343,
     "photographerId": 243,
-    "image": "Animals_Rainbow.jpg.jpg",
+    "image": "Animals_Rainbow.jpg",
     "tags": ["animals"],
     "likes": 59,
     "date": "2019-07-02",
@@ -648,7 +648,7 @@ module.exports = {
     "price": 80
   }]
 };
-},{}],"component/photographers/Photographer.js":[function(require,module,exports) {
+},{}],"component/infoMainPage/HeaderFactory.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -656,9 +656,439 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _FishEyeDataFR = _interopRequireDefault(require("../../../FishEyeDataFR.json"));
+var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var HeaderFactory = /*#__PURE__*/function () {
+  function HeaderFactory() {
+    _classCallCheck(this, HeaderFactory);
+  }
+
+  _createClass(HeaderFactory, null, [{
+    key: "create",
+    value: function create() {
+      HeaderFactory.createHeader();
+    } //tags reference
+
+  }, {
+    key: "createHeader",
+    value: // create header method
+    function createHeader() {
+      var logoLink = document.createElement('a');
+      var logoImg = document.createElement('img');
+      var header = document.createElement("header");
+      var headerNav = document.createElement("nav");
+      logoLink.href = "index.html";
+      logoImg.src = "./logo.png";
+      logoImg.alt = "Fisheye Home page";
+      header.classList.add("header");
+      document.body.prepend(header);
+      logoLink.appendChild(logoImg);
+      header.appendChild(logoLink);
+      header.appendChild(headerNav);
+      HeaderFactory.createTags(headerNav);
+    } //creating tags method
+
+  }, {
+    key: "createTags",
+    value: function createTags(headerNav) {
+      HeaderFactory.tags.map(function (tag) {
+        var spanNav = document.createElement("span");
+        var linkNav = document.createElement("a");
+        linkNav.href = "#";
+        spanNav.classList.add("tag");
+        headerNav.appendChild(spanNav);
+        spanNav.appendChild(linkNav);
+        linkNav.innerHTML = "#" + tag;
+        linkNav.addEventListener('click', HeaderFactory.sortingProfile);
+      });
+    } //sotring profiles with hashtags
+
+  }, {
+    key: "sortingProfile",
+    value: function sortingProfile(e) {
+      var tag = e.target.innerHTML;
+      tag = tag.toLowerCase().substring(1, tag.length);
+
+      var photographers = _FishEyeDataFR.default.photographers.map(function (item) {
+        return item;
+      });
+
+      var idArray = [];
+      photographers.map(function (photographer) {
+        var photographerProfile = document.querySelector("#profile-".concat(photographer.id));
+
+        if (photographer.tags.includes(tag) === false) {
+          idArray.push(photographer.id);
+        }
+
+        photographerProfile.style.removeProperty("display");
+      });
+      idArray.forEach(function (id) {
+        var photographerCard = document.querySelector("#profile-".concat(id));
+        photographerCard.style.display = "none";
+      });
+    }
+  }]);
+
+  return HeaderFactory;
+}();
+
+exports.default = HeaderFactory;
+
+_defineProperty(HeaderFactory, "tags", ["Portrait", "Art", "Fashion", "Architecture", "Travel", "Sport", "Animals", "Events"]);
+},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/infoProfile/InfoProfileFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var InfoProfileFactory = /*#__PURE__*/function () {
+  function InfoProfileFactory() {
+    _classCallCheck(this, InfoProfileFactory);
+  }
+
+  _createClass(InfoProfileFactory, null, [{
+    key: "create",
+    value: function create(photographer) {
+      var infoProfile = document.createElement('section');
+      infoProfile.classList.add("profileID");
+      InfoProfileFactory.createProfileName(infoProfile, photographer);
+      InfoProfileFactory.createPhotographerLocation(infoProfile, photographer);
+      InfoProfileFactory.createPhotographerQuote(infoProfile, photographer);
+      InfoProfileFactory.createProfilesTags(infoProfile, photographer);
+      InfoProfileFactory.createContactBtn(infoProfile, "Contactez-moi");
+      InfoProfileFactory.createAvatar(infoProfile, photographer);
+      return infoProfile;
+    }
+  }, {
+    key: "createProfileName",
+    value: function createProfileName(infoProfile, photographer) {
+      var IDName = document.createElement("h2");
+      IDName.classList.add("name");
+      IDName.innerHTML = photographer.name;
+      infoProfile.appendChild(IDName);
+    }
+  }, {
+    key: "createPhotographerLocation",
+    value: function createPhotographerLocation(infoProfile, photographer) {
+      var IDLocation = document.createElement("p");
+      IDLocation.classList.add("city");
+      IDLocation.innerHTML = "".concat(photographer.city) + "".concat(photographer.country);
+      infoProfile.appendChild(IDLocation);
+    }
+  }, {
+    key: "createPhotographerQuote",
+    value: function createPhotographerQuote(infoProfile, photographer) {
+      var IDTagline = document.createElement("p");
+      IDTagline.classList.add("quote");
+      IDTagline.innerHTML = photographer.tagline;
+      infoProfile.appendChild(IDTagline);
+    }
+  }, {
+    key: "createContactBtn",
+    value: function createContactBtn(infoProfile, content) {
+      var btnContact = document.createElement('button');
+      btnContact.classList.add('btn-contact');
+      btnContact.innerHTML = content;
+      infoProfile.appendChild(btnContact);
+    }
+  }, {
+    key: "createProfilesTags",
+    value: function createProfilesTags(infoProfile, photographer) {
+      photographer.tags.map(function (tag) {
+        var profileSpan = document.createElement('span');
+        var profileSpanLink = document.createElement('a');
+        profileSpanLink.href = "#";
+        profileSpan.appendChild(profileSpanLink);
+        profileSpanLink.innerHTML = "#" + tag;
+        profileSpan.classList.add("tag");
+        infoProfile.appendChild(profileSpan);
+      });
+    }
+  }, {
+    key: "createAvatar",
+    value: function createAvatar(infoProfile, photographer) {
+      var IDImg = document.createElement('img');
+      IDImg.classList.add("img-profile-link");
+      IDImg.src = "./../SamplePhotos/Photographers_ID_Photos/" + photographer.portrait;
+      IDImg.alt = "photo profil de ".concat(photographer.name);
+      infoProfile.appendChild(IDImg);
+    }
+  }]);
+
+  return InfoProfileFactory;
+}();
+
+exports.default = InfoProfileFactory;
+},{}],"component/gallery/GalleryFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var GalleryFactory = /*#__PURE__*/function () {
+  function GalleryFactory() {
+    _classCallCheck(this, GalleryFactory);
+  }
+
+  _createClass(GalleryFactory, null, [{
+    key: "create",
+    value: function create(photographer) {
+      var media = _FishEyeDataFR.default.media;
+      var infoGallery = document.createElement("section");
+      infoGallery.classList.add("gallery");
+      var label = document.createElement("label");
+      label.innerHTML = "Trier par";
+      var input = document.createElement("select");
+      input.classList.add("select");
+      var optArray = ["Popularité", "Date", "Titre"];
+      input.addEventListener('change', function (e) {
+        var likesArr = [];
+        var dateArr = [];
+        var titleArr = [];
+        media.forEach(function (item) {
+          likesArr.push(item.likes);
+          dateArr.push(item.date);
+          titleArr.push(item.image);
+          var likes = likesArr.sort(function (a, b) {
+            return b - a;
+          });
+          var date = dateArr.sort(function (a, b) {
+            return b > a;
+          });
+          var title = titleArr.sort(function (a, b) {
+            return b < a;
+          });
+          console.log(title);
+
+          switch (e.target.value) {
+            case "Popularité":
+              return likes;
+              break;
+
+            case "Date":
+              return date;
+              break;
+
+            case "Titre":
+              return title;
+              break;
+
+            default:
+              break;
+          }
+        });
+      });
+      infoGallery.appendChild(label);
+      infoGallery.appendChild(input);
+      GalleryFactory.createOptions(optArray, input);
+      GalleryFactory.createMedia(media, infoGallery, photographer);
+      return infoGallery;
+    }
+  }, {
+    key: "createOptions",
+    value: function createOptions(optArray, input) {
+      for (var i = 0; i < optArray.length; i++) {
+        var optContent = optArray[i];
+        var option = document.createElement("option");
+        option.value = optContent;
+        option.text = optContent;
+        input.appendChild(option);
+      }
+    }
+  }, {
+    key: "createMedia",
+    value: function createMedia(media, infoGallery, photographer) {
+      media.map(function (photo) {
+        if (photo.photographerId === photographer.id) {
+          var path = GalleryFactory.definePath(photographer.id, photo);
+          var photoFigure = document.createElement("figure");
+          photoFigure.classList.add('photoFigure');
+          var photoLegend = document.createElement("figcaption");
+          photoLegend.classList.add("photoLegend");
+
+          if (path.image !== undefined) {
+            var imageGallery = document.createElement('img');
+            imageGallery.src = path.image;
+            photoFigure.appendChild(imageGallery);
+          } else {
+            var videoGallery = document.createElement('video');
+            videoGallery.setAttribute("controls", "");
+            photoFigure.appendChild(videoGallery);
+            var sourceVideoGallery = document.createElement('source');
+            sourceVideoGallery.src = path.video;
+            videoGallery.appendChild(sourceVideoGallery);
+          }
+
+          photoFigure.appendChild(photoLegend);
+          GalleryFactory.createLikesPrice(photo, photoLegend);
+          infoGallery.appendChild(photoFigure);
+        }
+      });
+    }
+  }, {
+    key: "createLikesPrice",
+    value: function createLikesPrice(photo, photoLegend) {
+      var spanPrice = document.createElement("span");
+      spanPrice.classList.add("price-photo");
+      spanPrice.innerHTML = photo.price + "€ ";
+      var spanLikes = document.createElement("span");
+      spanLikes.classList.add("photo-likes");
+      spanLikes.innerHTML = photo.likes;
+      var icon = document.createElement("i");
+      icon.classList.add("fas", "fa-heart");
+      spanLikes.innerHTML = photo.likes;
+      spanLikes.appendChild(icon);
+      photoLegend.appendChild(spanPrice);
+      photoLegend.appendChild(spanLikes);
+      spanLikes.addEventListener('click', function (e) {
+        e.currentTarget.innerText = photo.likes++;
+        spanLikes.appendChild(icon);
+      });
+    }
+  }, {
+    key: "definePath",
+    value: function definePath(photographerId, photo) {
+      var path = {};
+
+      switch (photographerId) {
+        case 243:
+          GalleryFactory.createPath("Mimi", path, photo);
+          break;
+
+        case 930:
+          GalleryFactory.createPath("Ellie Rose", path, photo);
+          break;
+
+        case 82:
+          GalleryFactory.createPath("Tracy", path, photo);
+          break;
+
+        case 527:
+          GalleryFactory.createPath("Nabeel", path, photo);
+          break;
+
+        case 925:
+          GalleryFactory.createPath("Rhode", path, photo);
+          break;
+
+        case 195:
+          GalleryFactory.createPath("Marcel", path, photo);
+          break;
+      }
+
+      return path;
+    }
+  }, {
+    key: "createPath",
+    value: function createPath(name, path, photo) {
+      var photoPath = "/SamplePhotos/";
+
+      if (photo.image !== undefined) {
+        path.image = photoPath + name + '/' + photo.image;
+      } else {
+        path.video = photoPath + name + '/' + photo.video;
+      }
+    }
+  }]);
+
+  return GalleryFactory;
+}();
+
+exports.default = GalleryFactory;
+},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"pages/ProfilPages.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _InfoProfileFactory = _interopRequireDefault(require("../component/infoProfile/InfoProfileFactory"));
+
+var _GalleryFactory = _interopRequireDefault(require("../component/gallery/GalleryFactory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ProfilPages = /*#__PURE__*/function () {
+  function ProfilPages() {
+    _classCallCheck(this, ProfilPages);
+  }
+
+  _createClass(ProfilPages, null, [{
+    key: "changePage",
+    value: //Change page method at clicking on profile
+    function changePage(photographer) {
+      document.querySelector(".main").innerHTML = "";
+      document.querySelector("nav").remove();
+      ProfilPages.displayInfoProfile(photographer);
+      ProfilPages.displayGallery(photographer);
+    } // display information of profile with datas and form feature
+
+  }, {
+    key: "displayInfoProfile",
+    value: function displayInfoProfile(photographer) {
+      var infoProfile = _InfoProfileFactory.default.create(photographer);
+
+      document.querySelector(".main").appendChild(infoProfile);
+    } //display photo gallery with pictures features
+
+  }, {
+    key: "displayGallery",
+    value: function displayGallery(photographer) {
+      var gallery = _GalleryFactory.default.create(photographer);
+
+      document.querySelector(".main").appendChild(gallery);
+    }
+  }]);
+
+  return ProfilPages;
+}();
+
+exports.default = ProfilPages;
+},{"../component/infoProfile/InfoProfileFactory":"component/infoProfile/InfoProfileFactory.js","../component/gallery/GalleryFactory":"component/gallery/GalleryFactory.js"}],"component/photographers/Photographer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -688,7 +1118,7 @@ var Photographer = function Photographer(_ref) {
 };
 
 exports.default = Photographer;
-},{"../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/photographers/PhotographerFactory.js":[function(require,module,exports) {
+},{}],"component/photographers/PhotographerFactory.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -731,7 +1161,7 @@ var PhotographerFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = PhotographerFactory;
-},{"./Photographer":"component/photographers/Photographer.js"}],"component/MainPage.js":[function(require,module,exports) {
+},{"./Photographer":"component/photographers/Photographer.js"}],"component/infoMainPage/MainFactory.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -739,7 +1169,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _FishEyeDataFR = _interopRequireDefault(require("./../../FishEyeDataFR.json"));
+var _ProfilPages = _interopRequireDefault(require("../../pages/ProfilPages"));
+
+var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
+
+var _PhotographerFactory = _interopRequireDefault(require("./../photographers/PhotographerFactory"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -749,105 +1183,96 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var MainPage = /*#__PURE__*/function () {
-  function MainPage() {
-    _classCallCheck(this, MainPage);
+var MainFactory = /*#__PURE__*/function () {
+  function MainFactory() {
+    _classCallCheck(this, MainFactory);
   }
 
-  _createClass(MainPage, null, [{
-    key: "DOMConstructHeader",
-    value: // method template header
-    function DOMConstructHeader() {
-      var logoLink = document.createElement('a');
-      var logoImg = document.createElement('img');
-      var header = document.createElement("header");
-      var headerNav = document.createElement("nav");
-      logoLink.href = "index.html";
-      logoImg.src = "./logo.png";
-      logoImg.alt = "Fisheye Home page";
-      header.classList.add("header");
-      document.body.prepend(header);
-      logoLink.appendChild(logoImg);
-      header.appendChild(logoLink);
-      header.appendChild(headerNav);
-      this.tags.map(function (tag) {
-        var spanNav = document.createElement("span");
-        var linkNav = document.createElement("a");
-        linkNav.href = "#";
-        spanNav.classList.add("tag");
-        headerNav.appendChild(spanNav);
-        spanNav.appendChild(linkNav);
-        linkNav.innerHTML = "#" + tag;
-      });
-    }
-  }, {
-    key: "sortingProfile",
-    value: function sortingProfile(e) {
-      var tag = e.target.innerHTML;
-      tag = tag.toLowerCase().substring(1, tag.length);
-
-      var photographers = _FishEyeDataFR.default.photographers.map(function (item) {
-        return item;
-      });
-
-      var idArray = [];
-      photographers.map(function (photographer) {
-        var photographerProfile = document.querySelector("#profile-".concat(photographer.id));
-
-        if (photographer.tags.includes(tag) === false) {
-          idArray.push(photographer.id);
-        }
-
-        photographerProfile.style.removeProperty("display");
-      });
-      idArray.forEach(function (id) {
-        var photographerCard = document.querySelector("#profile-".concat(id));
-        photographerCard.style.display = "none";
-      });
+  _createClass(MainFactory, null, [{
+    key: "create",
+    value: function create(parent) {
+      MainFactory.createMainTitlePage(parent);
+      MainFactory.createSectionProfiles(parent);
     } //method template main landing page
 
   }, {
-    key: "DOMConstructMain",
-    value: function DOMConstructMain() {
-      var main = document.createElement("main");
+    key: "createSectionProfiles",
+    value: function createSectionProfiles(parent) {
       var sectionContainer = document.createElement("section");
-      var mainTitle = document.createElement("h1");
-      main.classList.add("main");
       sectionContainer.classList.add("profiles");
+      parent.appendChild(sectionContainer);
+      var photographersInfo = _FishEyeDataFR.default.photographers;
+      photographersInfo.map(function (photographerInfo) {
+        var photographer = _PhotographerFactory.default.create(photographerInfo);
+
+        return MainFactory.createMainProfiles(photographer, sectionContainer);
+      });
+    } //main title (h1) method
+
+  }, {
+    key: "createMainTitlePage",
+    value: function createMainTitlePage(parent) {
+      var mainTitle = document.createElement("h1");
       mainTitle.classList.add("main-title");
       mainTitle.innerHTML = "Nos photographes";
-      document.body.appendChild(main);
-      main.appendChild(sectionContainer);
-      main.prepend(mainTitle);
-      return sectionContainer;
+      parent.prepend(mainTitle);
     } //method template profiles
 
   }, {
-    key: "DOMConstructMainProfiles",
-    value: function DOMConstructMainProfiles(photographer) {
+    key: "createMainProfiles",
+    value: function createMainProfiles(photographer, parent) {
       var figure = document.createElement("figure");
-      var profileLink = document.createElement('a');
-      var profileImg = document.createElement('img');
-      var profileTitle = document.createElement('h2');
-      var profileFigcaption = document.createElement('figcaption');
-      var profiltCity = document.createElement('p');
-      var profileQuote = document.createElement('p');
-      var profilePrice = document.createElement('p');
       figure.classList.add("profile");
       figure.id = "profile-" + photographer.id;
+      parent.appendChild(figure);
+      var profileFigcaption = document.createElement('figcaption');
+      profileFigcaption.classList.add("info-profile");
+      MainFactory.createProfileAvatar(figure, photographer);
+      MainFactory.createProfileTitle(figure, photographer);
+      MainFactory.createProfileCity(profileFigcaption, photographer);
+      MainFactory.createProfileQuote(profileFigcaption, photographer);
+      MainFactory.createProfilePrice(profileFigcaption, photographer);
+      MainFactory.createProfileTags(profileFigcaption, photographer);
+      figure.appendChild(profileFigcaption);
+    } // title profile method
+
+  }, {
+    key: "createProfileTitle",
+    value: function createProfileTitle(figure, photographer) {
+      var profileTitle = document.createElement('h2');
+      profileTitle.classList.add("name");
+      profileTitle.innerHTML = photographer.name;
+      figure.appendChild(profileTitle);
+    } // profile photo method
+
+  }, {
+    key: "createProfileAvatar",
+    value: function createProfileAvatar(figure, photographer) {
+      var profileLink = document.createElement('a');
       profileLink.classList.add("img-profile-link");
       profileLink.setAttribute("data-portraitId", photographer.id);
-      profileTitle.classList.add("name");
-      profileFigcaption.classList.add("info-profile");
-      profiltCity.classList.add("city");
-      profileQuote.classList.add("quote");
-      profilePrice.classList.add("price");
       profileLink.href = "#";
+      figure.appendChild(profileLink);
+      var profileImg = document.createElement('img');
       profileImg.src = photographer.portrait;
       profileImg.alt = "photo profil de ".concat(photographer.name);
       profileImg.classList.add("img-".concat(photographer.id));
+      profileLink.appendChild(profileImg);
+      MainFactory.createEventChangePage(profileLink);
+    } // profile city method
+
+  }, {
+    key: "createProfileCity",
+    value: function createProfileCity(profileFigcaption, photographer) {
+      var profileCity = document.createElement('p');
+      profileCity.classList.add("city");
+      profileCity.innerHTML = "".concat(photographer.city, " ") + "".concat(photographer.country);
+      profileFigcaption.appendChild(profileCity);
+    } //creating profiles tags in to the legend profiles
+
+  }, {
+    key: "createProfileTags",
+    value: function createProfileTags(profileFigcaption, photographer) {
       photographer.tags.map(function (tag) {
         var profileSpan = document.createElement('span');
         var profileSpanLink = document.createElement('a');
@@ -857,28 +1282,48 @@ var MainPage = /*#__PURE__*/function () {
         profileSpan.appendChild(profileSpanLink);
         profileFigcaption.appendChild(profileSpan);
       });
-      profileTitle.innerHTML = photographer.name;
-      profiltCity.innerHTML = "".concat(photographer.city, " ") + "".concat(photographer.country);
-      profileQuote.innerHTML = photographer.tagline;
+    }
+  }, {
+    key: "createProfilePrice",
+    value: function createProfilePrice(profileFigcaption, photographer) {
+      var profilePrice = document.createElement('p');
+      profilePrice.classList.add("price");
       profilePrice.innerHTML = photographer.price + '€';
-      figure.appendChild(profileLink);
-      profileLink.appendChild(profileImg);
-      figure.appendChild(profileTitle);
-      figure.appendChild(profileFigcaption);
-      profileFigcaption.appendChild(profiltCity);
-      profileFigcaption.appendChild(profileQuote);
       profileFigcaption.appendChild(profilePrice);
-      return figure;
+    }
+  }, {
+    key: "createProfileQuote",
+    value: function createProfileQuote(profileFigcaption, photographer) {
+      var profileQuote = document.createElement('p');
+      profileQuote.classList.add("quote");
+      profileQuote.innerHTML = photographer.tagline;
+      profileFigcaption.appendChild(profileQuote);
+    } // Access to profiles pages with clicking on profile link
+
+  }, {
+    key: "createEventChangePage",
+    value: function createEventChangePage(profileLink) {
+      var photographersInfo = _FishEyeDataFR.default.photographers;
+
+      var getPhotographerById = function getPhotographerById(id) {
+        return photographersInfo.find(function (photographer) {
+          return photographer.id === Number(id);
+        });
+      };
+
+      profileLink.addEventListener('click', function (evt) {
+        var id = evt.currentTarget.getAttribute("data-portraitId");
+
+        _ProfilPages.default.changePage(getPhotographerById(id));
+      });
     }
   }]);
 
-  return MainPage;
+  return MainFactory;
 }();
 
-exports.default = MainPage;
-
-_defineProperty(MainPage, "tags", ["Portrait", "Art", "Fashion", "Architecture", "Travel", "Sport", "Animals", "Events"]);
-},{"./../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/ProfilPages.js":[function(require,module,exports) {
+exports.default = MainFactory;
+},{"../../pages/ProfilPages":"pages/ProfilPages.js","./../../../FishEyeDataFR.json":"../FishEyeDataFR.json","./../photographers/PhotographerFactory":"component/photographers/PhotographerFactory.js"}],"pages/MainPage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -886,7 +1331,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _FishEyeDataFR = _interopRequireDefault(require("../../FishEyeDataFR.json"));
+var _HeaderFactory = _interopRequireDefault(require("./../component/infoMainPage/HeaderFactory"));
+
+var _MainFactory = _interopRequireDefault(require("./../component/infoMainPage/MainFactory"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -896,149 +1343,69 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var ProfilPages = /*#__PURE__*/function () {
-  function ProfilPages() {
-    _classCallCheck(this, ProfilPages);
+var MainPage = /*#__PURE__*/function () {
+  function MainPage() {
+    _classCallCheck(this, MainPage);
   }
 
-  _createClass(ProfilPages, null, [{
-    key: "changePage",
-    value: function changePage(photographer) {
-      document.querySelector(".main").innerHTML = "";
-      document.querySelector("nav").remove();
-      var infoProfile = document.createElement('section');
-      var IDName = document.createElement("h2");
-      var IDLocation = document.createElement("p");
-      var IDTagline = document.createElement("p");
-      var btnContact = document.createElement('button');
-      infoProfile.appendChild(IDName);
-      infoProfile.appendChild(IDLocation);
-      infoProfile.appendChild(IDTagline);
-      photographer.tags.map(function (tag) {
-        var profileSpan = document.createElement('span');
-        var profileSpanLink = document.createElement('a');
-        profileSpanLink.href = "#";
-        profileSpan.appendChild(profileSpanLink);
-        profileSpanLink.innerHTML = "#" + tag;
-        profileSpan.classList.add("tag");
-        infoProfile.appendChild(profileSpan);
-      });
-      infoProfile.appendChild(btnContact);
-      var IDImg = document.createElement('img');
-      infoProfile.appendChild(IDImg);
-      IDImg.src = "./../SamplePhotos/Photographers_ID_Photos/" + photographer.portrait;
-      IDImg.alt = "photo profil de ".concat(photographer.name);
-      IDName.innerHTML = photographer.name;
-      IDLocation.innerHTML = "".concat(photographer.city) + "".concat(photographer.country);
-      IDTagline.innerHTML = photographer.tagline;
-      btnContact.innerHTML = "Contactez-moi";
-      infoProfile.classList.add("profileID");
-      IDName.classList.add("name");
-      IDLocation.classList.add("city");
-      IDTagline.classList.add("quote");
-      btnContact.classList.add('btn-contact');
-      IDImg.classList.add("img-profile-link");
-      document.querySelector(".main").appendChild(infoProfile);
-      var media = _FishEyeDataFR.default.media;
-      var infoGallery = document.createElement("section");
-      var label = document.createElement("label");
-      var input = document.createElement("select");
-      var optArray = ["Popularité", "Date", "Titre"];
-      input.classList.add("select");
-      infoGallery.appendChild(label);
-      infoGallery.appendChild(input);
-      label.innerHTML = "Trier par";
+  _createClass(MainPage, null, [{
+    key: "create",
+    value: function create() {
+      MainPage.displayHeaderFactory();
+      MainPage.displayMainFactory();
+    }
+  }, {
+    key: "displayHeaderFactory",
+    value: function displayHeaderFactory() {
+      _HeaderFactory.default.create();
+    }
+  }, {
+    key: "displayMainFactory",
+    value: function displayMainFactory() {
+      var main = document.createElement("main");
+      main.classList.add("main");
+      document.body.appendChild(main);
 
-      for (var i = 0; i < optArray.length; i++) {
-        var optContent = optArray[i];
-        var option = document.createElement("option");
-        option.value = optContent;
-        option.text = optContent;
-        input.appendChild(option);
-      }
-
-      media.map(function (photos) {
-        var photoFigure = document.createElement("figure");
-        var photoLegend = document.createElement("figcaption");
-        var spanPrice = document.createElement("span");
-        var spanLikes = document.createElement("span");
-        var imageGallery = document.createElement('img');
-        var videoGallery = document.createElement('video');
-        var sourceVideoGallery = document.createElement('source');
-        photoFigure.appendChild(imageGallery);
-        photoFigure.appendChild(photoLegend);
-        videoGallery.appendChild(sourceVideoGallery);
-        infoGallery.appendChild(videoGallery);
-        imageGallery.src = photos.image;
-        sourceVideoGallery.src = photos.video;
-        spanPrice.innerHTML = photos.price + "€ ";
-        spanLikes.innerHTML = photos.likes + '<i class="fas fa-heart"></i>';
-        photoLegend.appendChild(spanPrice);
-        photoLegend.appendChild(spanLikes);
-        infoGallery.appendChild(photoFigure);
-      });
-      document.querySelector(".main").appendChild(infoGallery);
+      _MainFactory.default.create(main);
     }
   }]);
 
-  return ProfilPages;
+  return MainPage;
 }();
 
-exports.default = ProfilPages;
-},{"../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"index.js":[function(require,module,exports) {
+exports.default = MainPage;
+},{"./../component/infoMainPage/HeaderFactory":"component/infoMainPage/HeaderFactory.js","./../component/infoMainPage/MainFactory":"component/infoMainPage/MainFactory.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
-var _FishEyeDataFR = _interopRequireDefault(require("../FishEyeDataFR.json"));
-
-var _PhotographerFactory = _interopRequireDefault(require("./component/photographers/PhotographerFactory"));
-
-var _MainPage = _interopRequireDefault(require("./component/MainPage"));
-
-var _ProfilPages = _interopRequireDefault(require("./component/ProfilPages"));
+var _MainPage = _interopRequireDefault(require("./pages/MainPage"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//stocker les données des photographes du fichier JSON
-var photographersInfo = _FishEyeDataFR.default.photographers;
-var media = _FishEyeDataFR.default.media;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var getPhotographerById = function getPhotographerById(id) {
-  return photographersInfo.find(function (photographer) {
-    return photographer.id === Number(id);
-  });
-};
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function init() {
-  //creation du DOM header
-  _MainPage.default.DOMConstructHeader(); //Création d'instances de classes et ajout dans le DOM
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var App = /*#__PURE__*/function () {
+  function App() {
+    _classCallCheck(this, App);
+  }
 
-  var photographersProfile = photographersInfo.map(function (photographerInfo) {
-    var photographer = _PhotographerFactory.default.create(photographerInfo);
+  _createClass(App, null, [{
+    key: "create",
+    value: function create() {
+      //Main page initialisation
+      _MainPage.default.create();
+    }
+  }]);
 
-    return _MainPage.default.DOMConstructMainProfiles(photographer);
-  }); //Construction du container et envoi des enfant dans le parent
-
-  var main = _MainPage.default.DOMConstructMain();
-
-  photographersProfile.map(function (profile) {
-    main.appendChild(profile);
-  });
-  document.querySelectorAll("nav > .tag > a").forEach(function (tag) {
-    tag.addEventListener('click', _MainPage.default.sortingProfile);
-  });
-  document.querySelectorAll(".profile .img-profile-link").forEach(function (profile) {
-    profile.addEventListener('click', function (evt) {
-      var id = evt.currentTarget.getAttribute("data-portraitId");
-
-      _ProfilPages.default.changePage(getPhotographerById(id));
-    });
-  });
-} // Evenemment d'initiation du document
+  return App;
+}(); // Document initialisation
 
 
-document.addEventListener("DOMContentLoaded", init);
-},{"../FishEyeDataFR.json":"../FishEyeDataFR.json","./component/photographers/PhotographerFactory":"component/photographers/PhotographerFactory.js","./component/MainPage":"component/MainPage.js","./component/ProfilPages":"component/ProfilPages.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+document.addEventListener("DOMContentLoaded", App.create);
+},{"./pages/MainPage":"pages/MainPage.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1066,7 +1433,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50919" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61454" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

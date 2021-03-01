@@ -118,3 +118,6 @@ body{
 .show{
     display: block;
 }
+.photoFigure img{
+    width: 150px;
+}

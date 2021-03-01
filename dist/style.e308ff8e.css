@@ -118,5 +118,8 @@ body{
 .show{
     display: block;
 }
+.photoFigure img{
+    width: 150px;
+}
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */
