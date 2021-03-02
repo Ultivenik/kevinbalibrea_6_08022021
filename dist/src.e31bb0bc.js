@@ -770,13 +770,13 @@ var InfoProfileFactory = /*#__PURE__*/function () {
   _createClass(InfoProfileFactory, null, [{
     key: "create",
     value: function create(photographer) {
-      var infoProfile = document.createElement('section');
+      var infoProfile = document.createElement("section");
       infoProfile.classList.add("profileID");
       InfoProfileFactory.createProfileName(infoProfile, photographer);
       InfoProfileFactory.createPhotographerLocation(infoProfile, photographer);
       InfoProfileFactory.createPhotographerQuote(infoProfile, photographer);
       InfoProfileFactory.createProfilesTags(infoProfile, photographer);
-      InfoProfileFactory.createContactBtn(infoProfile, "Contactez-moi");
+      InfoProfileFactory.createContactBtn(infoProfile, photographer, "Contactez-moi");
       InfoProfileFactory.createAvatar(infoProfile, photographer);
       return infoProfile;
     }
@@ -806,18 +806,21 @@ var InfoProfileFactory = /*#__PURE__*/function () {
     }
   }, {
     key: "createContactBtn",
-    value: function createContactBtn(infoProfile, content) {
-      var btnContact = document.createElement('button');
-      btnContact.classList.add('btn-contact');
+    value: function createContactBtn(infoProfile, photographer, content) {
+      var btnContact = document.createElement("button");
+      btnContact.classList.add("btn-contact");
       btnContact.innerHTML = content;
       infoProfile.appendChild(btnContact);
+      btnContact.addEventListener("click", function () {
+        InfoProfileFactory.createContactForm(photographer);
+      });
     }
   }, {
     key: "createProfilesTags",
     value: function createProfilesTags(infoProfile, photographer) {
       photographer.tags.map(function (tag) {
-        var profileSpan = document.createElement('span');
-        var profileSpanLink = document.createElement('a');
+        var profileSpan = document.createElement("span");
+        var profileSpanLink = document.createElement("a");
         profileSpanLink.href = "#";
         profileSpan.appendChild(profileSpanLink);
         profileSpanLink.innerHTML = "#" + tag;
@@ -828,7 +831,7 @@ var InfoProfileFactory = /*#__PURE__*/function () {
   }, {
     key: "createAvatar",
     value: function createAvatar(infoProfile, photographer) {
-      var IDImg = document.createElement('img');
+      var IDImg = document.createElement("img");
       IDImg.classList.add("img-profile-link");
       IDImg.src = "./../SamplePhotos/Photographers_ID_Photos/" + photographer.portrait;
       IDImg.alt = "photo profil de ".concat(photographer.name);
@@ -836,7 +839,89 @@ var InfoProfileFactory = /*#__PURE__*/function () {
     }
   }, {
     key: "createContactForm",
-    value: function createContactForm() {}
+    value: function createContactForm(photographer) {
+      var overlay = document.createElement("section");
+      overlay.classList.add("overlay-contact");
+      document.querySelector(".main").appendChild(overlay);
+      var form = document.createElement("form");
+      form.classList.add("contact-form");
+      overlay.appendChild(form);
+      InfoProfileFactory.createTitleForm(photographer, form);
+      InfoProfileFactory.createCloseButton(overlay, form);
+      InfoProfileFactory.createLabel("Prenom", form);
+      InfoProfileFactory.createInput("text", "firstname", form);
+      InfoProfileFactory.createLabel("Nom", form);
+      InfoProfileFactory.createInput("text", "lastname", form);
+      InfoProfileFactory.createLabel("Email", form);
+      InfoProfileFactory.createInput("email", "email", form);
+      InfoProfileFactory.createLabel("Votre message", form);
+      InfoProfileFactory.createTextArea("text", form);
+      InfoProfileFactory.createBtnForm("Envoyer", form);
+    }
+  }, {
+    key: "createTitleForm",
+    value: function createTitleForm(photographer, parent) {
+      var title = document.createElement("h2");
+      title.classList.add("title-form");
+      title.innerHTML = "Contactez moi " + photographer.name;
+      parent.appendChild(title);
+    }
+  }, {
+    key: "createCloseButton",
+    value: function createCloseButton(overlay, parent) {
+      var close = document.createElement("i");
+      close.classList.add("fas", "fa-times");
+      close.addEventListener("click", function () {
+        overlay.remove();
+      });
+      parent.appendChild(close);
+    }
+  }, {
+    key: "createLabel",
+    value: function createLabel(content, parent) {
+      var Label = document.createElement("label");
+      Label.classList.add("label-form");
+      Label.innerHTML = content;
+      parent.appendChild(Label);
+    }
+  }, {
+    key: "createInput",
+    value: function createInput(type, id, parent) {
+      var input = document.createElement("input");
+      input.type = type;
+      input.classList.add("input-form");
+      input.id = id;
+      parent.appendChild(input);
+    }
+  }, {
+    key: "createTextArea",
+    value: function createTextArea(id, parent) {
+      var textInput = document.createElement("textarea");
+      textInput.classList.add("input-form");
+      textInput.id = id;
+      parent.appendChild(textInput);
+    }
+  }, {
+    key: "createBtnForm",
+    value: function createBtnForm(content, parent) {
+      var btnForm = document.createElement("button");
+      btnForm.classList.add("btn-contact");
+      btnForm.innerHTML = content;
+      btnForm.addEventListener("click", function (e) {
+        var firstNameInput = document.getElementById("firstname");
+        var lastNameInput = document.getElementById("lastname");
+        var emailInput = document.getElementById("email");
+        var textInput = document.getElementById("text");
+        InfoProfileFactory.retrieveFormValues(e, firstNameInput, lastNameInput, emailInput, textInput);
+      });
+      parent.appendChild(btnForm);
+    }
+  }, {
+    key: "retrieveFormValues",
+    value: function retrieveFormValues(e, firstNameInput, lastNameInput, emailInput, textInput) {
+      e.preventDefault;
+      console.log("Nom de l'utilisateur: " + firstNameInput.value + "\n" + "Prénom de l'utilisateur: " + lastNameInput.value + "\n" + "E-mail de l'utilisateur: " + emailInput.value + "\n" + "Message de l'utilisateur: " + textInput.value);
+    }
   }]);
 
   return InfoProfileFactory;
@@ -870,52 +955,63 @@ var GalleryFactory = /*#__PURE__*/function () {
     key: "create",
     value: function create(photographer) {
       var media = _FishEyeDataFR.default.media;
+      media.sort(function (a, b) {
+        return b.likes - a.likes;
+      });
       var infoGallery = document.createElement("section");
       infoGallery.classList.add("gallery");
       var label = document.createElement("label");
       label.innerHTML = "Trier par";
+      document.querySelector(".main").appendChild(label);
       var select = document.createElement("select");
       select.classList.add("select");
+      document.querySelector(".main").appendChild(select);
       var optArray = ["Popularité", "Date", "Titre"]; //filtering photo by occurency
 
-      select.addEventListener('change', function (e) {
-        var likesArr = [];
-        var dateArr = [];
-        var titleArr = [];
-        media.map(function (item) {
-          switch (e.target.value) {
-            case "Popularité":
-              likesArr.push(item.likes);
-              likesArr.sort(function (a, b) {
-                return b - a;
-              });
-              break;
+      select.addEventListener("change", function (e) {
+        switch (e.target.value) {
+          case "Popularité":
+            media.sort(function (a, b) {
+              return b.likes - a.likes;
+            });
+            break;
 
-            case "Date":
-              dateArr.push(item.date);
-              dateArr.sort(function (a, b) {
-                return b > a;
-              });
-              break;
+          case "Date":
+            media.sort(function (a, b) {
+              a = a.date.split('-');
+              b = b.date.split('-');
+              return a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+            });
+            break;
 
-            case "Titre":
-              titleArr.push(item.image);
-              titleArr.sort(function (a, b) {
-                return b < a;
-              });
-              break;
+          case "Titre":
+            media.sort(function (a, b) {
+              var aa = a.image !== undefined ? a.image : a.video;
+              var bb = b.image !== undefined ? b.image : b.video; // return aa.localeCompare(bb)
 
-            default:
-              break;
-          }
-        });
+              return aa > bb;
+            });
+            break;
+        }
+
+        GalleryFactory.deletePhotoGallery();
+        GalleryFactory.createPhotoGallery(media, infoGallery, photographer);
       });
-      document.querySelector('.main').appendChild(label);
-      document.querySelector('.main').appendChild(select);
       GalleryFactory.createOptions(optArray, select);
       GalleryFactory.createPhotoGallery(media, infoGallery, photographer);
       return infoGallery;
-    } // creating option DOM method
+    }
+  }, {
+    key: "deletePhotoGallery",
+    value: function deletePhotoGallery() {
+      var photos = document.querySelectorAll(".photoFigure");
+      photos.forEach(function (photo) {
+        photo.remove();
+      });
+    }
+  }, {
+    key: "filterGallery",
+    value: function filterGallery(e, media) {} // creating option DOM method
 
   }, {
     key: "createOptions",
@@ -936,29 +1032,93 @@ var GalleryFactory = /*#__PURE__*/function () {
         if (photo.photographerId === photographer.id) {
           var path = GalleryFactory.definePath(photographer.id, photo);
           var photoFigure = document.createElement("figure");
-          photoFigure.classList.add('photoFigure');
+          photoFigure.classList.add("photoFigure");
           var photoLegend = document.createElement("figcaption");
           photoLegend.classList.add("photoLegend");
 
           if (path.image !== undefined) {
-            var imageGallery = document.createElement('img');
-            imageGallery.src = path.image;
-            photoFigure.appendChild(imageGallery);
+            GalleryFactory.createImage(path.image, photoFigure);
           } else {
-            var videoGallery = document.createElement('video');
-            videoGallery.setAttribute("controls", "");
-            photoFigure.appendChild(videoGallery);
-            var sourceVideoGallery = document.createElement('source');
-            sourceVideoGallery.src = path.video;
-            videoGallery.appendChild(sourceVideoGallery);
+            GalleryFactory.createVideo(path.video, photoFigure);
           }
 
           photoFigure.appendChild(photoLegend);
           GalleryFactory.createLikesPrice(photo, photoLegend);
           infoGallery.appendChild(photoFigure);
+          GalleryFactory.createLightBoxEvent(photoFigure);
         }
       });
+    } // lightbox open when clicking on a photo
+
+  }, {
+    key: "createLightBoxEvent",
+    value: function createLightBoxEvent(photoFigure) {
+      photoFigure.addEventListener("click", function (e) {
+        e.target.classList.remove("media-gallery");
+        e.target.classList.add("lightbox");
+        var overlayGallery = document.createElement("div");
+        overlayGallery.classList.add("overlay-gallery");
+        document.querySelector(".main").appendChild(overlayGallery);
+        GalleryFactory.createCloseButton(e, overlayGallery, overlayGallery);
+        GalleryFactory.createLeftArrow(overlayGallery);
+        GalleryFactory.createLeftArrow(overlayGallery); //avoid doublons
+
+        e.target.addEventListener("click", function () {
+          overlayGallery.remove();
+        });
+      });
+    } // close lightbox when click on "X"
+
+  }, {
+    key: "createCloseButton",
+    value: function createCloseButton(e, overlay, parent) {
+      var close = document.createElement("i");
+      close.classList.add("fas", "fa-times", "lightbox-close-btn");
+      close.addEventListener("click", function () {
+        overlay.remove();
+        e.target.classList.remove("lightbox");
+        e.target.classList.add("media-gallery");
+      });
+      parent.appendChild(close);
+    } // left navigation lightbox
+
+  }, {
+    key: "createLeftArrow",
+    value: function createLeftArrow(parent) {
+      var leftArrow = document.createElement('i');
+      leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow");
+      parent.appendChild(leftArrow);
+    } // right navigation lightbox
+
+  }, {
+    key: "createRightArrow",
+    value: function createRightArrow(parent) {
+      var rightArrow = document.createElement('i');
+      rightArrow.classList.add("fas", "fa-chevron-right", "right-arrow");
+      parent.appendChild(rightArrow);
+    } // create gallery method
+
+  }, {
+    key: "createImage",
+    value: function createImage(source, photoFigure) {
+      var imageGallery = document.createElement("img");
+      imageGallery.classList.add("media-gallery");
+      imageGallery.src = source;
+      photoFigure.appendChild(imageGallery);
     }
+  }, {
+    key: "createVideo",
+    value: function createVideo(source, photoFigure) {
+      var videoGallery = document.createElement("video");
+      videoGallery.addEventListener('click', function () {
+        videoGallery.setAttribute("controls", "");
+      });
+      photoFigure.appendChild(videoGallery);
+      var sourceVideoGallery = document.createElement("source");
+      sourceVideoGallery.src = source;
+      videoGallery.appendChild(sourceVideoGallery);
+    } // like button with like increment event and price
+
   }, {
     key: "createLikesPrice",
     value: function createLikesPrice(photo, photoLegend) {
@@ -974,11 +1134,12 @@ var GalleryFactory = /*#__PURE__*/function () {
       spanLikes.appendChild(icon);
       photoLegend.appendChild(spanPrice);
       photoLegend.appendChild(spanLikes);
-      spanLikes.addEventListener('click', function (e) {
+      spanLikes.addEventListener("click", function (e) {
         e.currentTarget.innerText = photo.likes++;
         spanLikes.appendChild(icon);
       });
-    }
+    } // implementation photos with photographers ID
+
   }, {
     key: "definePath",
     value: function definePath(photographerId, photo) {
@@ -1018,9 +1179,9 @@ var GalleryFactory = /*#__PURE__*/function () {
       var photoPath = "/SamplePhotos/";
 
       if (photo.image !== undefined) {
-        path.image = photoPath + name + '/' + photo.image;
+        path.image = photoPath + name + "/" + photo.image;
       } else {
-        path.video = photoPath + name + '/' + photo.video;
+        path.video = photoPath + name + "/" + photo.video;
       }
     }
   }]);
@@ -1436,7 +1597,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63836" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56447" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

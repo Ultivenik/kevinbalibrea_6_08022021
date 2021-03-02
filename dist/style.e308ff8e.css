@@ -122,17 +122,114 @@ body{
     display: flex;
     flex-wrap: wrap;
     width: 90%;
-    justify-content: center;
     margin: auto;
 }
 .photoFigure{
-    width: 33.33%;
+    width: 27%;
+    margin: 3%;
+    height: 26em;
 }
-.photoFigure img{
-    width: 33em;
+.media-gallery{
+    width: 100%;
+    border-radius: 5px;
+    height: 100%;
+    object-fit: cover;
 }
 .photoFigure video{
     width: 33em;
+}
+.overlay-gallery{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.overlay-gallery i{
+    color: #901C1C;
+    position: absolute;
+    font-size: 3em;
+    z-index: 1000;
+}
+.lightbox-close-btn{
+    top: 10%;
+    right: 10%;
+}
+.left-arrow{
+    left: 0;
+}
+.right-arrow{
+    left: 20%;
+}
+.left-arrow, .right-arrow{
+    top: 50%;
+}
+.lightbox{
+    scale: .8;
+    height: 100vh;
+    position: fixed;
+    /* transition: all .4s ease-in-out; */
+    object-fit: contain;
+    top: 0;
+    left: 50%;
+    z-index: 10;
+}
+.overlay-contact{
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    position: fixed;
+    background: #cacaca9c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+.contact-form{
+    display: flex;
+    flex-direction: column;
+    background: #DB8876;
+    position: relative;
+    width: 23%;
+    height: max-content;
+    padding: 1%;
+    border-radius: 5px;
+}
+.contact-form i {
+    position: absolute;
+    left: 85%;
+    top: 5%;
+    font-size: 3em;
+    color: white;
+}
+.title-form{
+    font-weight: normal;
+    font-size: 2.7em;
+    width: 73%;
+    margin-bottom: 5%;
+}
+.label-form{
+    color: #414141;
+    font-size: 1.5em;
+}
+.input-form{
+    border-radius: 5px;
+    border: 1px solid #D3573C;
+    padding: 3%;
+    margin: 1% 0;
+}
+.contact-form .btn-contact{
+    border: 0;
+    border-radius: 5px;
+    width: 35%;
+    color: white;
+    font-weight: bold;
+    background: #901C1C;
+    padding: 5%;
+    margin: 3% 0px;
 }
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */
