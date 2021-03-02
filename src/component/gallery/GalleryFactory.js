@@ -43,7 +43,7 @@ export default class GalleryFactory{
         infoGallery.appendChild(select)
 
         GalleryFactory.createOptions(optArray, select)
-        GalleryFactory.createMedia(media, infoGallery, photographer)
+        GalleryFactory.createPhotoGallery(media, infoGallery, photographer)
 
         return infoGallery
     }
@@ -59,7 +59,7 @@ export default class GalleryFactory{
         }
     }
     // create photo gallery method
-    static createMedia(media, infoGallery, photographer)
+    static createPhotoGallery(media, infoGallery, photographer)
     {
         media.map(photo =>{
             if (photo.photographerId === photographer.id) {

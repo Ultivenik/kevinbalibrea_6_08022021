@@ -913,7 +913,7 @@ var GalleryFactory = /*#__PURE__*/function () {
       infoGallery.appendChild(label);
       infoGallery.appendChild(select);
       GalleryFactory.createOptions(optArray, select);
-      GalleryFactory.createMedia(media, infoGallery, photographer);
+      GalleryFactory.createPhotoGallery(media, infoGallery, photographer);
       return infoGallery;
     } // creating option DOM method
 
@@ -930,8 +930,8 @@ var GalleryFactory = /*#__PURE__*/function () {
     } // create photo gallery method
 
   }, {
-    key: "createMedia",
-    value: function createMedia(media, infoGallery, photographer) {
+    key: "createPhotoGallery",
+    value: function createPhotoGallery(media, infoGallery, photographer) {
       media.map(function (photo) {
         if (photo.photographerId === photographer.id) {
           var path = GalleryFactory.definePath(photographer.id, photo);
