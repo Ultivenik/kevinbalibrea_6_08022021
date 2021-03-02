@@ -910,8 +910,8 @@ var GalleryFactory = /*#__PURE__*/function () {
           }
         });
       });
-      infoGallery.appendChild(label);
-      infoGallery.appendChild(select);
+      document.querySelector('.main').appendChild(label);
+      document.querySelector('.main').appendChild(select);
       GalleryFactory.createOptions(optArray, select);
       GalleryFactory.createPhotoGallery(media, infoGallery, photographer);
       return infoGallery;

@@ -118,6 +118,19 @@ body{
 .show{
     display: block;
 }
+.gallery{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: center;
+    margin: auto;
+}
+.photoFigure{
+    width: 33.33%;
+}
 .photoFigure img{
-    width: 150px;
+    width: 33em;
+}
+.photoFigure video{
+    width: 33em;
 }
