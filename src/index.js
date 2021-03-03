@@ -1,4 +1,5 @@
 import MainPage from "./pages/MainPage"
+import info from './../FishEyeDataFR.json'
 
 class App{
    static create()

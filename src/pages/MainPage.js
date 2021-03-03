@@ -15,7 +15,7 @@ export default class MainPage {
 
     static displayMainFactory()
     {
-        let main = document.createElement("main")
+        const main = document.createElement("main")
         main.classList.add("main")
         document.body.appendChild(main)
 

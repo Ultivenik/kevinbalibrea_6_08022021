@@ -6,15 +6,16 @@ export default class GalleryFactory{
         let media = info.media
         media.sort((a, b) => b.likes - a.likes)
 
-        let infoGallery = document.createElement("section")
+        const infoGallery = document.createElement("section")
         infoGallery.classList.add("gallery")
 
-        let label = document.createElement("label")
+        const label = document.createElement("label")
+        label.classList.add("label-list")
         label.innerHTML = "Trier par"
         document.querySelector(".main").appendChild(label)
 
-        let select = document.createElement("select")
-        select.classList.add("select")
+        const select = document.createElement("select")
+        select.classList.add("select-list")
         document.querySelector(".main").appendChild(select)
 
         let optArray = ["Popularité", "Date", "Titre"]
@@ -52,22 +53,19 @@ export default class GalleryFactory{
 
     static deletePhotoGallery()
     {
-        let photos = document.querySelectorAll(".photoFigure")
+        const photos = document.querySelectorAll(".photoFigure")
         photos.forEach((photo) => {
             photo.remove()
         })
     }
 
-    static filterGallery(e, media)
-    {
-
-    }
     // creating option DOM method
     static createOptions(optArray, select)
     {
         for (let i = 0; i < optArray.length; i++) {
             const optContent = optArray[i];
-            let option = document.createElement("option")
+            const option = document.createElement("option")
+            option.classList.add("occurency-list")
             option.value = optContent
             option.text = optContent
             select.appendChild(option)
@@ -78,38 +76,64 @@ export default class GalleryFactory{
     {
         media.map(photo =>{
             if (photo.photographerId === photographer.id) {
-                let path = GalleryFactory.definePath(photographer.id, photo)
-                let photoFigure = document.createElement("figure")
+                const path = GalleryFactory.definePath(photographer.id, photo)
+                const photoFigure = document.createElement("figure")
                 photoFigure.classList.add("photoFigure")
 
-                let photoLegend = document.createElement("figcaption")
+                const photoLegend = document.createElement("figcaption")
                 photoLegend.classList.add("photoLegend")
 
                 if (path.image !== undefined) {
-                    GalleryFactory.createImage(path.image, photoFigure)
+                    GalleryFactory.createImage(path.image, photo.altText, photoFigure)
                 }else{
-                    GalleryFactory.createVideo(path.video, photoFigure)
+                    GalleryFactory.createVideo(path.video, photo.altText, photoFigure)
                 }
 
                 photoFigure.appendChild(photoLegend)
-                GalleryFactory.createLikesPrice(photo, photoLegend)
+                GalleryFactory.createLegendTitle(photo.altText, photoLegend)
+                GalleryFactory.createPrice(photo.price, photoLegend)
+                GalleryFactory.createLikes(photo.likes, photoLegend)
+                GalleryFactory.createDatePhoto(photo.date, photoLegend)
                 infoGallery.appendChild(photoFigure)
-                GalleryFactory.createLightBoxEvent(photoFigure)
             }
         })
     }
-    // lightbox open when clicking on a photo
-    static createLightBoxEvent(photoFigure)
+
+    static createDatePhoto(date, parent)
     {
-        photoFigure.addEventListener("click", (e) => {
-            e.target.classList.remove("media-gallery")
-            e.target.classList.add("lightbox")
-            let overlayGallery = document.createElement("div")
+        const dateTime = document.createElement("time")
+        dateTime.classList.add("date-time")
+        dateTime.setAttribute("datetime", date)
+        dateTime.innerHTML = date
+        parent.appendChild(dateTime)
+    }
+    static createLegendTitle(photo, parent)
+    {
+        const title = document.createElement("h3")
+        title.classList.add("title-photo-gallery")
+        title.innerHTML = photo
+        parent.appendChild(title)
+    }
+
+    // lightbox open when clicking on a photo
+    static createLightBoxEvent(target)
+    {
+        target.addEventListener("click", (e) => {
+            let clone = e.target.cloneNode(false)
+            const overlayGallery = document.createElement("div")
+
+            clone.classList.remove("media-gallery")
+            clone.classList.add("lightbox")
+
+            overlayGallery.appendChild(clone)
             overlayGallery.classList.add("overlay-gallery")
             document.querySelector(".main").appendChild(overlayGallery)
+
+            GalleryFactory.createLegendTitle(e.target.dataset.altText, overlayGallery)
             GalleryFactory.createCloseButton(e, overlayGallery, overlayGallery)
             GalleryFactory.createLeftArrow(overlayGallery)
-            GalleryFactory.createLeftArrow(overlayGallery)
+            GalleryFactory.createRightArrow(overlayGallery)
+
             //avoid doublons
             e.target.addEventListener("click", () => {
                 overlayGallery.remove()
@@ -119,73 +143,86 @@ export default class GalleryFactory{
     // close lightbox when click on "X"
     static createCloseButton(e, overlay, parent)
     {
-        let close = document.createElement("i")
+        const close = document.createElement("i")
         close.classList.add("fas", "fa-times", "lightbox-close-btn")
         close.addEventListener("click", () =>{
             overlay.remove()
             e.target.classList.remove("lightbox")
             e.target.classList.add("media-gallery")
+            e.target.removeAttribute("controls")
         })
         parent.appendChild(close)
     }
     // left navigation lightbox
     static createLeftArrow(parent)
     {
-        let leftArrow = document.createElement('i')
+        const leftArrow = document.createElement('i')
         leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow")
         parent.appendChild(leftArrow)
     }
     // right navigation lightbox
     static createRightArrow(parent)
     {
-        let rightArrow = document.createElement('i')
+        const rightArrow = document.createElement('i')
         rightArrow.classList.add("fas", "fa-chevron-right", "right-arrow")
         parent.appendChild(rightArrow)
+
+        rightArrow.addEventListener("click", () => {
+            console.log()
+        })
     }
     // create gallery method
-    static createImage(source, photoFigure)
+    static createImage(source, altText, photoFigure)
     {
-        let imageGallery = document.createElement("img")
+        const imageGallery = document.createElement("img")
         imageGallery.classList.add("media-gallery")
         imageGallery.src = source
+        imageGallery.alt = altText
+        imageGallery.dataset.altText = altText
         photoFigure.appendChild(imageGallery)
+        GalleryFactory.createLightBoxEvent(imageGallery)
+
     }
 
-    static createVideo(source, photoFigure)
+    static createVideo(source, altText, photoFigure)
     {
-        let videoGallery = document.createElement("video")
+        const videoGallery = document.createElement("video")
         videoGallery.addEventListener('click', () =>{
             videoGallery.setAttribute("controls", "")
         })
+        videoGallery.dataset.altText = altText
         photoFigure.appendChild(videoGallery)
+        GalleryFactory.createLightBoxEvent(videoGallery)
 
-        let sourceVideoGallery = document.createElement("source")
+        const sourceVideoGallery = document.createElement("source")
         sourceVideoGallery.src = source
         videoGallery.appendChild(sourceVideoGallery)
     }
-    // like button with like increment event and price
-    static createLikesPrice(photo, photoLegend)
+
+    static createPrice(photo, photoLegend)
     {
-        let spanPrice = document.createElement("span")
+        const spanPrice = document.createElement("span")
         spanPrice.classList.add("price-photo")
-        spanPrice.innerHTML = photo.price + "€ "
-
-        let spanLikes = document.createElement("span")
-        spanLikes.classList.add("photo-likes")
-        spanLikes.innerHTML = photo.likes
-
-        let icon = document.createElement("i")
-        icon.classList.add("fas", "fa-heart")
-        spanLikes.innerHTML = photo.likes
-        spanLikes.appendChild(icon)
-
+        spanPrice.innerHTML = photo + "  €  "
         photoLegend.appendChild(spanPrice)
+    }
+    // like button with like increment event and price
+    static createLikes(photo, photoLegend)
+    {
+        const spanLikes = document.createElement("span")
+        spanLikes.classList.add("photo-likes")
+        spanLikes.innerHTML = photo+ "  "
+
+        const icon = document.createElement("i")
+        icon.classList.add("fas", "fa-heart")
+        icon.setAttribute("aria-label", "likes")
+
+        spanLikes.appendChild(icon)
         photoLegend.appendChild(spanLikes)
 
         spanLikes.addEventListener("click", (e) =>{
-            e.currentTarget.innerText = photo.likes++
+            e.currentTarget.innerText = photo++
             spanLikes.appendChild(icon)
-            
         })
     }
     // implementation photos with photographers ID

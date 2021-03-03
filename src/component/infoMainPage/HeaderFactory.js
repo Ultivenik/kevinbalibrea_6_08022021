@@ -20,10 +20,10 @@ export default class HeaderFactory
     // create header method
     static createHeader()
     {
-        let logoLink = document.createElement('a')
-        let logoImg = document.createElement('img')
-        let header = document.createElement("header")
-        let headerNav = document.createElement("nav")
+        const logoLink = document.createElement('a')
+        const logoImg = document.createElement('img')
+        const header = document.createElement("header")
+        const headerNav = document.createElement("nav")
 
         logoLink.href = "index.html"
         logoImg.src = "./logo.png"
@@ -43,8 +43,8 @@ export default class HeaderFactory
     static createTags(headerNav)
     {
         HeaderFactory.tags.map(tag =>{
-            let spanNav = document.createElement("span")
-            let linkNav = document.createElement("a")
+            const spanNav = document.createElement("span")
+            const linkNav = document.createElement("a")
 
             linkNav.href = "#"
             spanNav.classList.add("tag")
@@ -76,6 +76,17 @@ export default class HeaderFactory
         idArray.forEach(id => {
             let photographerCard = document.querySelector(`#profile-${id}`)
             photographerCard.style.display = "none"
+        })
+        // make appear profile by clicking tag again
+        e.target.addEventListener("click", () =>{
+            idArray.forEach(id => {
+                let photographerCard = document.querySelector(`#profile-${id}`)
+                if (photographerCard.style.display === "none") {
+                     photographerCard.style.display = "block"
+                 }else{
+                     photographerCard.style.display = "none"
+                 }
+            })
         })
     }
 }

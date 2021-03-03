@@ -3,6 +3,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body{
     font-family: 'DM Sans', sans-serif;
@@ -14,7 +15,7 @@ body{
     align-items: center;
     justify-content: space-between;
     width: 50%;
-    margin: 2% 0 6% 9%;
+    margin: 2% 0 6% 7.5%;
 }
 .header img{
     width: 17em;
@@ -24,6 +25,9 @@ body{
     justify-content: space-between;
     width: 44em;
     margin-left: 12%;
+}
+.header .tag{
+    margin-left: 1%;
 }
 .tag{
     border: 1px solid #C4C4C4;
@@ -60,8 +64,8 @@ body{
     display: inline-block;
     overflow: hidden;
     border-radius: 50%;
-    width: 17em;
-    height: 17em;
+    width: 15em;
+    height: 15em;
     margin: 0 auto;
 }
 .profile img{
@@ -73,24 +77,7 @@ body{
     object-fit: cover;
     object-position: 63% 24%;
 }
-.img-1{
-    scale: 1.4;
-}
-.img-3{
-    scale: 2.7;
-}
-.img-4{
-    scale: 2.5;
-}
-.img-5{
-    scale: 2.5;
-    margin: 65% 23% !important;
 
-}
-.img-6{
-    scale: 1.8;
-    margin: 15% 8% !important;
-}
 .profile h2{
     font-size: 45px;
     color: #D3573C;
@@ -118,25 +105,120 @@ body{
 .show{
     display: block;
 }
+.profileID{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    background: #fafafa;
+    width: 85%;
+    margin: 0 auto 1%;
+    padding: 5%;
+}
+.profileID .name{
+    font-weight: normal;
+    font-size: 4em;
+    color: #D3573C;
+}
+.profileID .city{
+    font-size: 1.4em;
+}
+.profileID .name, .profileID .city, .profileID .quote{
+    width: 100%;
+}
+.profileID .quote{
+    font-size: 1em;
+    color: #525252;
+    margin: 1% auto;
+}
+.profileID .tag{
+    margin-right: 1%;
+    padding: 0 .4%;
+}
+.profileID img, .profileID button{
+    position: absolute;
+}
+.profileID img{
+    right: 10%;
+}
+.profileID button{
+    border: 0;
+    border-radius: 5px;
+    left: 40%;
+    top: 30%;
+    color: white;
+    font-weight: normal;
+    font-size: 1.2em;
+    background: #901C1C;
+    padding: 1%;
+}
+.label-list{
+    font-weight: bold;
+    margin-left: 7.4%;
+    margin-top: 5%;
+}
+.select-list{
+    appearance: none;
+    background: #901C1C;
+    color: white;
+    border-radius: 5px;
+    padding: .5%;
+    font-weight: bold;
+    outline: none;
+    border: 0;
+    margin-left: 2%;
+    width: 8em;
+}
+.select-list::before{
+    content: ">";
+    /* display: block; */
+    color: white;
+    /* width: 100%; */
+    position: absolute;
+    font-size: 2em;
+    top: 0;
+    right: 0;
+}
+.occurency-list{
+    padding: 1%;
+}
 .gallery{
     display: flex;
     flex-wrap: wrap;
-    width: 90%;
-    margin: auto;
+    margin-left: 5%;
+    width: 100%;
 }
 .photoFigure{
-    width: 27%;
-    margin: 3%;
-    height: 26em;
+    width: 25%;
+    margin: 2.5%;
+    height: 23em;
 }
 .media-gallery{
     width: 100%;
     border-radius: 5px;
     height: 100%;
     object-fit: cover;
+    object-position: 100% 33%;
 }
 .photoFigure video{
-    width: 33em;
+    width: 100%;
+}
+.photoLegend{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    color: #901C1C;
+}
+.photoLegend span{
+    font-size: 1.2em;
+}
+.photoLegend .date-time{
+    width: 100%;
+}
+.photoLegend .title-photo-gallery{
+    width: 75%;
+    font-weight: normal;
 }
 .overlay-gallery{
     width: 100%;
@@ -154,24 +236,30 @@ body{
     font-size: 3em;
     z-index: 1000;
 }
+.overlay-gallery .title-photo-gallery{
+    color: #901C1C;
+    font-weight: normal;
+    position: absolute;
+}
 .lightbox-close-btn{
     top: 10%;
     right: 10%;
 }
 .left-arrow{
-    left: 0;
+    left: 20%;
 }
 .right-arrow{
-    left: 20%;
+    right: 20%;
 }
 .left-arrow, .right-arrow{
     top: 50%;
 }
 .lightbox{
-    scale: .8;
+    transform: scale(.9);
     height: 100vh;
     position: fixed;
-    /* transition: all .4s ease-in-out; */
+    transition: transform .4s ease-in;
+    transform-origin: center;
     object-fit: contain;
     top: 0;
     left: 50%;
@@ -186,7 +274,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -1;
 }
 .contact-form{
     display: flex;
@@ -218,8 +305,13 @@ body{
 .input-form{
     border-radius: 5px;
     border: 1px solid #D3573C;
+    outline: none;
     padding: 3%;
     margin: 1% 0;
+    caret-color: #D3573C;
+}
+.input-form:focus{
+    border: 2px solid #901C1C;
 }
 .contact-form .btn-contact{
     border: 0;

@@ -181,7 +181,8 @@ module.exports = {
     "tags": ["fashion"],
     "likes": 62,
     "date": "2011-12-08",
-    "price": 55
+    "price": 55,
+    "altText": "Yellow weared girl"
   }, {
     "id": 8520927,
     "photographerId": 82,
@@ -189,7 +190,8 @@ module.exports = {
     "tags": ["fashion"],
     "likes": 11,
     "date": "2011-11-06",
-    "price": 55
+    "price": 55,
+    "altText": "Blond girl green weared"
   }, {
     "id": 9025895,
     "photographerId": 82,
@@ -197,15 +199,17 @@ module.exports = {
     "tags": ["fashion"],
     "likes": 72,
     "date": "2013-08-12",
-    "price": 55
+    "price": 55,
+    "altText": "Striped jacket girl"
   }, {
     "id": 9275938,
     "photographerId": 82,
-    "image": "Event-_eddingGazebo.jpg",
+    "image": "Event_WeddingGazebo.jpg",
     "tags": ["events"],
     "likes": 69,
     "date": "2018-02-22",
-    "price": 55
+    "price": 55,
+    "altText": "Wedding gazebo"
   }, {
     "id": 2053494,
     "photographerId": 82,
@@ -213,7 +217,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 2,
     "date": "2020-05-25",
-    "price": 55
+    "price": 55,
+    "altText": "Sparklers in wedding"
   }, {
     "id": 7324238,
     "photographerId": 82,
@@ -221,7 +226,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 33,
     "date": "2019-06-12",
-    "price": 55
+    "price": 55,
+    "altText": "Event of 18th anniversary"
   }, {
     "id": 8328953,
     "photographerId": 82,
@@ -229,7 +235,8 @@ module.exports = {
     "tags": ["art"],
     "likes": 24,
     "date": "2011-12-08",
-    "price": 100
+    "price": 100,
+    "altText": "Art wooden horse sculpture"
   }, {
     "id": 7502053,
     "photographerId": 82,
@@ -237,7 +244,8 @@ module.exports = {
     "tags": ["art"],
     "likes": 88,
     "date": "2007-05-07",
-    "price": 55
+    "price": 55,
+    "altText": "Art triangle man"
   }, {
     "id": 8523492,
     "photographerId": 82,
@@ -245,7 +253,8 @@ module.exports = {
     "tags": ["art"],
     "likes": 24,
     "date": "2018-05-05",
-    "price": 55
+    "price": 55,
+    "altText": "Grafiti in a corridor"
   }, {
     "id": 75902334,
     "photographerId": 82,
@@ -253,7 +262,8 @@ module.exports = {
     "tags": ["art"],
     "likes": 75,
     "date": "2019-11-25",
-    "price": 55
+    "price": 55,
+    "altText": "Multiple blue and red ducks"
   }, {
     "id": 73852953,
     "photographerId": 925,
@@ -261,7 +271,8 @@ module.exports = {
     "tags": ["sport"],
     "likes": 52,
     "date": "2013-02-30",
-    "price": 70
+    "price": 70,
+    "altText": "Canoë in team"
   }, {
     "id": 92758372,
     "photographerId": 925,
@@ -269,7 +280,8 @@ module.exports = {
     "tags": ["fashion"],
     "likes": 58,
     "date": "2018-07-17",
-    "price": 70
+    "price": 70,
+    "altText": "Two mannequin wings imitate"
   }, {
     "id": 32958383,
     "photographerId": 925,
@@ -277,7 +289,8 @@ module.exports = {
     "tags": ["fashion"],
     "likes": 11,
     "date": "2019-08-12",
-    "price": 70
+    "price": 70,
+    "altText": "Red weared girl on stairs"
   }, {
     "id": 928587383,
     "photographerId": 925,
@@ -285,7 +298,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 2,
     "date": "2019-01-02",
-    "price": 70
+    "price": 70,
+    "altText": "Event venture conference"
   }, {
     "id": 725639493,
     "photographerId": 925,
@@ -293,7 +307,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 3,
     "date": "2019-05-20",
-    "price": 70
+    "price": 70,
+    "altText": "Event product pitch"
   }, {
     "id": 23394384,
     "photographerId": 925,
@@ -301,7 +316,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 52,
     "date": "2019-07-18",
-    "price": 70
+    "price": 70,
+    "altText": "Event keyboard check"
   }, {
     "id": 87367293,
     "photographerId": 925,
@@ -309,7 +325,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 23,
     "date": "2018-02-22",
-    "price": 70
+    "price": 70,
+    "altText": "Event emcee"
   }, {
     "id": 593834784,
     "photographerId": 925,
@@ -317,7 +334,8 @@ module.exports = {
     "tags": ["animals"],
     "likes": 52,
     "date": "2017-03-13",
-    "price": 70
+    "price": 70,
+    "altText": "Deer in forest"
   }, {
     "id": 83958935,
     "photographerId": 925,
@@ -325,7 +343,8 @@ module.exports = {
     "tags": ["animals"],
     "likes": 52,
     "date": "2016-06-12",
-    "price": 70
+    "price": 70,
+    "altText": "Puppy in the beach"
   }, {
     "id": 394583434,
     "photographerId": 527,
@@ -333,7 +352,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 23,
     "date": "2017-03-18",
-    "price": 45
+    "price": 45,
+    "altText": "Mountain aerial view"
   }, {
     "id": 343423425,
     "photographerId": 527,
@@ -341,7 +361,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 101,
     "date": "2017-04-03",
-    "price": 45
+    "price": 45,
+    "altText": "Outdoor baths"
   }, {
     "id": 73434243,
     "photographerId": 527,
@@ -349,7 +370,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 99,
     "date": "2018-04-30",
-    "price": 45
+    "price": 45,
+    "altText": "Road into hill"
   }, {
     "id": 23425523,
     "photographerId": 527,
@@ -357,7 +379,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 34,
     "date": "2016-04-05",
-    "price": 45
+    "price": 45,
+    "altText": "Bridge into forest"
   }, {
     "id": 23134513,
     "photographerId": 527,
@@ -365,7 +388,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 23,
     "date": "2017-03-18",
-    "price": 45
+    "price": 45,
+    "altText": "Boat wanderer"
   }, {
     "id": 92352352,
     "photographerId": 527,
@@ -373,7 +397,8 @@ module.exports = {
     "tags": ["portrait"],
     "likes": 66,
     "date": "2018-05-24",
-    "price": 45
+    "price": 45,
+    "altText": "Portrait sunkisses"
   }, {
     "id": 34513453,
     "photographerId": 527,
@@ -381,7 +406,8 @@ module.exports = {
     "tags": ["portait"],
     "likes": 52,
     "date": "2017-04-21",
-    "price": 45
+    "price": 45,
+    "altText": "Portrait Shaw"
   }, {
     "id": 23523533,
     "photographerId": 527,
@@ -389,7 +415,8 @@ module.exports = {
     "tags": ["portait"],
     "likes": 95,
     "date": "2018-11-02",
-    "price": 45
+    "price": 45,
+    "altText": "Portrait Alexandra"
   }, {
     "id": 525834234,
     "photographerId": 527,
@@ -397,7 +424,8 @@ module.exports = {
     "tags": ["portait"],
     "likes": 25,
     "date": "2019-01-02",
-    "price": 45
+    "price": 45,
+    "altText": "Portrait afternoonBreak"
   }, {
     "id": 623534343,
     "photographerId": 243,
@@ -405,7 +433,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 88,
     "date": "2019-02-03",
-    "price": 45
+    "price": 45,
+    "altText": "Lonesome"
   }, {
     "id": 625025343,
     "photographerId": 243,
@@ -413,7 +442,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 85,
     "date": "2019-04-03",
-    "price": 45
+    "price": 45,
+    "altText": "Burano's colored houses"
   }, {
     "id": 2525345343,
     "photographerId": 243,
@@ -421,7 +451,8 @@ module.exports = {
     "tags": ["portait"],
     "likes": 34,
     "date": "2019-04-07",
-    "price": 45
+    "price": 45,
+    "altText": "Portrait Wednesday"
   }, {
     "id": 2523434634,
     "photographerId": 243,
@@ -429,7 +460,8 @@ module.exports = {
     "tags": ["portait"],
     "likes": 63,
     "date": "2019-04-07",
-    "price": 45
+    "price": 45,
+    "altText": "Portrait Nora"
   }, {
     "id": 398847109,
     "photographerId": 243,
@@ -437,7 +469,8 @@ module.exports = {
     "tags": ["portait"],
     "likes": 55,
     "date": "2019-06-20",
-    "price": 45
+    "price": 45,
+    "altText": "Portrait black and white"
   }, {
     "id": 2534342,
     "photographerId": 243,
@@ -445,7 +478,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 25,
     "date": "2019-06-21",
-    "price": 45
+    "price": 45,
+    "altText": "Sea side Wedding"
   }, {
     "id": 65235234,
     "photographerId": 243,
@@ -453,7 +487,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 52,
     "date": "2019-06-25",
-    "price": 45
+    "price": 45,
+    "altText": "Pinto Wedding"
   }, {
     "id": 23523434,
     "photographerId": 243,
@@ -461,7 +496,8 @@ module.exports = {
     "tags": ["events"],
     "likes": 77,
     "date": "2019-06-28",
-    "price": 45
+    "price": 45,
+    "altText": "Benevides Wedding"
   }, {
     "id": 5234343,
     "photographerId": 243,
@@ -469,7 +505,8 @@ module.exports = {
     "tags": ["animals"],
     "likes": 142,
     "date": "2019-08-23",
-    "price": 60
+    "price": 60,
+    "altText": "Wild Horses in the mountains"
   }, {
     "id": 95234343,
     "photographerId": 243,
@@ -477,7 +514,8 @@ module.exports = {
     "tags": ["animals"],
     "likes": 59,
     "date": "2019-07-02",
-    "price": 60
+    "price": 60,
+    "altText": "Rainbow colored bird"
   }, {
     "id": 52343416,
     "photographerId": 195,
@@ -485,7 +523,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 25,
     "date": "2019-04-03",
-    "price": 60
+    "price": 60,
+    "altText": "Chinese tower"
   }, {
     "id": 2523434,
     "photographerId": 195,
@@ -493,7 +532,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 53,
     "date": "2019-05-06",
-    "price": 60
+    "price": 60,
+    "altText": "Sunset on Venetian canal"
   }, {
     "id": 95293534,
     "photographerId": 195,
@@ -501,7 +541,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 33,
     "date": "2019-05-12",
-    "price": 60
+    "price": 60,
+    "altText": "Lake forest and mountain"
   }, {
     "id": 356234343,
     "photographerId": 195,
@@ -509,7 +550,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 53,
     "date": "2019-06-20",
-    "price": 60
+    "price": 60,
+    "altText": "Bike beside parisian stairs"
   }, {
     "id": 235234343,
     "photographerId": 195,
@@ -517,7 +559,8 @@ module.exports = {
     "tags": ["travel"],
     "likes": 63,
     "date": "2019-06-26",
-    "price": 60
+    "price": 60,
+    "altText": "Turkish door"
   }, {
     "id": 6234234343,
     "photographerId": 195,
@@ -525,7 +568,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 52,
     "date": "2019-06-30",
-    "price": 60
+    "price": 60,
+    "altText": "Synagogue"
   }, {
     "id": 6525666253,
     "photographerId": 195,
@@ -533,7 +577,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 63,
     "date": "2019-07-20",
-    "price": 60
+    "price": 60,
+    "altText": "Houses on a hill"
   }, {
     "id": 98252523433,
     "photographerId": 195,
@@ -541,7 +586,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 88,
     "date": "2020-01-05",
-    "price": 60
+    "price": 60,
+    "altText": "Pisa tower"
   }, {
     "id": 9259398453,
     "photographerId": 195,
@@ -549,7 +595,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 57,
     "date": "2020-01-20",
-    "price": 65
+    "price": 65,
+    "altText": "Aerial video traffic"
   }, {
     "id": 3523523534,
     "photographerId": 195,
@@ -557,7 +604,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 54,
     "date": "2020-05-05",
-    "price": 60
+    "price": 60,
+    "altText": "Corner Room"
   }, {
     "id": 952343423,
     "photographerId": 930,
@@ -565,7 +613,8 @@ module.exports = {
     "tags": ["sport"],
     "likes": 150,
     "date": "2018-02-30",
-    "price": 70
+    "price": 70,
+    "altText": "Tricks in the air"
   }, {
     "id": 235234343,
     "photographerId": 930,
@@ -573,7 +622,8 @@ module.exports = {
     "tags": ["sport"],
     "likes": 101,
     "date": "2018-03-05",
-    "price": 65
+    "price": 65,
+    "altText": "A girl climbing"
   }, {
     "id": 235343222,
     "photographerId": 930,
@@ -581,7 +631,8 @@ module.exports = {
     "tags": ["sport"],
     "likes": 103,
     "date": "2018-03-10",
-    "price": 70
+    "price": 70,
+    "altText": "Man surfing in a tub"
   }, {
     "id": 7775342343,
     "photographerId": 930,
@@ -589,7 +640,8 @@ module.exports = {
     "tags": ["sport"],
     "likes": 77,
     "date": "2018-04-16",
-    "price": 50
+    "price": 50,
+    "altText": "Man tricks with ski"
   }, {
     "id": 9253445784,
     "photographerId": 930,
@@ -597,7 +649,8 @@ module.exports = {
     "tags": ["sport"],
     "likes": 88,
     "date": "2018-04-22",
-    "price": 65
+    "price": 65,
+    "altText": "Women sprint in a race"
   }, {
     "id": 22299394,
     "photographerId": 930,
@@ -605,7 +658,8 @@ module.exports = {
     "tags": ["sport"],
     "likes": 95,
     "date": "2018-04-27",
-    "price": 70
+    "price": 70,
+    "altText": "Man tricks on skatebord"
   }, {
     "id": 3452342633,
     "photographerId": 930,
@@ -613,7 +667,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 52,
     "date": "2018-05-03",
-    "price": 75
+    "price": 75,
+    "altText": "Architecture white light"
   }, {
     "id": 939234243,
     "photographerId": 930,
@@ -621,7 +676,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 55,
     "date": "2018-05-10",
-    "price": 72
+    "price": 72,
+    "altText": "Architecture water on modern"
   }, {
     "id": 222959233,
     "photographerId": 930,
@@ -629,7 +685,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 85,
     "date": "2018-05-15",
-    "price": 71
+    "price": 71,
+    "altText": "Architecture Horseshoe"
   }, {
     "id": 965933434,
     "photographerId": 930,
@@ -637,7 +694,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 66,
     "date": "2018-05-20",
-    "price": 58
+    "price": 58,
+    "altText": "Architecture Cross Bar"
   }, {
     "id": 777723343,
     "photographerId": 930,
@@ -645,7 +703,8 @@ module.exports = {
     "tags": ["architecture"],
     "likes": 79,
     "date": "2018-05-21",
-    "price": 80
+    "price": 80,
+    "altText": "Architecture connected curves"
   }]
 };
 },{}],"component/infoMainPage/HeaderFactory.js":[function(require,module,exports) {
@@ -738,6 +797,18 @@ var HeaderFactory = /*#__PURE__*/function () {
       idArray.forEach(function (id) {
         var photographerCard = document.querySelector("#profile-".concat(id));
         photographerCard.style.display = "none";
+      }); // make appear profile by clicking tag again
+
+      e.target.addEventListener("click", function () {
+        idArray.forEach(function (id) {
+          var photographerCard = document.querySelector("#profile-".concat(id));
+
+          if (photographerCard.style.display === "none") {
+            photographerCard.style.display = "block";
+          } else {
+            photographerCard.style.display = "none";
+          }
+        });
       });
     }
   }]);
@@ -793,7 +864,7 @@ var InfoProfileFactory = /*#__PURE__*/function () {
     value: function createPhotographerLocation(infoProfile, photographer) {
       var IDLocation = document.createElement("p");
       IDLocation.classList.add("city");
-      IDLocation.innerHTML = "".concat(photographer.city) + "".concat(photographer.country);
+      IDLocation.innerHTML = "".concat(photographer.city, ", ") + "".concat(photographer.country);
       infoProfile.appendChild(IDLocation);
     }
   }, {
@@ -848,13 +919,13 @@ var InfoProfileFactory = /*#__PURE__*/function () {
       overlay.appendChild(form);
       InfoProfileFactory.createTitleForm(photographer, form);
       InfoProfileFactory.createCloseButton(overlay, form);
-      InfoProfileFactory.createLabel("Prenom", form);
+      InfoProfileFactory.createLabel("Prenom", "firstname", form);
       InfoProfileFactory.createInput("text", "firstname", form);
-      InfoProfileFactory.createLabel("Nom", form);
+      InfoProfileFactory.createLabel("Nom", "lastname", form);
       InfoProfileFactory.createInput("text", "lastname", form);
-      InfoProfileFactory.createLabel("Email", form);
+      InfoProfileFactory.createLabel("Email", "email", form);
       InfoProfileFactory.createInput("email", "email", form);
-      InfoProfileFactory.createLabel("Votre message", form);
+      InfoProfileFactory.createLabel("Votre message", "text", form);
       InfoProfileFactory.createTextArea("text", form);
       InfoProfileFactory.createBtnForm("Envoyer", form);
     }
@@ -878,10 +949,11 @@ var InfoProfileFactory = /*#__PURE__*/function () {
     }
   }, {
     key: "createLabel",
-    value: function createLabel(content, parent) {
+    value: function createLabel(content, id, parent) {
       var Label = document.createElement("label");
       Label.classList.add("label-form");
       Label.innerHTML = content;
+      Label.setAttribute("for", id);
       parent.appendChild(Label);
     }
   }, {
@@ -908,18 +980,20 @@ var InfoProfileFactory = /*#__PURE__*/function () {
       btnForm.classList.add("btn-contact");
       btnForm.innerHTML = content;
       btnForm.addEventListener("click", function (e) {
+        e.preventDefault();
+        var form = document.querySelector(".contact-form");
         var firstNameInput = document.getElementById("firstname");
         var lastNameInput = document.getElementById("lastname");
         var emailInput = document.getElementById("email");
         var textInput = document.getElementById("text");
-        InfoProfileFactory.retrieveFormValues(e, firstNameInput, lastNameInput, emailInput, textInput);
+        InfoProfileFactory.retrieveFormValues(firstNameInput, lastNameInput, emailInput, textInput);
+        form.reset();
       });
       parent.appendChild(btnForm);
     }
   }, {
     key: "retrieveFormValues",
-    value: function retrieveFormValues(e, firstNameInput, lastNameInput, emailInput, textInput) {
-      e.preventDefault;
+    value: function retrieveFormValues(firstNameInput, lastNameInput, emailInput, textInput) {
       console.log("Nom de l'utilisateur: " + firstNameInput.value + "\n" + "Prénom de l'utilisateur: " + lastNameInput.value + "\n" + "E-mail de l'utilisateur: " + emailInput.value + "\n" + "Message de l'utilisateur: " + textInput.value);
     }
   }]);
@@ -961,10 +1035,11 @@ var GalleryFactory = /*#__PURE__*/function () {
       var infoGallery = document.createElement("section");
       infoGallery.classList.add("gallery");
       var label = document.createElement("label");
+      label.classList.add("label-list");
       label.innerHTML = "Trier par";
       document.querySelector(".main").appendChild(label);
       var select = document.createElement("select");
-      select.classList.add("select");
+      select.classList.add("select-list");
       document.querySelector(".main").appendChild(select);
       var optArray = ["Popularité", "Date", "Titre"]; //filtering photo by occurency
 
@@ -1008,10 +1083,7 @@ var GalleryFactory = /*#__PURE__*/function () {
       photos.forEach(function (photo) {
         photo.remove();
       });
-    }
-  }, {
-    key: "filterGallery",
-    value: function filterGallery(e, media) {} // creating option DOM method
+    } // creating option DOM method
 
   }, {
     key: "createOptions",
@@ -1019,6 +1091,7 @@ var GalleryFactory = /*#__PURE__*/function () {
       for (var i = 0; i < optArray.length; i++) {
         var optContent = optArray[i];
         var option = document.createElement("option");
+        option.classList.add("occurency-list");
         option.value = optContent;
         option.text = optContent;
         select.appendChild(option);
@@ -1037,31 +1110,53 @@ var GalleryFactory = /*#__PURE__*/function () {
           photoLegend.classList.add("photoLegend");
 
           if (path.image !== undefined) {
-            GalleryFactory.createImage(path.image, photoFigure);
+            GalleryFactory.createImage(path.image, photo.altText, photoFigure);
           } else {
-            GalleryFactory.createVideo(path.video, photoFigure);
+            GalleryFactory.createVideo(path.video, photo.altText, photoFigure);
           }
 
           photoFigure.appendChild(photoLegend);
-          GalleryFactory.createLikesPrice(photo, photoLegend);
+          GalleryFactory.createLegendTitle(photo.altText, photoLegend);
+          GalleryFactory.createPrice(photo.price, photoLegend);
+          GalleryFactory.createLikes(photo.likes, photoLegend);
+          GalleryFactory.createDatePhoto(photo.date, photoLegend);
           infoGallery.appendChild(photoFigure);
-          GalleryFactory.createLightBoxEvent(photoFigure);
         }
       });
+    }
+  }, {
+    key: "createDatePhoto",
+    value: function createDatePhoto(date, parent) {
+      var dateTime = document.createElement("time");
+      dateTime.classList.add("date-time");
+      dateTime.setAttribute("datetime", date);
+      dateTime.innerHTML = date;
+      parent.appendChild(dateTime);
+    }
+  }, {
+    key: "createLegendTitle",
+    value: function createLegendTitle(photo, parent) {
+      var title = document.createElement("h3");
+      title.classList.add("title-photo-gallery");
+      title.innerHTML = photo;
+      parent.appendChild(title);
     } // lightbox open when clicking on a photo
 
   }, {
     key: "createLightBoxEvent",
-    value: function createLightBoxEvent(photoFigure) {
-      photoFigure.addEventListener("click", function (e) {
-        e.target.classList.remove("media-gallery");
-        e.target.classList.add("lightbox");
+    value: function createLightBoxEvent(target) {
+      target.addEventListener("click", function (e) {
+        var clone = e.target.cloneNode(false);
         var overlayGallery = document.createElement("div");
+        clone.classList.remove("media-gallery");
+        clone.classList.add("lightbox");
+        overlayGallery.appendChild(clone);
         overlayGallery.classList.add("overlay-gallery");
         document.querySelector(".main").appendChild(overlayGallery);
+        GalleryFactory.createLegendTitle(e.target.dataset.altText, overlayGallery);
         GalleryFactory.createCloseButton(e, overlayGallery, overlayGallery);
         GalleryFactory.createLeftArrow(overlayGallery);
-        GalleryFactory.createLeftArrow(overlayGallery); //avoid doublons
+        GalleryFactory.createRightArrow(overlayGallery); //avoid doublons
 
         e.target.addEventListener("click", function () {
           overlayGallery.remove();
@@ -1078,6 +1173,7 @@ var GalleryFactory = /*#__PURE__*/function () {
         overlay.remove();
         e.target.classList.remove("lightbox");
         e.target.classList.add("media-gallery");
+        e.target.removeAttribute("controls");
       });
       parent.appendChild(close);
     } // left navigation lightbox
@@ -1096,46 +1192,58 @@ var GalleryFactory = /*#__PURE__*/function () {
       var rightArrow = document.createElement('i');
       rightArrow.classList.add("fas", "fa-chevron-right", "right-arrow");
       parent.appendChild(rightArrow);
+      rightArrow.addEventListener("click", function () {
+        console.log();
+      });
     } // create gallery method
 
   }, {
     key: "createImage",
-    value: function createImage(source, photoFigure) {
+    value: function createImage(source, altText, photoFigure) {
       var imageGallery = document.createElement("img");
       imageGallery.classList.add("media-gallery");
       imageGallery.src = source;
+      imageGallery.alt = altText;
+      imageGallery.dataset.altText = altText;
       photoFigure.appendChild(imageGallery);
+      GalleryFactory.createLightBoxEvent(imageGallery);
     }
   }, {
     key: "createVideo",
-    value: function createVideo(source, photoFigure) {
+    value: function createVideo(source, altText, photoFigure) {
       var videoGallery = document.createElement("video");
       videoGallery.addEventListener('click', function () {
         videoGallery.setAttribute("controls", "");
       });
+      videoGallery.dataset.altText = altText;
       photoFigure.appendChild(videoGallery);
+      GalleryFactory.createLightBoxEvent(videoGallery);
       var sourceVideoGallery = document.createElement("source");
       sourceVideoGallery.src = source;
       videoGallery.appendChild(sourceVideoGallery);
+    }
+  }, {
+    key: "createPrice",
+    value: function createPrice(photo, photoLegend) {
+      var spanPrice = document.createElement("span");
+      spanPrice.classList.add("price-photo");
+      spanPrice.innerHTML = photo + "  €  ";
+      photoLegend.appendChild(spanPrice);
     } // like button with like increment event and price
 
   }, {
-    key: "createLikesPrice",
-    value: function createLikesPrice(photo, photoLegend) {
-      var spanPrice = document.createElement("span");
-      spanPrice.classList.add("price-photo");
-      spanPrice.innerHTML = photo.price + "€ ";
+    key: "createLikes",
+    value: function createLikes(photo, photoLegend) {
       var spanLikes = document.createElement("span");
       spanLikes.classList.add("photo-likes");
-      spanLikes.innerHTML = photo.likes;
+      spanLikes.innerHTML = photo + "  ";
       var icon = document.createElement("i");
       icon.classList.add("fas", "fa-heart");
-      spanLikes.innerHTML = photo.likes;
+      icon.setAttribute("aria-label", "likes");
       spanLikes.appendChild(icon);
-      photoLegend.appendChild(spanPrice);
       photoLegend.appendChild(spanLikes);
       spanLikes.addEventListener("click", function (e) {
-        e.currentTarget.innerText = photo.likes++;
+        e.currentTarget.innerText = photo++;
         spanLikes.appendChild(icon);
       });
     } // implementation photos with photographers ID
@@ -1543,6 +1651,8 @@ exports.default = MainPage;
 
 var _MainPage = _interopRequireDefault(require("./pages/MainPage"));
 
+var _FishEyeDataFR = _interopRequireDefault(require("./../FishEyeDataFR.json"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1569,7 +1679,7 @@ var App = /*#__PURE__*/function () {
 
 
 document.addEventListener("DOMContentLoaded", App.create);
-},{"./pages/MainPage":"pages/MainPage.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./pages/MainPage":"pages/MainPage.js","./../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1597,7 +1707,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56447" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49726" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

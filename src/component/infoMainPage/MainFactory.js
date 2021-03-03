@@ -12,7 +12,7 @@ export default class MainFactory
     //method template main landing page
     static createSectionProfiles(parent)
     {
-        let sectionContainer = document.createElement("section")
+        const sectionContainer = document.createElement("section")
         sectionContainer.classList.add("profiles")
         parent.appendChild(sectionContainer)
 
@@ -28,7 +28,7 @@ export default class MainFactory
     //main title (h1) method
     static createMainTitlePage(parent)
     {
-        let mainTitle = document.createElement("h1")
+        const mainTitle = document.createElement("h1")
         mainTitle.classList.add("main-title")
         mainTitle.innerHTML = "Nos photographes"
         parent.prepend(mainTitle)
@@ -37,12 +37,12 @@ export default class MainFactory
     //method template profiles
     static createMainProfiles(photographer, parent)
     {
-        let figure = document.createElement("figure")
+        const figure = document.createElement("figure")
         figure.classList.add("profile")
         figure.id = "profile-" + photographer.id
         parent.appendChild(figure)
 
-        let profileFigcaption = document.createElement('figcaption')
+        const profileFigcaption = document.createElement('figcaption')
         profileFigcaption.classList.add("info-profile")
 
         MainFactory.createProfileAvatar(figure, photographer)
@@ -57,7 +57,7 @@ export default class MainFactory
     // title profile method
     static createProfileTitle(figure, photographer)
     {
-        let profileTitle = document.createElement('h2')
+        const profileTitle = document.createElement('h2')
         profileTitle.classList.add("name")
         profileTitle.innerHTML = photographer.name
         figure.appendChild(profileTitle)
@@ -65,13 +65,13 @@ export default class MainFactory
     // profile photo method
     static createProfileAvatar(figure, photographer)
     {
-        let profileLink = document.createElement('a')
+        const profileLink = document.createElement('a')
         profileLink.classList.add("img-profile-link")
         profileLink.setAttribute("data-portraitId", photographer.id)
         profileLink.href = "#"
         figure.appendChild(profileLink)
 
-        let profileImg = document.createElement('img')
+        const profileImg = document.createElement('img')
         profileImg.src = photographer.portrait
         profileImg.alt = `photo profil de ${photographer.name}`
         profileImg.classList.add(`img-${photographer.id}`)
@@ -83,7 +83,7 @@ export default class MainFactory
     // profile city method
     static createProfileCity(profileFigcaption, photographer)
     {
-        let profileCity = document.createElement('p')
+        const profileCity = document.createElement('p')
         profileCity.classList.add("city")
         profileCity.innerHTML = `${photographer.city} ` + `${photographer.country}`
         profileFigcaption.appendChild(profileCity)
@@ -93,8 +93,8 @@ export default class MainFactory
     static createProfileTags(profileFigcaption, photographer)
     {
         photographer.tags.map(tag =>{
-            let profileSpan = document.createElement('span')
-            let profileSpanLink = document.createElement('a')
+            const profileSpan = document.createElement('span')
+            const profileSpanLink = document.createElement('a')
 
             profileSpanLink.href = "#"
             profileSpan.classList.add(`tag`)
@@ -107,7 +107,7 @@ export default class MainFactory
 
     static createProfilePrice(profileFigcaption, photographer)
     {
-        let profilePrice = document.createElement('p')
+        const profilePrice = document.createElement('p')
         profilePrice.classList.add("price")
         profilePrice.innerHTML = photographer.price + '€'
         profileFigcaption.appendChild(profilePrice)
@@ -115,7 +115,7 @@ export default class MainFactory
 
     static createProfileQuote(profileFigcaption, photographer)
     {
-        let profileQuote = document.createElement('p')
+        const profileQuote = document.createElement('p')
         profileQuote.classList.add("quote")
         profileQuote.innerHTML = photographer.tagline
         profileFigcaption.appendChild(profileQuote)

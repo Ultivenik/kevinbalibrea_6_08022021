@@ -2,7 +2,7 @@ export default class InfoProfileFactory
 {
     static create(photographer)
     {
-        let infoProfile = document.createElement("section")
+        const infoProfile = document.createElement("section")
         infoProfile.classList.add("profileID")
 
         InfoProfileFactory.createProfileName(infoProfile, photographer)
@@ -16,7 +16,7 @@ export default class InfoProfileFactory
 
     static createProfileName(infoProfile, photographer)
     {
-        let IDName = document.createElement("h2")
+        const IDName = document.createElement("h2")
         IDName.classList.add("name")
         IDName.innerHTML = photographer.name
         infoProfile.appendChild(IDName)
@@ -24,15 +24,15 @@ export default class InfoProfileFactory
 
     static createPhotographerLocation(infoProfile, photographer)
     {
-        let IDLocation = document.createElement("p")
+        const IDLocation = document.createElement("p")
         IDLocation.classList.add("city")
-        IDLocation.innerHTML = `${photographer.city}` + `${photographer.country}`
+        IDLocation.innerHTML = `${photographer.city}, ` + `${photographer.country}`
         infoProfile.appendChild(IDLocation)
     }
 
     static createPhotographerQuote(infoProfile, photographer)
     {
-        let IDTagline = document.createElement("p")
+        const IDTagline = document.createElement("p")
         IDTagline.classList.add("quote")
         IDTagline.innerHTML = photographer.tagline
         infoProfile.appendChild(IDTagline)
@@ -40,7 +40,7 @@ export default class InfoProfileFactory
 
     static createContactBtn(infoProfile, photographer, content)
     {
-        let btnContact = document.createElement("button")
+        const btnContact = document.createElement("button")
         btnContact.classList.add("btn-contact")
         btnContact.innerHTML = content
         infoProfile.appendChild(btnContact)
@@ -52,8 +52,8 @@ export default class InfoProfileFactory
     static createProfilesTags(infoProfile, photographer)
     {
         photographer.tags.map(tag =>{
-            let profileSpan = document.createElement("span")
-            let profileSpanLink = document.createElement("a")
+            const profileSpan = document.createElement("span")
+            const profileSpanLink = document.createElement("a")
             profileSpanLink.href = "#"
             profileSpan.appendChild(profileSpanLink)
             profileSpanLink.innerHTML ="#" + tag
@@ -64,7 +64,7 @@ export default class InfoProfileFactory
 
     static createAvatar(infoProfile, photographer)
     {
-        let IDImg = document.createElement("img")
+        const IDImg = document.createElement("img")
         IDImg.classList.add("img-profile-link")
         IDImg.src ="./../SamplePhotos/Photographers_ID_Photos/" + photographer.portrait
         IDImg.alt = `photo profil de ${photographer.name}`
@@ -72,30 +72,30 @@ export default class InfoProfileFactory
     }
     static createContactForm(photographer)
     {
-        let overlay = document.createElement("section")
+        const overlay = document.createElement("section")
         overlay.classList.add("overlay-contact")
         document.querySelector(".main").appendChild(overlay)
 
-        let form = document.createElement("form")
+        const form = document.createElement("form")
         form.classList.add("contact-form")
         overlay.appendChild(form)
 
         InfoProfileFactory.createTitleForm(photographer, form)
         InfoProfileFactory.createCloseButton(overlay, form)
-        InfoProfileFactory.createLabel("Prenom", form)
+        InfoProfileFactory.createLabel("Prenom", "firstname", form)
         InfoProfileFactory.createInput("text", "firstname", form)
-        InfoProfileFactory.createLabel("Nom", form)
+        InfoProfileFactory.createLabel("Nom", "lastname", form)
         InfoProfileFactory.createInput("text", "lastname", form)
-        InfoProfileFactory.createLabel("Email", form,)
+        InfoProfileFactory.createLabel("Email", "email", form)
         InfoProfileFactory.createInput("email", "email", form)
-        InfoProfileFactory.createLabel("Votre message", form)
+        InfoProfileFactory.createLabel("Votre message", "text", form)
         InfoProfileFactory.createTextArea("text", form)
         InfoProfileFactory.createBtnForm("Envoyer", form)
     }
 
     static createTitleForm(photographer, parent)
     {
-        let title = document.createElement("h2")
+        const title = document.createElement("h2")
         title.classList.add("title-form")
         title.innerHTML = "Contactez moi " + photographer.name
         parent.appendChild(title)
@@ -103,7 +103,7 @@ export default class InfoProfileFactory
 
     static createCloseButton(overlay, parent)
     {
-        let close = document.createElement("i")
+        const close = document.createElement("i")
         close.classList.add("fas", "fa-times")
         close.addEventListener("click", () =>{
             overlay.remove()
@@ -111,17 +111,18 @@ export default class InfoProfileFactory
         parent.appendChild(close)
     }
 
-    static createLabel(content, parent)
+    static createLabel(content, id, parent)
     {
-        let Label = document.createElement("label")
+        const Label = document.createElement("label")
         Label.classList.add("label-form")
         Label.innerHTML = content
+        Label.setAttribute("for", id)
         parent.appendChild(Label)
     }
 
     static createInput(type, id, parent)
     {
-        let input = document.createElement("input")
+        const input = document.createElement("input")
         input.type = type
         input.classList.add("input-form")
         input.id = id
@@ -130,7 +131,7 @@ export default class InfoProfileFactory
 
     static createTextArea(id, parent)
     {
-        let textInput = document.createElement("textarea")
+        const textInput = document.createElement("textarea")
         textInput.classList.add("input-form")
         textInput.id = id
         parent.appendChild(textInput)
@@ -138,21 +139,23 @@ export default class InfoProfileFactory
 
     static createBtnForm(content, parent)
     {
-        let btnForm = document.createElement("button")
+        const btnForm = document.createElement("button")
         btnForm.classList.add("btn-contact")
         btnForm.innerHTML = content
         btnForm.addEventListener("click", (e) =>{
+            e.preventDefault()
+            let form = document.querySelector(".contact-form")
             let firstNameInput = document.getElementById("firstname")
             let lastNameInput = document.getElementById("lastname")
             let emailInput = document.getElementById("email")
             let textInput = document.getElementById("text")
-            InfoProfileFactory.retrieveFormValues(e, firstNameInput, lastNameInput, emailInput, textInput)
+            InfoProfileFactory.retrieveFormValues(firstNameInput, lastNameInput, emailInput, textInput)
+            form.reset()
         })
         parent.appendChild(btnForm)
     }
-    static retrieveFormValues(e, firstNameInput, lastNameInput, emailInput, textInput)
+    static retrieveFormValues(firstNameInput, lastNameInput, emailInput, textInput)
     {
-        e.preventDefault
         console.log(
             "Nom de l'utilisateur: " + firstNameInput.value + "\n" +
             "Prénom de l'utilisateur: " + lastNameInput.value + "\n" +
