@@ -6,7 +6,8 @@
     "core-js": "^3.9.1",
     "npm-check-updates": "^11.1.10",
     "parcel-bundler": "^1.12.4",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "node":"15.6.0"
   },
   "devDependencies": {
     "eslint": "^7.21.0"
