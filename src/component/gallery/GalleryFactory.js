@@ -125,15 +125,20 @@ export default class GalleryFactory{
             clone.classList.remove("media-gallery")
             clone.classList.add("lightbox")
 
-            overlayGallery.appendChild(clone)
+            const containerLightBox = document.createElement("div")
+            containerLightBox.classList.add("container-lightbox")
+            containerLightBox.setAttribute("aria-label", "image-closeup-view")
+            containerLightBox.appendChild(clone)
+
             overlayGallery.classList.add("overlay-gallery")
             document.querySelector(".main").appendChild(overlayGallery)
 
-            GalleryFactory.createLegendTitle(e.target.dataset.altText, overlayGallery)
-            GalleryFactory.createCloseButton(e, overlayGallery, overlayGallery)
-            GalleryFactory.createLeftArrow(overlayGallery)
-            GalleryFactory.createRightArrow(overlayGallery)
+            GalleryFactory.createLegendTitle(e.target.dataset.altText, containerLightBox)
+            GalleryFactory.createCloseButton(e, overlayGallery, containerLightBox)
+            GalleryFactory.createLeftArrow(containerLightBox)
+            GalleryFactory.createRightArrow(containerLightBox)
 
+            overlayGallery.appendChild(containerLightBox)
             //avoid doublons
             e.target.addEventListener("click", () => {
                 overlayGallery.remove()
@@ -146,12 +151,21 @@ export default class GalleryFactory{
         const close = document.createElement("i")
         close.classList.add("fas", "fa-times", "lightbox-close-btn")
         close.addEventListener("click", () =>{
-            overlay.remove()
-            e.target.classList.remove("lightbox")
-            e.target.classList.add("media-gallery")
-            e.target.removeAttribute("controls")
+            GalleryFactory.createCloseLightBox(e.target, overlay)
+        })
+        document.addEventListener("keydown", (event) =>{
+            if (event.key === "Escape") {
+                GalleryFactory.createCloseLightBox(e.target, overlay)
+            }
         })
         parent.appendChild(close)
+    }
+    static createCloseLightBox(eventTarget, overlay)
+    {
+            overlay.remove()
+            eventTarget.classList.remove("lightbox")
+            eventTarget.classList.add("media-gallery")
+            eventTarget.removeAttribute("controls")
     }
     // left navigation lightbox
     static createLeftArrow(parent)
@@ -159,6 +173,12 @@ export default class GalleryFactory{
         const leftArrow = document.createElement('i')
         leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow")
         parent.appendChild(leftArrow)
+        leftArrow.addEventListener('click', (e) =>{
+            let photos =Array.from(document.querySelectorAll(".media-gallery"))
+            photos.forEach(photo =>{
+                e.target =photo
+            })
+        })
     }
     // right navigation lightbox
     static createRightArrow(parent)
