@@ -1008,7 +1008,7 @@ exports.default = InfoProfileFactory;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CarouselFactory = void 0;
+exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1078,7 +1078,7 @@ var CarouselFactory = /*#__PURE__*/function () {
   return CarouselFactory;
 }();
 
-exports.CarouselFactory = CarouselFactory;
+exports.default = CarouselFactory;
 
 var ArrowFactory = /*#__PURE__*/function () {
   function ArrowFactory() {
@@ -1224,8 +1224,7 @@ var GalleryFactory = /*#__PURE__*/function () {
           case "Titre":
             medias.sort(function (a, b) {
               var aa = a.image !== undefined ? a.image : a.video;
-              var bb = b.image !== undefined ? b.image : b.video; // return aa.localeCompare(bb)
-
+              var bb = b.image !== undefined ? b.image : b.video;
               return aa > bb;
             });
             break;
@@ -1366,9 +1365,7 @@ var GalleryFactory = /*#__PURE__*/function () {
       var leftArrow = document.createElement('i');
       leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow");
       parent.appendChild(leftArrow);
-      leftArrow.addEventListener('click', function (e) {
-        e--;
-      });
+      leftArrow.addEventListener('click', function (e) {});
     } // right navigation lightbox
 
   }, {
@@ -1377,9 +1374,7 @@ var GalleryFactory = /*#__PURE__*/function () {
       var rightArrow = document.createElement('i');
       rightArrow.classList.add("fas", "fa-chevron-right", "right-arrow");
       parent.appendChild(rightArrow);
-      rightArrow.addEventListener("click", function (e) {
-        e++;
-      });
+      rightArrow.addEventListener("click", function (e) {});
     } // create gallery method
 
   }, {
@@ -1844,7 +1839,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60213" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52692" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

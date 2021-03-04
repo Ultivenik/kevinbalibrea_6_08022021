@@ -1,7 +1,7 @@
 
 const mediaPath = "./../SamplePhotos"
 
-export class CarouselFactory {
+export default class CarouselFactory {
     static create({
         medias,
         currentIndex = 0,
@@ -13,7 +13,6 @@ export class CarouselFactory {
         let currentMedia = medias[index]
         const imageContainer = document.createElement("img")
         const goToLeft = (evt) => {
-            
             if (index - 1 < 0) {
                 index = medias.length;
             } else {

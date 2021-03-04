@@ -41,7 +41,6 @@ export default class GalleryFactory{
                     medias.sort((a, b) => {
                         let aa = a.image !== undefined ? a.image : a.video
                         let bb = b.image !== undefined ? b.image : b.video
-                        // return aa.localeCompare(bb)
                         return aa > bb
                     })
                     break;
@@ -180,7 +179,7 @@ export default class GalleryFactory{
         leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow")
         parent.appendChild(leftArrow)
         leftArrow.addEventListener('click', (e) =>{
-            e--
+
         })
     }
     // right navigation lightbox
@@ -191,12 +190,12 @@ export default class GalleryFactory{
         parent.appendChild(rightArrow)
 
         rightArrow.addEventListener("click", (e) => {
-            e++
+
         })
     }
     // create gallery method
     static createImage(source, altText)
-    {   
+    {
         console.info(source)
         const imageGallery = document.createElement("img")
         imageGallery.classList.add("media-gallery")
