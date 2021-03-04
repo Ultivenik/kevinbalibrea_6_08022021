@@ -1,10 +1,15 @@
 import info from "./../../../FishEyeDataFR.json"
+import {CarouselFactory} from '../carousel/CarouselFactory'
+import {getPhotographerById} from '../../helpers/data'
+import {ImageFactory} from '../image/ImageFactory'
+
+const mediaPath = "./../SamplePhotos"
 
 export default class GalleryFactory{
     static create(photographer)
     {
-        let media = info.media
-        media.sort((a, b) => b.likes - a.likes)
+        let medias = info.media
+        medias.sort((a, b) => b.likes - a.likes)
 
         const infoGallery = document.createElement("section")
         infoGallery.classList.add("gallery")
@@ -23,17 +28,17 @@ export default class GalleryFactory{
         select.addEventListener("change", (e) => {
             switch (e.target.value) {
                 case "Popularité":
-                    media.sort((a, b) => b.likes - a.likes)
+                    medias.sort((a, b) => b.likes - a.likes)
                     break;
                 case "Date":
-                    media.sort((a, b) => {
+                    medias.sort((a, b) => {
                         a = a.date.split('-');
                         b = b.date.split('-');
                         return a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
                     })
                     break;
                 case "Titre":
-                    media.sort((a, b) => {
+                    medias.sort((a, b) => {
                         let aa = a.image !== undefined ? a.image : a.video
                         let bb = b.image !== undefined ? b.image : b.video
                         // return aa.localeCompare(bb)
@@ -42,11 +47,11 @@ export default class GalleryFactory{
                     break;
             }
             GalleryFactory.deletePhotoGallery()
-            GalleryFactory.createPhotoGallery(media, infoGallery, photographer)
+            GalleryFactory.createPhotoGallery(medias.filter((media) => media.photographerId === photographer.id), infoGallery)
         })
 
         GalleryFactory.createOptions(optArray, select)
-        GalleryFactory.createPhotoGallery(media, infoGallery, photographer)
+        GalleryFactory.createPhotoGallery(medias.filter((media) => media.photographerId === photographer.id), infoGallery)
 
         return infoGallery
     }
@@ -72,31 +77,44 @@ export default class GalleryFactory{
         }
     }
     // create photo gallery method
-    static createPhotoGallery(media, infoGallery, photographer)
+    static createPhotoGallery(medias, infoGallery)
     {
-        media.map((photo, index) =>{
-            if (photo.photographerId === photographer.id) {
-                const path = GalleryFactory.definePath(photographer.id, photo)
-                const photoFigure = document.createElement("figure")
-                photoFigure.classList.add("photoFigure")
+        let carousel;
+        medias.map((media, index) =>{
+                const mediaFigure = document.createElement("figure")
+                mediaFigure.classList.add("photoFigure")
 
-                const photoLegend = document.createElement("figcaption")
-                photoLegend.classList.add("photoLegend")
+                const mediaLegend = document.createElement("figcaption")
+                mediaLegend.classList.add("photoLegend")
 
-                if (path.image !== undefined) {
-                    GalleryFactory.createImage(path.image, photo.altText, photoFigure, media, index, photographer.id)
+                if (media.image) {
+                    const image = ImageFactory.create({
+                        source: `${mediaPath}/${media.photographerId}/${media.image}`,
+                        text: media.altText,
+                    })
+                    image.addEventListener("click", () => {
+                        carousel = CarouselFactory.create({
+                            medias,
+                            currentIndex: index,
+                            onClose: () => {
+                                document.querySelector(".main").removeChild(carousel)
+                            }
+                        })
+                        document.querySelector(".main").appendChild(carousel)
+                    })
+                    mediaFigure.appendChild(image)
                 }else{
-                    GalleryFactory.createVideo(path.video, photo.altText, photoFigure, media, index, photographer.id)
+                    //GalleryFactory.createVideo(path.video, photo.altText, photoFigure,)
                 }
 
-                photoFigure.appendChild(photoLegend)
-                GalleryFactory.createLegendTitle(photo.altText, photoLegend)
-                GalleryFactory.createPrice(photo.price, photoLegend)
-                GalleryFactory.createLikes(photo.likes, photoLegend)
-                GalleryFactory.createDatePhoto(photo.date, photoLegend)
-                infoGallery.appendChild(photoFigure)
+                mediaFigure.appendChild(mediaLegend)
+                //GalleryFactory.createLegendTitle(photo.altText, photoLegend)
+                //GalleryFactory.createPrice(photo.price, photoLegend)
+                //GalleryFactory.createLikes(photo.likes, photoLegend)
+                //GalleryFactory.createDatePhoto(photo.date, photoLegend)
+                infoGallery.appendChild(mediaFigure)
             }
-        })
+        )
     }
 
     static createDatePhoto(date, parent)
@@ -130,16 +148,8 @@ export default class GalleryFactory{
         overlayGallery.classList.add("overlay-gallery")
         document.querySelector(".main").appendChild(overlayGallery)
         let indexImage = index
-        // GalleryFactory.createLegendTitle(e.target.dataset.altText, containerLightBox)
-        // GalleryFactory.createCloseButton(e, overlayGallery, containerLightBox)
-        GalleryFactory.createLeftArrow(containerLightBox, indexImage)
-        GalleryFactory.createRightArrow(containerLightBox, indexImage)
 
         overlayGallery.appendChild(containerLightBox)
-        //avoid doublons
-        // e.target.addEventListener("click", () => {
-        //     overlayGallery.remove()
-        // })
     }
     // close lightbox when click on "X"
     static createCloseButton(e, overlay, parent)
@@ -185,25 +195,22 @@ export default class GalleryFactory{
         })
     }
     // create gallery method
-    static createImage(source, altText, photoFigure, media, index, photographerId)
-    {
+    static createImage(source, altText)
+    {   
+        console.info(source)
         const imageGallery = document.createElement("img")
         imageGallery.classList.add("media-gallery")
-        imageGallery.src = source
+        imageGallery.setAttribute("src", source)
         imageGallery.alt = altText
         imageGallery.dataset.altText = altText
-        photoFigure.appendChild(imageGallery)
-        imageGallery.addEventListener("click", () =>{
-            GalleryFactory.createLightBoxEvent(media,index, photographerId)
-        })
+        return imageGallery
     }
 
-    static createVideo(source, altText, photoFigure, media, index, photographerId)
+    static createVideo(source, altText, photoFigure)
     {
         const videoGallery = document.createElement("video")
         videoGallery.addEventListener('click', () =>{
             videoGallery.setAttribute("controls", "")
-            GalleryFactory.createLightBoxEvent(media, index, photographerId)
         })
         videoGallery.dataset.altText = altText
         photoFigure.appendChild(videoGallery)
@@ -239,40 +246,5 @@ export default class GalleryFactory{
             spanLikes.appendChild(icon)
         })
     }
-    // implementation photos with photographers ID
-    static definePath(photographerId, photo)
-    {
-        let path = {}
-        switch (photographerId) {
-            case 243:
-                GalleryFactory.createPath("Mimi", path, photo)
-                break;
-            case 930:
-                GalleryFactory.createPath("Ellie Rose", path, photo)
-                break;
-            case 82:
-                GalleryFactory.createPath("Tracy", path, photo)
-                break;
-            case 527:
-                GalleryFactory.createPath("Nabeel", path, photo)
-                break;
-            case 925:
-                GalleryFactory.createPath("Rhode", path, photo)
-                break;
-            case 195:
-                GalleryFactory.createPath("Marcel", path, photo)
-                break;
-        }
-        return path
-    }
-
-    static createPath(name, path, photo)
-    {
-        const photoPath = "/SamplePhotos/"
-        if (photo.image !== undefined) {
-            path.image = photoPath + name + "/" + photo.image
-        } else {
-            path.video = photoPath + name + "/" + photo.video
-        }
-    }
 }
+

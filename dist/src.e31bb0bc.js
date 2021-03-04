@@ -1002,6 +1002,160 @@ var InfoProfileFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = InfoProfileFactory;
+},{}],"component/carousel/CarouselFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CarouselFactory = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var mediaPath = "./../SamplePhotos";
+
+var CarouselFactory = /*#__PURE__*/function () {
+  function CarouselFactory() {
+    _classCallCheck(this, CarouselFactory);
+  }
+
+  _createClass(CarouselFactory, null, [{
+    key: "create",
+    value: function create(_ref) {
+      var medias = _ref.medias,
+          _ref$currentIndex = _ref.currentIndex,
+          currentIndex = _ref$currentIndex === void 0 ? 0 : _ref$currentIndex,
+          onClose = _ref.onClose;
+      var carouselContainer = document.createElement("div");
+      var containerLightBox = document.createElement("div");
+      var index = currentIndex;
+      var currentMedia = medias[index];
+      var imageContainer = document.createElement("img");
+
+      var goToLeft = function goToLeft(evt) {
+        if (index - 1 < 0) {
+          index = medias.length;
+        } else {
+          index--;
+        }
+
+        currentMedia = medias[index];
+        imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
+      };
+
+      var arrowLeft = ArrowFactory.create({
+        left: true,
+        onClick: goToLeft
+      });
+
+      var keyboardEvents = function keyboardEvents(evt) {
+        switch (evt.key) {
+          case "ArrowLeft":
+            goToLeft();
+            break;
+
+          case "ArrowRight":
+            break;
+        }
+      };
+
+      window.addEventListener("keydown", keyboardEvents);
+      imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
+      carouselContainer.appendChild(imageContainer);
+      containerLightBox.classList.add("container-lightbox");
+      containerLightBox.setAttribute("aria-label", "image-closeup-view");
+      carouselContainer.classList.add("overlay-gallery");
+      carouselContainer.appendChild(containerLightBox);
+      carouselContainer.appendChild(arrowLeft);
+      return carouselContainer;
+    }
+  }]);
+
+  return CarouselFactory;
+}();
+
+exports.CarouselFactory = CarouselFactory;
+
+var ArrowFactory = /*#__PURE__*/function () {
+  function ArrowFactory() {
+    _classCallCheck(this, ArrowFactory);
+  }
+
+  _createClass(ArrowFactory, null, [{
+    key: "create",
+    value: function create(_ref2) {
+      var onClick = _ref2.onClick;
+      var arrowElement = document.createElement('button');
+      arrowElement.addEventListener("click", onClick);
+      return arrowElement;
+    }
+  }]);
+
+  return ArrowFactory;
+}();
+},{}],"helpers/data.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getPhotographerById = void 0;
+
+var _FishEyeDataFR = _interopRequireDefault(require("../../FishEyeDataFR.json"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getPhotographerById = function getPhotographerById(_ref) {
+  var id = _ref.id;
+  return _FishEyeDataFR.default.photographers.find(function (photographer) {
+    return photographer.id === id;
+  });
+};
+
+exports.getPhotographerById = getPhotographerById;
+},{"../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/image/ImageFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ImageFactory = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ImageFactory = /*#__PURE__*/function () {
+  function ImageFactory() {
+    _classCallCheck(this, ImageFactory);
+  }
+
+  _createClass(ImageFactory, null, [{
+    key: "create",
+    value: function create(_ref) {
+      var source = _ref.source,
+          text = _ref.text,
+          _ref$className = _ref.className,
+          className = _ref$className === void 0 ? "media-gallery" : _ref$className;
+      var image = document.createElement("img");
+      image.classList.add(className);
+      image.setAttribute("src", source);
+      image.alt = text;
+      image.dataset.altText = text;
+      return image;
+    }
+  }]);
+
+  return ImageFactory;
+}();
+
+exports.ImageFactory = ImageFactory;
 },{}],"component/gallery/GalleryFactory.js":[function(require,module,exports) {
 "use strict";
 
@@ -1012,6 +1166,12 @@ exports.default = void 0;
 
 var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
 
+var _CarouselFactory = require("../carousel/CarouselFactory");
+
+var _data = require("../../helpers/data");
+
+var _ImageFactory = require("../image/ImageFactory");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1019,6 +1179,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var mediaPath = "./../SamplePhotos";
 
 var GalleryFactory = /*#__PURE__*/function () {
   function GalleryFactory() {
@@ -1028,8 +1190,8 @@ var GalleryFactory = /*#__PURE__*/function () {
   _createClass(GalleryFactory, null, [{
     key: "create",
     value: function create(photographer) {
-      var media = _FishEyeDataFR.default.media;
-      media.sort(function (a, b) {
+      var medias = _FishEyeDataFR.default.media;
+      medias.sort(function (a, b) {
         return b.likes - a.likes;
       });
       var infoGallery = document.createElement("section");
@@ -1046,13 +1208,13 @@ var GalleryFactory = /*#__PURE__*/function () {
       select.addEventListener("change", function (e) {
         switch (e.target.value) {
           case "Popularité":
-            media.sort(function (a, b) {
+            medias.sort(function (a, b) {
               return b.likes - a.likes;
             });
             break;
 
           case "Date":
-            media.sort(function (a, b) {
+            medias.sort(function (a, b) {
               a = a.date.split('-');
               b = b.date.split('-');
               return a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
@@ -1060,7 +1222,7 @@ var GalleryFactory = /*#__PURE__*/function () {
             break;
 
           case "Titre":
-            media.sort(function (a, b) {
+            medias.sort(function (a, b) {
               var aa = a.image !== undefined ? a.image : a.video;
               var bb = b.image !== undefined ? b.image : b.video; // return aa.localeCompare(bb)
 
@@ -1070,10 +1232,14 @@ var GalleryFactory = /*#__PURE__*/function () {
         }
 
         GalleryFactory.deletePhotoGallery();
-        GalleryFactory.createPhotoGallery(media, infoGallery, photographer);
+        GalleryFactory.createPhotoGallery(medias.filter(function (media) {
+          return media.photographerId === photographer.id;
+        }), infoGallery);
       });
       GalleryFactory.createOptions(optArray, select);
-      GalleryFactory.createPhotoGallery(media, infoGallery, photographer);
+      GalleryFactory.createPhotoGallery(medias.filter(function (media) {
+        return media.photographerId === photographer.id;
+      }), infoGallery);
       return infoGallery;
     }
   }, {
@@ -1100,28 +1266,40 @@ var GalleryFactory = /*#__PURE__*/function () {
 
   }, {
     key: "createPhotoGallery",
-    value: function createPhotoGallery(media, infoGallery, photographer) {
-      media.map(function (photo, index) {
-        if (photo.photographerId === photographer.id) {
-          var path = GalleryFactory.definePath(photographer.id, photo);
-          var photoFigure = document.createElement("figure");
-          photoFigure.classList.add("photoFigure");
-          var photoLegend = document.createElement("figcaption");
-          photoLegend.classList.add("photoLegend");
+    value: function createPhotoGallery(medias, infoGallery) {
+      var carousel;
+      medias.map(function (media, index) {
+        var mediaFigure = document.createElement("figure");
+        mediaFigure.classList.add("photoFigure");
+        var mediaLegend = document.createElement("figcaption");
+        mediaLegend.classList.add("photoLegend");
 
-          if (path.image !== undefined) {
-            GalleryFactory.createImage(path.image, photo.altText, photoFigure, media, index, photographer.id);
-          } else {
-            GalleryFactory.createVideo(path.video, photo.altText, photoFigure, media, index, photographer.id);
-          }
+        if (media.image) {
+          var image = _ImageFactory.ImageFactory.create({
+            source: "".concat(mediaPath, "/").concat(media.photographerId, "/").concat(media.image),
+            text: media.altText
+          });
 
-          photoFigure.appendChild(photoLegend);
-          GalleryFactory.createLegendTitle(photo.altText, photoLegend);
-          GalleryFactory.createPrice(photo.price, photoLegend);
-          GalleryFactory.createLikes(photo.likes, photoLegend);
-          GalleryFactory.createDatePhoto(photo.date, photoLegend);
-          infoGallery.appendChild(photoFigure);
+          image.addEventListener("click", function () {
+            carousel = _CarouselFactory.CarouselFactory.create({
+              medias: medias,
+              currentIndex: index,
+              onClose: function onClose() {
+                document.querySelector(".main").removeChild(carousel);
+              }
+            });
+            document.querySelector(".main").appendChild(carousel);
+          });
+          mediaFigure.appendChild(image);
+        } else {//GalleryFactory.createVideo(path.video, photo.altText, photoFigure,)
         }
+
+        mediaFigure.appendChild(mediaLegend); //GalleryFactory.createLegendTitle(photo.altText, photoLegend)
+        //GalleryFactory.createPrice(photo.price, photoLegend)
+        //GalleryFactory.createLikes(photo.likes, photoLegend)
+        //GalleryFactory.createDatePhoto(photo.date, photoLegend)
+
+        infoGallery.appendChild(mediaFigure);
       });
     }
   }, {
@@ -1154,15 +1332,8 @@ var GalleryFactory = /*#__PURE__*/function () {
       currentImage.src = GalleryFactory.definePath(photographerId, media[index]).image;
       overlayGallery.classList.add("overlay-gallery");
       document.querySelector(".main").appendChild(overlayGallery);
-      var indexImage = index; // GalleryFactory.createLegendTitle(e.target.dataset.altText, containerLightBox)
-      // GalleryFactory.createCloseButton(e, overlayGallery, containerLightBox)
-
-      GalleryFactory.createLeftArrow(containerLightBox, indexImage);
-      GalleryFactory.createRightArrow(containerLightBox, indexImage);
-      overlayGallery.appendChild(containerLightBox); //avoid doublons
-      // e.target.addEventListener("click", () => {
-      //     overlayGallery.remove()
-      // })
+      var indexImage = index;
+      overlayGallery.appendChild(containerLightBox);
     } // close lightbox when click on "X"
 
   }, {
@@ -1213,24 +1384,21 @@ var GalleryFactory = /*#__PURE__*/function () {
 
   }, {
     key: "createImage",
-    value: function createImage(source, altText, photoFigure, media, index, photographerId) {
+    value: function createImage(source, altText) {
+      console.info(source);
       var imageGallery = document.createElement("img");
       imageGallery.classList.add("media-gallery");
-      imageGallery.src = source;
+      imageGallery.setAttribute("src", source);
       imageGallery.alt = altText;
       imageGallery.dataset.altText = altText;
-      photoFigure.appendChild(imageGallery);
-      imageGallery.addEventListener("click", function () {
-        GalleryFactory.createLightBoxEvent(media, index, photographerId);
-      });
+      return imageGallery;
     }
   }, {
     key: "createVideo",
-    value: function createVideo(source, altText, photoFigure, media, index, photographerId) {
+    value: function createVideo(source, altText, photoFigure) {
       var videoGallery = document.createElement("video");
       videoGallery.addEventListener('click', function () {
         videoGallery.setAttribute("controls", "");
-        GalleryFactory.createLightBoxEvent(media, index, photographerId);
       });
       videoGallery.dataset.altText = altText;
       photoFigure.appendChild(videoGallery);
@@ -1262,51 +1430,6 @@ var GalleryFactory = /*#__PURE__*/function () {
         e.currentTarget.innerText = photo++;
         spanLikes.appendChild(icon);
       });
-    } // implementation photos with photographers ID
-
-  }, {
-    key: "definePath",
-    value: function definePath(photographerId, photo) {
-      var path = {};
-
-      switch (photographerId) {
-        case 243:
-          GalleryFactory.createPath("Mimi", path, photo);
-          break;
-
-        case 930:
-          GalleryFactory.createPath("Ellie Rose", path, photo);
-          break;
-
-        case 82:
-          GalleryFactory.createPath("Tracy", path, photo);
-          break;
-
-        case 527:
-          GalleryFactory.createPath("Nabeel", path, photo);
-          break;
-
-        case 925:
-          GalleryFactory.createPath("Rhode", path, photo);
-          break;
-
-        case 195:
-          GalleryFactory.createPath("Marcel", path, photo);
-          break;
-      }
-
-      return path;
-    }
-  }, {
-    key: "createPath",
-    value: function createPath(name, path, photo) {
-      var photoPath = "/SamplePhotos/";
-
-      if (photo.image !== undefined) {
-        path.image = photoPath + name + "/" + photo.image;
-      } else {
-        path.video = photoPath + name + "/" + photo.video;
-      }
     }
   }]);
 
@@ -1314,7 +1437,7 @@ var GalleryFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = GalleryFactory;
-},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"pages/ProfilPages.js":[function(require,module,exports) {
+},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json","../carousel/CarouselFactory":"component/carousel/CarouselFactory.js","../../helpers/data":"helpers/data.js","../image/ImageFactory":"component/image/ImageFactory.js"}],"pages/ProfilPages.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1721,7 +1844,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50380" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60213" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
