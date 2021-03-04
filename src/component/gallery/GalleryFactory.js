@@ -74,7 +74,7 @@ export default class GalleryFactory{
     // create photo gallery method
     static createPhotoGallery(media, infoGallery, photographer)
     {
-        media.map(photo =>{
+        media.map((photo, index) =>{
             if (photo.photographerId === photographer.id) {
                 const path = GalleryFactory.definePath(photographer.id, photo)
                 const photoFigure = document.createElement("figure")
@@ -84,9 +84,9 @@ export default class GalleryFactory{
                 photoLegend.classList.add("photoLegend")
 
                 if (path.image !== undefined) {
-                    GalleryFactory.createImage(path.image, photo.altText, photoFigure)
+                    GalleryFactory.createImage(path.image, photo.altText, photoFigure, media, index, photographer.id)
                 }else{
-                    GalleryFactory.createVideo(path.video, photo.altText, photoFigure)
+                    GalleryFactory.createVideo(path.video, photo.altText, photoFigure, media, index, photographer.id)
                 }
 
                 photoFigure.appendChild(photoLegend)
@@ -116,34 +116,30 @@ export default class GalleryFactory{
     }
 
     // lightbox open when clicking on a photo
-    static createLightBoxEvent(target)
+    static createLightBoxEvent(media, index, photographerId)
     {
-        target.addEventListener("click", (e) => {
-            let clone = e.target.cloneNode(false)
-            const overlayGallery = document.createElement("div")
+        const overlayGallery = document.createElement("div")
+        const containerLightBox = document.createElement("div")
+        containerLightBox.classList.add("container-lightbox")
+        containerLightBox.setAttribute("aria-label", "image-closeup-view")
 
-            clone.classList.remove("media-gallery")
-            clone.classList.add("lightbox")
+        const currentImage = document.createElement("img")
+        containerLightBox.appendChild(currentImage)
+        currentImage.src = GalleryFactory.definePath(photographerId, media[index]).image
 
-            const containerLightBox = document.createElement("div")
-            containerLightBox.classList.add("container-lightbox")
-            containerLightBox.setAttribute("aria-label", "image-closeup-view")
-            containerLightBox.appendChild(clone)
+        overlayGallery.classList.add("overlay-gallery")
+        document.querySelector(".main").appendChild(overlayGallery)
+        let indexImage = index
+        // GalleryFactory.createLegendTitle(e.target.dataset.altText, containerLightBox)
+        // GalleryFactory.createCloseButton(e, overlayGallery, containerLightBox)
+        GalleryFactory.createLeftArrow(containerLightBox, indexImage)
+        GalleryFactory.createRightArrow(containerLightBox, indexImage)
 
-            overlayGallery.classList.add("overlay-gallery")
-            document.querySelector(".main").appendChild(overlayGallery)
-
-            GalleryFactory.createLegendTitle(e.target.dataset.altText, containerLightBox)
-            GalleryFactory.createCloseButton(e, overlayGallery, containerLightBox)
-            GalleryFactory.createLeftArrow(containerLightBox)
-            GalleryFactory.createRightArrow(containerLightBox)
-
-            overlayGallery.appendChild(containerLightBox)
-            //avoid doublons
-            e.target.addEventListener("click", () => {
-                overlayGallery.remove()
-            })
-        })
+        overlayGallery.appendChild(containerLightBox)
+        //avoid doublons
+        // e.target.addEventListener("click", () => {
+        //     overlayGallery.remove()
+        // })
     }
     // close lightbox when click on "X"
     static createCloseButton(e, overlay, parent)
@@ -174,10 +170,7 @@ export default class GalleryFactory{
         leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow")
         parent.appendChild(leftArrow)
         leftArrow.addEventListener('click', (e) =>{
-            let photos =Array.from(document.querySelectorAll(".media-gallery"))
-            photos.forEach(photo =>{
-                e.target =photo
-            })
+            e--
         })
     }
     // right navigation lightbox
@@ -187,12 +180,12 @@ export default class GalleryFactory{
         rightArrow.classList.add("fas", "fa-chevron-right", "right-arrow")
         parent.appendChild(rightArrow)
 
-        rightArrow.addEventListener("click", () => {
-            console.log()
+        rightArrow.addEventListener("click", (e) => {
+            e++
         })
     }
     // create gallery method
-    static createImage(source, altText, photoFigure)
+    static createImage(source, altText, photoFigure, media, index, photographerId)
     {
         const imageGallery = document.createElement("img")
         imageGallery.classList.add("media-gallery")
@@ -200,19 +193,20 @@ export default class GalleryFactory{
         imageGallery.alt = altText
         imageGallery.dataset.altText = altText
         photoFigure.appendChild(imageGallery)
-        GalleryFactory.createLightBoxEvent(imageGallery)
-
+        imageGallery.addEventListener("click", () =>{
+            GalleryFactory.createLightBoxEvent(media,index, photographerId)
+        })
     }
 
-    static createVideo(source, altText, photoFigure)
+    static createVideo(source, altText, photoFigure, media, index, photographerId)
     {
         const videoGallery = document.createElement("video")
         videoGallery.addEventListener('click', () =>{
             videoGallery.setAttribute("controls", "")
+            GalleryFactory.createLightBoxEvent(media, index, photographerId)
         })
         videoGallery.dataset.altText = altText
         photoFigure.appendChild(videoGallery)
-        GalleryFactory.createLightBoxEvent(videoGallery)
 
         const sourceVideoGallery = document.createElement("source")
         sourceVideoGallery.src = source

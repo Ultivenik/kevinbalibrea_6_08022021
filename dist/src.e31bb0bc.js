@@ -1101,7 +1101,7 @@ var GalleryFactory = /*#__PURE__*/function () {
   }, {
     key: "createPhotoGallery",
     value: function createPhotoGallery(media, infoGallery, photographer) {
-      media.map(function (photo) {
+      media.map(function (photo, index) {
         if (photo.photographerId === photographer.id) {
           var path = GalleryFactory.definePath(photographer.id, photo);
           var photoFigure = document.createElement("figure");
@@ -1110,9 +1110,9 @@ var GalleryFactory = /*#__PURE__*/function () {
           photoLegend.classList.add("photoLegend");
 
           if (path.image !== undefined) {
-            GalleryFactory.createImage(path.image, photo.altText, photoFigure);
+            GalleryFactory.createImage(path.image, photo.altText, photoFigure, media, index, photographer.id);
           } else {
-            GalleryFactory.createVideo(path.video, photo.altText, photoFigure);
+            GalleryFactory.createVideo(path.video, photo.altText, photoFigure, media, index, photographer.id);
           }
 
           photoFigure.appendChild(photoLegend);
@@ -1144,24 +1144,25 @@ var GalleryFactory = /*#__PURE__*/function () {
 
   }, {
     key: "createLightBoxEvent",
-    value: function createLightBoxEvent(target) {
-      target.addEventListener("click", function (e) {
-        var clone = e.target.cloneNode(false);
-        var overlayGallery = document.createElement("div");
-        clone.classList.remove("media-gallery");
-        clone.classList.add("lightbox");
-        overlayGallery.appendChild(clone);
-        overlayGallery.classList.add("overlay-gallery");
-        document.querySelector(".main").appendChild(overlayGallery);
-        GalleryFactory.createLegendTitle(e.target.dataset.altText, overlayGallery);
-        GalleryFactory.createCloseButton(e, overlayGallery, overlayGallery);
-        GalleryFactory.createLeftArrow(overlayGallery);
-        GalleryFactory.createRightArrow(overlayGallery); //avoid doublons
+    value: function createLightBoxEvent(media, index, photographerId) {
+      var overlayGallery = document.createElement("div");
+      var containerLightBox = document.createElement("div");
+      containerLightBox.classList.add("container-lightbox");
+      containerLightBox.setAttribute("aria-label", "image-closeup-view");
+      var currentImage = document.createElement("img");
+      containerLightBox.appendChild(currentImage);
+      currentImage.src = GalleryFactory.definePath(photographerId, media[index]).image;
+      overlayGallery.classList.add("overlay-gallery");
+      document.querySelector(".main").appendChild(overlayGallery);
+      var indexImage = index; // GalleryFactory.createLegendTitle(e.target.dataset.altText, containerLightBox)
+      // GalleryFactory.createCloseButton(e, overlayGallery, containerLightBox)
 
-        e.target.addEventListener("click", function () {
-          overlayGallery.remove();
-        });
-      });
+      GalleryFactory.createLeftArrow(containerLightBox, indexImage);
+      GalleryFactory.createRightArrow(containerLightBox, indexImage);
+      overlayGallery.appendChild(containerLightBox); //avoid doublons
+      // e.target.addEventListener("click", () => {
+      //     overlayGallery.remove()
+      // })
     } // close lightbox when click on "X"
 
   }, {
@@ -1170,12 +1171,22 @@ var GalleryFactory = /*#__PURE__*/function () {
       var close = document.createElement("i");
       close.classList.add("fas", "fa-times", "lightbox-close-btn");
       close.addEventListener("click", function () {
-        overlay.remove();
-        e.target.classList.remove("lightbox");
-        e.target.classList.add("media-gallery");
-        e.target.removeAttribute("controls");
+        GalleryFactory.createCloseLightBox(e.target, overlay);
+      });
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          GalleryFactory.createCloseLightBox(e.target, overlay);
+        }
       });
       parent.appendChild(close);
+    }
+  }, {
+    key: "createCloseLightBox",
+    value: function createCloseLightBox(eventTarget, overlay) {
+      overlay.remove();
+      eventTarget.classList.remove("lightbox");
+      eventTarget.classList.add("media-gallery");
+      eventTarget.removeAttribute("controls");
     } // left navigation lightbox
 
   }, {
@@ -1184,6 +1195,9 @@ var GalleryFactory = /*#__PURE__*/function () {
       var leftArrow = document.createElement('i');
       leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow");
       parent.appendChild(leftArrow);
+      leftArrow.addEventListener('click', function (e) {
+        e--;
+      });
     } // right navigation lightbox
 
   }, {
@@ -1192,32 +1206,34 @@ var GalleryFactory = /*#__PURE__*/function () {
       var rightArrow = document.createElement('i');
       rightArrow.classList.add("fas", "fa-chevron-right", "right-arrow");
       parent.appendChild(rightArrow);
-      rightArrow.addEventListener("click", function () {
-        console.log();
+      rightArrow.addEventListener("click", function (e) {
+        e++;
       });
     } // create gallery method
 
   }, {
     key: "createImage",
-    value: function createImage(source, altText, photoFigure) {
+    value: function createImage(source, altText, photoFigure, media, index, photographerId) {
       var imageGallery = document.createElement("img");
       imageGallery.classList.add("media-gallery");
       imageGallery.src = source;
       imageGallery.alt = altText;
       imageGallery.dataset.altText = altText;
       photoFigure.appendChild(imageGallery);
-      GalleryFactory.createLightBoxEvent(imageGallery);
+      imageGallery.addEventListener("click", function () {
+        GalleryFactory.createLightBoxEvent(media, index, photographerId);
+      });
     }
   }, {
     key: "createVideo",
-    value: function createVideo(source, altText, photoFigure) {
+    value: function createVideo(source, altText, photoFigure, media, index, photographerId) {
       var videoGallery = document.createElement("video");
       videoGallery.addEventListener('click', function () {
         videoGallery.setAttribute("controls", "");
+        GalleryFactory.createLightBoxEvent(media, index, photographerId);
       });
       videoGallery.dataset.altText = altText;
       photoFigure.appendChild(videoGallery);
-      GalleryFactory.createLightBoxEvent(videoGallery);
       var sourceVideoGallery = document.createElement("source");
       sourceVideoGallery.src = source;
       videoGallery.appendChild(sourceVideoGallery);
@@ -1651,8 +1667,6 @@ exports.default = MainPage;
 
 var _MainPage = _interopRequireDefault(require("./pages/MainPage"));
 
-var _FishEyeDataFR = _interopRequireDefault(require("./../FishEyeDataFR.json"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1679,7 +1693,7 @@ var App = /*#__PURE__*/function () {
 
 
 document.addEventListener("DOMContentLoaded", App.create);
-},{"./pages/MainPage":"pages/MainPage.js","./../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./pages/MainPage":"pages/MainPage.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1707,7 +1721,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49726" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50380" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
