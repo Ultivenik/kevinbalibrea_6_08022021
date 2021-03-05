@@ -13,7 +13,7 @@
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-0",
+    "@babel/core": "^7.13.8",
     "@babel/plugin-transform-runtime": "^7.13.9",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
@@ -21,7 +21,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel src/index.html"
+    "build": "parcel src/index.html",
+    "copy": "cp -r src/SamplePhotos src/logo.png dist"
   },
   "repository": {
     "type": "git",

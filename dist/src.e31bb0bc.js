@@ -707,7 +707,7 @@ module.exports = {
     "altText": "Architecture connected curves"
   }]
 };
-},{}],"component/infoMainPage/HeaderFactory.js":[function(require,module,exports) {
+},{}],"component/infoMainPage/TagFactory.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -725,59 +725,34 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var HeaderFactory = /*#__PURE__*/function () {
-  function HeaderFactory() {
-    _classCallCheck(this, HeaderFactory);
+var TagFactory = /*#__PURE__*/function () {
+  function TagFactory() {
+    _classCallCheck(this, TagFactory);
   }
 
-  _createClass(HeaderFactory, null, [{
+  _createClass(TagFactory, null, [{
     key: "create",
-    value: function create() {
-      HeaderFactory.createHeader();
-    } //tags reference
+    value: function create(_ref) {
+      var parent = _ref.parent,
+          _ref$onClick = _ref.onClick,
+          onClick = _ref$onClick === void 0 ? TagFactory.sortProfile : _ref$onClick,
+          tag = _ref.tag;
+      var spanNav = document.createElement("span");
+      var linkNav = document.createElement("a");
+      spanNav.classList.add("tag");
+      spanNav.setAttribute("role", "Links");
+      linkNav.href = "#";
+      linkNav.setAttribute("aria-label", "Tag");
+      parent.appendChild(spanNav);
+      spanNav.appendChild(linkNav);
+      linkNav.innerHTML = "#" + tag;
+      linkNav.addEventListener('click', onClick);
+      return spanNav;
+    } //sorting profiles with hashtags
 
   }, {
-    key: "createHeader",
-    value: // create header method
-    function createHeader() {
-      var logoLink = document.createElement('a');
-      var logoImg = document.createElement('img');
-      var header = document.createElement("header");
-      var headerNav = document.createElement("nav");
-      logoLink.href = "index.html";
-      logoImg.src = "./logo.png";
-      logoImg.alt = "Fisheye Home page";
-      logoLink.setAttribute("aria-label", "ImageLink");
-      header.classList.add("header");
-      document.body.prepend(header);
-      logoLink.appendChild(logoImg);
-      header.appendChild(logoLink);
-      header.appendChild(headerNav);
-      HeaderFactory.createTags(headerNav);
-    } //creating tags method
-
-  }, {
-    key: "createTags",
-    value: function createTags(headerNav) {
-      HeaderFactory.tags.map(function (tag) {
-        var spanNav = document.createElement("span");
-        var linkNav = document.createElement("a");
-        spanNav.classList.add("tag");
-        spanNav.setAttribute("role", "Links");
-        linkNav.href = "#";
-        linkNav.setAttribute("aria-label", "Tag");
-        headerNav.appendChild(spanNav);
-        spanNav.appendChild(linkNav);
-        linkNav.innerHTML = "#" + tag;
-        linkNav.addEventListener('click', HeaderFactory.sortingProfile);
-      });
-    } //sotring profiles with hashtags
-
-  }, {
-    key: "sortingProfile",
-    value: function sortingProfile(e) {
+    key: "sortProfile",
+    value: function sortProfile(e) {
       var tag = e.target.innerHTML;
       tag = tag.toLowerCase().substring(1, tag.length);
 
@@ -816,13 +791,89 @@ var HeaderFactory = /*#__PURE__*/function () {
     }
   }]);
 
+  return TagFactory;
+}();
+
+exports.default = TagFactory;
+},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/infoMainPage/HeaderFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
+
+var _TagFactory = _interopRequireDefault(require("./TagFactory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var HeaderFactory = /*#__PURE__*/function () {
+  function HeaderFactory() {
+    _classCallCheck(this, HeaderFactory);
+  }
+
+  _createClass(HeaderFactory, null, [{
+    key: "create",
+    value: function create() {
+      return HeaderFactory.createHeader();
+    } //tags reference
+
+  }, {
+    key: "createHeader",
+    value: // create header method
+    function createHeader() {
+      var headerNav = document.createElement("nav");
+      var header = document.createElement("header");
+      var logoLink = document.createElement('a');
+      var logoImg = document.createElement('img');
+      logoLink.href = "index.html";
+      logoImg.src = "./logo.png";
+      logoImg.alt = "Fisheye Home page";
+      logoLink.setAttribute("aria-label", "ImageLink");
+      header.classList.add("header");
+      document.body.prepend(header);
+      logoLink.appendChild(logoImg);
+      header.appendChild(logoLink);
+      header.appendChild(headerNav);
+      HeaderFactory.createTags(headerNav);
+      return header;
+    } //creating tags method
+
+  }, {
+    key: "createTags",
+    value: function createTags(parent) {
+      var tags = HeaderFactory.tags.map(function (tag) {
+        return tag;
+      });
+
+      for (var i = 0; i < tags.length; i++) {
+        var tag = tags[i];
+
+        _TagFactory.default.create({
+          parent: parent,
+          tag: tag
+        });
+      }
+    }
+  }]);
+
   return HeaderFactory;
 }();
 
 exports.default = HeaderFactory;
 
 _defineProperty(HeaderFactory, "tags", ["Portrait", "Art", "Fashion", "Architecture", "Travel", "Sport", "Animals", "Events"]);
-},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/infoProfile/InfoProfileFactory.js":[function(require,module,exports) {
+},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json","./TagFactory":"component/infoMainPage/TagFactory.js"}],"component/infoProfile/InfoProfileFactory.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1050,9 +1101,24 @@ var CarouselFactory = /*#__PURE__*/function () {
         imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
       };
 
+      var goToRight = function goToRight(evt) {
+        if (index - 1 < 0) {
+          index = medias.length;
+        } else {
+          index++;
+        }
+
+        currentMedia = medias[index];
+        imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
+      };
+
       var arrowLeft = ArrowFactory.create({
         left: true,
         onClick: goToLeft
+      });
+      var arrowRight = ArrowFactory.create({
+        right: true,
+        onClick: goToRight
       });
 
       var keyboardEvents = function keyboardEvents(evt) {
@@ -1062,6 +1128,9 @@ var CarouselFactory = /*#__PURE__*/function () {
             break;
 
           case "ArrowRight":
+            break;
+
+          case "Escape":
             break;
         }
       };
@@ -1091,9 +1160,20 @@ var ArrowFactory = /*#__PURE__*/function () {
   _createClass(ArrowFactory, null, [{
     key: "create",
     value: function create(_ref2) {
-      var onClick = _ref2.onClick;
+      var left = _ref2.left,
+          onClick = _ref2.onClick,
+          right = _ref2.right;
       var arrowElement = document.createElement('button');
       arrowElement.addEventListener("click", onClick);
+
+      if (left) {
+        arrowElement.classList.add("fas", "fa-chevron-left", "left-arrow");
+      }
+
+      if (right) {
+        arrowElement.classList.add("fas", "fa-chevron-right", "right-arrow");
+      }
+
       return arrowElement;
     }
   }]);
@@ -1283,13 +1363,14 @@ var GalleryFactory = /*#__PURE__*/function () {
           });
 
           image.addEventListener("click", function () {
-            carousel = _CarouselFactory.CarouselFactory.create({
+            var carousel = _CarouselFactory.CarouselFactory.create({
               medias: medias,
               currentIndex: index,
               onClose: function onClose() {
                 document.querySelector(".main").removeChild(carousel);
               }
             });
+
             document.querySelector(".main").appendChild(carousel);
           });
           mediaFigure.appendChild(image);
@@ -1841,7 +1922,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52974" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53275" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

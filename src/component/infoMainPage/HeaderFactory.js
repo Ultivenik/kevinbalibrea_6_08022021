@@ -23,10 +23,10 @@ export default class HeaderFactory
     // create header method
     static createHeader()
     {
+        const headerNav = document.createElement("nav")
+        const header = document.createElement("header")
         const logoLink = document.createElement('a')
         const logoImg = document.createElement('img')
-        const header = document.createElement("header")
-        const headerNav = document.createElement("nav")
 
         logoLink.href = "index.html"
         logoImg.src = "./logo.png"
@@ -41,44 +41,19 @@ export default class HeaderFactory
         header.appendChild(headerNav)
 
         HeaderFactory.createTags(headerNav)
+
+        return header
     }
 
     //creating tags method
-    static createTags(headerNav)
+    static createTags(parent)
     {
-        HeaderFactory.tags.map(tag =>{
-            //sorting profiles with hashtags
-            const sortProfile = (e) => {
-                let tag = e.target.innerHTML
-                tag = tag.toLowerCase().substring(1, tag.length)
-                let photographers = info.photographers.map(item=> {return item})
-                let idArray = []
-                // if the tag on navbar is the same of profile tag the profile stay displayed
-                photographers.map( photographer => {
-                    let photographerProfile = document.querySelector(`#profile-${photographer.id}`)
-                    if (photographer.tags.includes(tag) === false) {
-                        idArray.push(photographer.id)
-                    }
-                    photographerProfile.style.removeProperty("display")
-                })
-                // if the profile haven't the clicked tag, it's deleted
-                idArray.forEach(id => {
-                    let photographerCard = document.querySelector(`#profile-${id}`)
-                    photographerCard.style.display = "none"
-                })
-                // make appear profile by clicking tag again
-                e.target.addEventListener("click", () =>{
-                    idArray.forEach(id => {
-                        let photographerCard = document.querySelector(`#profile-${id}`)
-                        if (photographerCard.style.display === "none") {
-                            photographerCard.style.display = "block"
-                        }else{
-                            photographerCard.style.display = "none"
-                        }
-                    })
-                })
-            }
-            TagFactory.create(headerNav, sortProfile, tag)
-        })
+        const tags = HeaderFactory.tags.map(tag =>{return tag})
+
+        for (let i = 0; i < tags.length; i++) {
+            const tag = tags[i];
+            TagFactory.create({parent, tag})
+        }
     }
+
 }
