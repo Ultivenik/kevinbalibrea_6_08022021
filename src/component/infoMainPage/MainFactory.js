@@ -44,9 +44,9 @@ export default class MainFactory
 
         const profileFigcaption = document.createElement('figcaption')
         profileFigcaption.classList.add("info-profile")
+        profileFigcaption.setAttribute("role", "text paragraph")
 
         MainFactory.createProfileAvatar(figure, photographer)
-        MainFactory.createProfileTitle(figure, photographer)
         MainFactory.createProfileCity(profileFigcaption, photographer)
         MainFactory.createProfileQuote(profileFigcaption, photographer)
         MainFactory.createProfilePrice(profileFigcaption, photographer)
@@ -55,12 +55,12 @@ export default class MainFactory
         figure.appendChild(profileFigcaption)
     }
     // title profile method
-    static createProfileTitle(figure, photographer)
+    static createProfileTitle(parent, photographer)
     {
         const profileTitle = document.createElement('h2')
         profileTitle.classList.add("name")
         profileTitle.innerHTML = photographer.name
-        figure.appendChild(profileTitle)
+        parent.appendChild(profileTitle)
     }
     // profile photo method
     static createProfileAvatar(figure, photographer)
@@ -68,6 +68,7 @@ export default class MainFactory
         const profileLink = document.createElement('a')
         profileLink.classList.add("img-profile-link")
         profileLink.setAttribute("data-portraitId", photographer.id)
+        profileLink.setAttribute("role", "Link + image")
         profileLink.href = "#"
         figure.appendChild(profileLink)
 
@@ -77,6 +78,7 @@ export default class MainFactory
         profileImg.classList.add(`img-${photographer.id}`)
 
         profileLink.appendChild(profileImg)
+        MainFactory.createProfileTitle(profileLink, photographer)
 
         MainFactory.createEventChangePage(profileLink)
     }
@@ -94,13 +96,10 @@ export default class MainFactory
     {
         photographer.tags.map(tag =>{
             const profileSpan = document.createElement('span')
-            const profileSpanLink = document.createElement('a')
 
-            profileSpanLink.href = "#"
             profileSpan.classList.add(`tag`)
-            profileSpanLink.innerHTML = "#" + tag
+            profileSpan.innerHTML = "#" + tag
 
-            profileSpan.appendChild(profileSpanLink)
             profileFigcaption.appendChild(profileSpan)
         })
     }

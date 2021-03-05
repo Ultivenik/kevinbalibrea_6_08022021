@@ -5,7 +5,7 @@ export class ImageFactory {
         text,
         className = "media-gallery",
     }) {
-   
+
         const image = document.createElement("img")
         image.classList.add(className)
         image.setAttribute("src", source)

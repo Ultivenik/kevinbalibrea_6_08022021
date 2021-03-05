@@ -92,7 +92,7 @@ export default class GalleryFactory{
                         text: media.altText,
                     })
                     image.addEventListener("click", () => {
-                        carousel = CarouselFactory.create({
+                        let carousel = CarouselFactory.create({
                             medias,
                             currentIndex: index,
                             onClose: () => {

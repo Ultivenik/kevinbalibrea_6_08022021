@@ -16,7 +16,8 @@ export default class InfoProfileFactory
 
     static createProfileName(infoProfile, photographer)
     {
-        const IDName = document.createElement("h2")
+        const IDName = document.createElement("h1")
+        IDName.setAttribute("role", "header")
         IDName.classList.add("name")
         IDName.innerHTML = photographer.name
         infoProfile.appendChild(IDName)
@@ -25,6 +26,7 @@ export default class InfoProfileFactory
     static createPhotographerLocation(infoProfile, photographer)
     {
         const IDLocation = document.createElement("p")
+        IDLocation.setAttribute("role", "text")
         IDLocation.classList.add("city")
         IDLocation.innerHTML = `${photographer.city}, ` + `${photographer.country}`
         infoProfile.appendChild(IDLocation)
@@ -33,6 +35,7 @@ export default class InfoProfileFactory
     static createPhotographerQuote(infoProfile, photographer)
     {
         const IDTagline = document.createElement("p")
+        IDTagline.setAttribute("role", "text")
         IDTagline.classList.add("quote")
         IDTagline.innerHTML = photographer.tagline
         infoProfile.appendChild(IDTagline)
@@ -53,10 +56,7 @@ export default class InfoProfileFactory
     {
         photographer.tags.map(tag =>{
             const profileSpan = document.createElement("span")
-            const profileSpanLink = document.createElement("a")
-            profileSpanLink.href = "#"
-            profileSpan.appendChild(profileSpanLink)
-            profileSpanLink.innerHTML ="#" + tag
+            profileSpan.innerHTML ="#" + tag
             profileSpan.classList.add(`tag`)
             infoProfile.appendChild(profileSpan)
         })

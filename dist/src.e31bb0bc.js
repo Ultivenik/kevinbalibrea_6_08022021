@@ -749,6 +749,7 @@ var HeaderFactory = /*#__PURE__*/function () {
       logoLink.href = "index.html";
       logoImg.src = "./logo.png";
       logoImg.alt = "Fisheye Home page";
+      logoLink.setAttribute("aria-label", "ImageLink");
       header.classList.add("header");
       document.body.prepend(header);
       logoLink.appendChild(logoImg);
@@ -763,8 +764,10 @@ var HeaderFactory = /*#__PURE__*/function () {
       HeaderFactory.tags.map(function (tag) {
         var spanNav = document.createElement("span");
         var linkNav = document.createElement("a");
-        linkNav.href = "#";
         spanNav.classList.add("tag");
+        spanNav.setAttribute("role", "Links");
+        linkNav.href = "#";
+        linkNav.setAttribute("aria-label", "Tag");
         headerNav.appendChild(spanNav);
         spanNav.appendChild(linkNav);
         linkNav.innerHTML = "#" + tag;
@@ -854,7 +857,8 @@ var InfoProfileFactory = /*#__PURE__*/function () {
   }, {
     key: "createProfileName",
     value: function createProfileName(infoProfile, photographer) {
-      var IDName = document.createElement("h2");
+      var IDName = document.createElement("h1");
+      IDName.setAttribute("role", "header");
       IDName.classList.add("name");
       IDName.innerHTML = photographer.name;
       infoProfile.appendChild(IDName);
@@ -863,6 +867,7 @@ var InfoProfileFactory = /*#__PURE__*/function () {
     key: "createPhotographerLocation",
     value: function createPhotographerLocation(infoProfile, photographer) {
       var IDLocation = document.createElement("p");
+      IDLocation.setAttribute("role", "text");
       IDLocation.classList.add("city");
       IDLocation.innerHTML = "".concat(photographer.city, ", ") + "".concat(photographer.country);
       infoProfile.appendChild(IDLocation);
@@ -871,6 +876,7 @@ var InfoProfileFactory = /*#__PURE__*/function () {
     key: "createPhotographerQuote",
     value: function createPhotographerQuote(infoProfile, photographer) {
       var IDTagline = document.createElement("p");
+      IDTagline.setAttribute("role", "text");
       IDTagline.classList.add("quote");
       IDTagline.innerHTML = photographer.tagline;
       infoProfile.appendChild(IDTagline);
@@ -891,10 +897,7 @@ var InfoProfileFactory = /*#__PURE__*/function () {
     value: function createProfilesTags(infoProfile, photographer) {
       photographer.tags.map(function (tag) {
         var profileSpan = document.createElement("span");
-        var profileSpanLink = document.createElement("a");
-        profileSpanLink.href = "#";
-        profileSpan.appendChild(profileSpanLink);
-        profileSpanLink.innerHTML = "#" + tag;
+        profileSpan.innerHTML = "#" + tag;
         profileSpan.classList.add("tag");
         infoProfile.appendChild(profileSpan);
       });
@@ -1633,8 +1636,8 @@ var MainFactory = /*#__PURE__*/function () {
       parent.appendChild(figure);
       var profileFigcaption = document.createElement('figcaption');
       profileFigcaption.classList.add("info-profile");
+      profileFigcaption.setAttribute("role", "text paragraph");
       MainFactory.createProfileAvatar(figure, photographer);
-      MainFactory.createProfileTitle(figure, photographer);
       MainFactory.createProfileCity(profileFigcaption, photographer);
       MainFactory.createProfileQuote(profileFigcaption, photographer);
       MainFactory.createProfilePrice(profileFigcaption, photographer);
@@ -1644,11 +1647,11 @@ var MainFactory = /*#__PURE__*/function () {
 
   }, {
     key: "createProfileTitle",
-    value: function createProfileTitle(figure, photographer) {
+    value: function createProfileTitle(parent, photographer) {
       var profileTitle = document.createElement('h2');
       profileTitle.classList.add("name");
       profileTitle.innerHTML = photographer.name;
-      figure.appendChild(profileTitle);
+      parent.appendChild(profileTitle);
     } // profile photo method
 
   }, {
@@ -1657,6 +1660,7 @@ var MainFactory = /*#__PURE__*/function () {
       var profileLink = document.createElement('a');
       profileLink.classList.add("img-profile-link");
       profileLink.setAttribute("data-portraitId", photographer.id);
+      profileLink.setAttribute("role", "Link + image");
       profileLink.href = "#";
       figure.appendChild(profileLink);
       var profileImg = document.createElement('img');
@@ -1664,6 +1668,7 @@ var MainFactory = /*#__PURE__*/function () {
       profileImg.alt = "photo profil de ".concat(photographer.name);
       profileImg.classList.add("img-".concat(photographer.id));
       profileLink.appendChild(profileImg);
+      MainFactory.createProfileTitle(profileLink, photographer);
       MainFactory.createEventChangePage(profileLink);
     } // profile city method
 
@@ -1681,11 +1686,8 @@ var MainFactory = /*#__PURE__*/function () {
     value: function createProfileTags(profileFigcaption, photographer) {
       photographer.tags.map(function (tag) {
         var profileSpan = document.createElement('span');
-        var profileSpanLink = document.createElement('a');
-        profileSpanLink.href = "#";
         profileSpan.classList.add("tag");
-        profileSpanLink.innerHTML = "#" + tag;
-        profileSpan.appendChild(profileSpanLink);
+        profileSpan.innerHTML = "#" + tag;
         profileFigcaption.appendChild(profileSpan);
       });
     }
@@ -1839,7 +1841,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52692" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52974" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
