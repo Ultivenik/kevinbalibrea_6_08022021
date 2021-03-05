@@ -27,11 +27,18 @@ export default class HeaderFactory
         const header = document.createElement("header")
         const logoLink = document.createElement('a')
         const logoImg = document.createElement('img')
+        const tags = HeaderFactory.tags.map(tag =>{return tag})
 
         logoLink.href = "index.html"
         logoImg.src = "./logo.png"
         logoImg.alt = "Fisheye Home page"
         logoLink.setAttribute("aria-label", "ImageLink")
+
+        for (let i = 0; i < tags.length; i++) {
+            const tag = tags[i];
+            const spanTags = TagFactory.create({headerNav, tag})
+            headerNav.appendChild(spanTags)
+        }
 
         header.classList.add("header")
 
@@ -40,20 +47,10 @@ export default class HeaderFactory
         header.appendChild(logoLink)
         header.appendChild(headerNav)
 
-        HeaderFactory.createTags(headerNav)
+
 
         return header
     }
 
-    //creating tags method
-    static createTags(parent)
-    {
-        const tags = HeaderFactory.tags.map(tag =>{return tag})
-
-        for (let i = 0; i < tags.length; i++) {
-            const tag = tags[i];
-            TagFactory.create({parent, tag})
-        }
-    }
 
 }

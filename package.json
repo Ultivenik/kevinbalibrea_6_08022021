@@ -21,8 +21,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel src/index.html",
-    "copy": "cp -r src/SamplePhotos src/logo.png dist"
+    "copy": "cp -r src/SamplePhotos src/logo.png dist",
+    "build": "parcel src/index.html"
   },
   "repository": {
     "type": "git",

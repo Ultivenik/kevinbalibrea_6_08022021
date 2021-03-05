@@ -16,11 +16,11 @@ export default class TagFactory
         linkNav.href = "#"
         linkNav.setAttribute("aria-label", "Tag")
 
-        parent.appendChild(spanNav)
         spanNav.appendChild(linkNav)
 
         linkNav.innerHTML = "#" + tag
         linkNav.addEventListener('click', onClick)
+        // parent.appendChild(spanNav)
         return spanNav
     }
 
@@ -55,6 +55,5 @@ export default class TagFactory
                 }
             })
         })
-        
     }
 }

@@ -743,10 +743,10 @@ var TagFactory = /*#__PURE__*/function () {
       spanNav.setAttribute("role", "Links");
       linkNav.href = "#";
       linkNav.setAttribute("aria-label", "Tag");
-      parent.appendChild(spanNav);
       spanNav.appendChild(linkNav);
       linkNav.innerHTML = "#" + tag;
-      linkNav.addEventListener('click', onClick);
+      linkNav.addEventListener('click', onClick); // parent.appendChild(spanNav)
+
       return spanNav;
     } //sorting profiles with hashtags
 
@@ -836,34 +836,31 @@ var HeaderFactory = /*#__PURE__*/function () {
       var header = document.createElement("header");
       var logoLink = document.createElement('a');
       var logoImg = document.createElement('img');
+      var tags = HeaderFactory.tags.map(function (tag) {
+        return tag;
+      });
       logoLink.href = "index.html";
       logoImg.src = "./logo.png";
       logoImg.alt = "Fisheye Home page";
       logoLink.setAttribute("aria-label", "ImageLink");
+
+      for (var i = 0; i < tags.length; i++) {
+        var tag = tags[i];
+
+        var spanTags = _TagFactory.default.create({
+          headerNav: headerNav,
+          tag: tag
+        });
+
+        headerNav.appendChild(spanTags);
+      }
+
       header.classList.add("header");
       document.body.prepend(header);
       logoLink.appendChild(logoImg);
       header.appendChild(logoLink);
       header.appendChild(headerNav);
-      HeaderFactory.createTags(headerNav);
       return header;
-    } //creating tags method
-
-  }, {
-    key: "createTags",
-    value: function createTags(parent) {
-      var tags = HeaderFactory.tags.map(function (tag) {
-        return tag;
-      });
-
-      for (var i = 0; i < tags.length; i++) {
-        var tag = tags[i];
-
-        _TagFactory.default.create({
-          parent: parent,
-          tag: tag
-        });
-      }
     }
   }]);
 
@@ -1894,7 +1891,7 @@ var App = /*#__PURE__*/function () {
 
 
 document.addEventListener("DOMContentLoaded", App.create);
-},{"./pages/MainPage":"pages/MainPage.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./pages/MainPage":"pages/MainPage.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1922,7 +1919,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53275" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57803" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -2098,5 +2095,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/src.e31bb0bc.js.map
