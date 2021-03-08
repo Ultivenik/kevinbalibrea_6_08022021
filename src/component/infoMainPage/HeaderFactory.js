@@ -5,24 +5,6 @@ export default class HeaderFactory
 {
     static create()
     {
-        return HeaderFactory.createHeader()
-    }
-    //tags reference
-    static tags =
-    [
-        "Portrait",
-        "Art",
-        "Fashion",
-        "Architecture",
-        "Travel",
-        "Sport",
-        "Animals",
-        "Events",
-    ]
-
-    // create header method
-    static createHeader()
-    {
         const headerNav = document.createElement("nav")
         const header = document.createElement("header")
         const logoLink = document.createElement('a')
@@ -51,6 +33,16 @@ export default class HeaderFactory
 
         return header
     }
-
-
+    //tags reference
+    static tags =
+    [
+        "Portrait",
+        "Art",
+        "Fashion",
+        "Architecture",
+        "Travel",
+        "Sport",
+        "Animals",
+        "Events",
+    ]
 }

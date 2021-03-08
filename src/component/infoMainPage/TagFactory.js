@@ -3,8 +3,6 @@ import info from './../../../FishEyeDataFR.json'
 export default class TagFactory
 {
     static create({
-        parent,
-        onClick = TagFactory.sortProfile,
         tag
     })
     {
@@ -19,8 +17,7 @@ export default class TagFactory
         spanNav.appendChild(linkNav)
 
         linkNav.innerHTML = "#" + tag
-        linkNav.addEventListener('click', onClick)
-        // parent.appendChild(spanNav)
+        linkNav.addEventListener('click', TagFactory.sortProfile)
         return spanNav
     }
 

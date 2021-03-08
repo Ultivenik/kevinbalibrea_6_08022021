@@ -1,5 +1,5 @@
 import info from "./../../../FishEyeDataFR.json"
-import {CarouselFactory} from '../carousel/CarouselFactory'
+import CarouselFactory from '../carousel/CarouselFactory'
 import {getPhotographerById} from '../../helpers/data'
 import {ImageFactory} from '../image/ImageFactory'
 

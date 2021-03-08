@@ -1,4 +1,4 @@
-
+import ArrowFactory from './ArrowFactory'
 const mediaPath = "./../SamplePhotos"
 
 export default class CarouselFactory {
@@ -22,7 +22,7 @@ export default class CarouselFactory {
             imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
         }
         const goToRight = (evt) => {
-            if (index - 1 < 0) {
+            if (index + 1 < 0) {
                 index = medias.length;
             } else {
                 index++
@@ -44,6 +44,7 @@ export default class CarouselFactory {
                     goToLeft()
                     break
                 case "ArrowRight":
+                    goToRight()
                     break
                 case "Escape":
                     break
@@ -58,25 +59,7 @@ export default class CarouselFactory {
         carouselContainer.classList.add("overlay-gallery")
         carouselContainer.appendChild(containerLightBox)
         carouselContainer.appendChild(arrowLeft)
-        return carouselContainer;
-    }
-}
-
-
-class ArrowFactory {
-    static create({
-        left,
-        onClick,
-        right
-    }) {
-        const arrowElement = document.createElement('button')
-        arrowElement.addEventListener("click", onClick)
-        if (left) {
-            arrowElement.classList.add("fas", "fa-chevron-left", "left-arrow")
-        }
-        if (right) {
-            arrowElement.classList.add("fas", "fa-chevron-right", "right-arrow")
-        }
-        return arrowElement
+        carouselContainer.appendChild(arrowRight)
+        return carouselContainer
     }
 }
