@@ -18,7 +18,7 @@ export default class HeaderFactory
 
         for (let i = 0; i < tags.length; i++) {
             const tag = tags[i];
-            const spanTags = TagFactory.create({headerNav, tag})
+            const spanTags = TagFactory.create({tag})
             headerNav.appendChild(spanTags)
         }
 
@@ -28,8 +28,6 @@ export default class HeaderFactory
         logoLink.appendChild(logoImg)
         header.appendChild(logoLink)
         header.appendChild(headerNav)
-
-
 
         return header
     }

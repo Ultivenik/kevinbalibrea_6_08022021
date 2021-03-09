@@ -733,10 +733,7 @@ var TagFactory = /*#__PURE__*/function () {
   _createClass(TagFactory, null, [{
     key: "create",
     value: function create(_ref) {
-      var parent = _ref.parent,
-          _ref$onClick = _ref.onClick,
-          onClick = _ref$onClick === void 0 ? TagFactory.sortProfile : _ref$onClick,
-          tag = _ref.tag;
+      var tag = _ref.tag;
       var spanNav = document.createElement("span");
       var linkNav = document.createElement("a");
       spanNav.classList.add("tag");
@@ -745,8 +742,7 @@ var TagFactory = /*#__PURE__*/function () {
       linkNav.setAttribute("aria-label", "Tag");
       spanNav.appendChild(linkNav);
       linkNav.innerHTML = "#" + tag;
-      linkNav.addEventListener('click', onClick); // parent.appendChild(spanNav)
-
+      linkNav.addEventListener('click', TagFactory.sortProfile);
       return spanNav;
     } //sorting profiles with hashtags
 
@@ -825,13 +821,6 @@ var HeaderFactory = /*#__PURE__*/function () {
   _createClass(HeaderFactory, null, [{
     key: "create",
     value: function create() {
-      return HeaderFactory.createHeader();
-    } //tags reference
-
-  }, {
-    key: "createHeader",
-    value: // create header method
-    function createHeader() {
       var headerNav = document.createElement("nav");
       var header = document.createElement("header");
       var logoLink = document.createElement('a');
@@ -848,7 +837,6 @@ var HeaderFactory = /*#__PURE__*/function () {
         var tag = tags[i];
 
         var spanTags = _TagFactory.default.create({
-          headerNav: headerNav,
           tag: tag
         });
 
@@ -861,7 +849,8 @@ var HeaderFactory = /*#__PURE__*/function () {
       header.appendChild(logoLink);
       header.appendChild(headerNav);
       return header;
-    }
+    } //tags reference
+
   }]);
 
   return HeaderFactory;
@@ -1053,6 +1042,84 @@ var InfoProfileFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = InfoProfileFactory;
+},{}],"component/carousel/ArrowFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ArrowFactory = /*#__PURE__*/function () {
+  function ArrowFactory() {
+    _classCallCheck(this, ArrowFactory);
+  }
+
+  _createClass(ArrowFactory, null, [{
+    key: "create",
+    value: function create(_ref) {
+      var left = _ref.left,
+          onClick = _ref.onClick,
+          right = _ref.right;
+      var arrowElement = document.createElement('button');
+      arrowElement.addEventListener("click", onClick);
+
+      if (left) {
+        arrowElement.innerHTML = "<i class= 'fas fa-chevron-right right-arrow'></i>";
+      }
+
+      if (right) {
+        arrowElement.innerHTML = "<i class= 'fas fa-chevron-left left-arrow'></i>";
+      }
+
+      return arrowElement;
+    }
+  }]);
+
+  return ArrowFactory;
+}();
+
+exports.default = ArrowFactory;
+},{}],"component/carousel/CloseFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CloseFactory = /*#__PURE__*/function () {
+  function CloseFactory() {
+    _classCallCheck(this, CloseFactory);
+  }
+
+  _createClass(CloseFactory, null, [{
+    key: "create",
+    value: function create(_ref) {
+      var onClick = _ref.onClick;
+      var close = document.createElement("button");
+      close.innerHTML = "<i class='fas fa-times lightbox-close-btn'></i>";
+      close.addEventListener('click', onClick);
+      return close;
+    }
+  }]);
+
+  return CloseFactory;
+}();
+
+exports.default = CloseFactory;
 },{}],"component/carousel/CarouselFactory.js":[function(require,module,exports) {
 "use strict";
 
@@ -1060,6 +1127,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _ArrowFactory = _interopRequireDefault(require("./ArrowFactory"));
+
+var _CloseFactory = _interopRequireDefault(require("./CloseFactory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1079,15 +1152,15 @@ var CarouselFactory = /*#__PURE__*/function () {
     value: function create(_ref) {
       var medias = _ref.medias,
           _ref$currentIndex = _ref.currentIndex,
-          currentIndex = _ref$currentIndex === void 0 ? 0 : _ref$currentIndex,
-          onClose = _ref.onClose;
+          currentIndex = _ref$currentIndex === void 0 ? 0 : _ref$currentIndex;
       var carouselContainer = document.createElement("div");
       var containerLightBox = document.createElement("div");
       var index = currentIndex;
       var currentMedia = medias[index];
       var imageContainer = document.createElement("img");
+      var videoContainer = document.createElement("source");
 
-      var goToLeft = function goToLeft(evt) {
+      var goToLeft = function goToLeft() {
         if (index - 1 < 0) {
           index = medias.length;
         } else {
@@ -1095,11 +1168,18 @@ var CarouselFactory = /*#__PURE__*/function () {
         }
 
         currentMedia = medias[index];
-        imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
+
+        if (imageContainer) {
+          imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
+        }
+
+        if (videoContainer) {
+          videoContainer.src = "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.video);
+        }
       };
 
-      var goToRight = function goToRight(evt) {
-        if (index - 1 < 0) {
+      var goToRight = function goToRight() {
+        if (index + 1 < 0) {
           index = medias.length;
         } else {
           index++;
@@ -1109,13 +1189,22 @@ var CarouselFactory = /*#__PURE__*/function () {
         imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
       };
 
-      var arrowLeft = ArrowFactory.create({
+      var closeWindow = function closeWindow() {
+        carouselContainer.remove();
+      };
+
+      var arrowLeft = _ArrowFactory.default.create({
         left: true,
         onClick: goToLeft
       });
-      var arrowRight = ArrowFactory.create({
+
+      var arrowRight = _ArrowFactory.default.create({
         right: true,
         onClick: goToRight
+      });
+
+      var closeButton = _CloseFactory.default.create({
+        onClick: closeWindow
       });
 
       var keyboardEvents = function keyboardEvents(evt) {
@@ -1125,9 +1214,11 @@ var CarouselFactory = /*#__PURE__*/function () {
             break;
 
           case "ArrowRight":
+            goToRight();
             break;
 
           case "Escape":
+            closeWindow();
             break;
         }
       };
@@ -1139,7 +1230,9 @@ var CarouselFactory = /*#__PURE__*/function () {
       containerLightBox.setAttribute("aria-label", "image-closeup-view");
       carouselContainer.classList.add("overlay-gallery");
       carouselContainer.appendChild(containerLightBox);
+      carouselContainer.appendChild(closeButton);
       carouselContainer.appendChild(arrowLeft);
+      carouselContainer.appendChild(arrowRight);
       return carouselContainer;
     }
   }]);
@@ -1148,56 +1241,7 @@ var CarouselFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = CarouselFactory;
-
-var ArrowFactory = /*#__PURE__*/function () {
-  function ArrowFactory() {
-    _classCallCheck(this, ArrowFactory);
-  }
-
-  _createClass(ArrowFactory, null, [{
-    key: "create",
-    value: function create(_ref2) {
-      var left = _ref2.left,
-          onClick = _ref2.onClick,
-          right = _ref2.right;
-      var arrowElement = document.createElement('button');
-      arrowElement.addEventListener("click", onClick);
-
-      if (left) {
-        arrowElement.classList.add("fas", "fa-chevron-left", "left-arrow");
-      }
-
-      if (right) {
-        arrowElement.classList.add("fas", "fa-chevron-right", "right-arrow");
-      }
-
-      return arrowElement;
-    }
-  }]);
-
-  return ArrowFactory;
-}();
-},{}],"helpers/data.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getPhotographerById = void 0;
-
-var _FishEyeDataFR = _interopRequireDefault(require("../../FishEyeDataFR.json"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var getPhotographerById = function getPhotographerById(_ref) {
-  var id = _ref.id;
-  return _FishEyeDataFR.default.photographers.find(function (photographer) {
-    return photographer.id === id;
-  });
-};
-
-exports.getPhotographerById = getPhotographerById;
-},{"../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/image/ImageFactory.js":[function(require,module,exports) {
+},{"./ArrowFactory":"component/carousel/ArrowFactory.js","./CloseFactory":"component/carousel/CloseFactory.js"}],"component/media/ImageFactory.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1236,6 +1280,292 @@ var ImageFactory = /*#__PURE__*/function () {
 }();
 
 exports.ImageFactory = ImageFactory;
+},{}],"component/gallery/LabelFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var LabelFactory = /*#__PURE__*/function () {
+  function LabelFactory() {
+    _classCallCheck(this, LabelFactory);
+  }
+
+  _createClass(LabelFactory, null, [{
+    key: "create",
+    value: function create(nameClass, innerHTML) {
+      var label = document.createElement("label");
+      label.classList.add(nameClass);
+      label.innerHTML = innerHTML;
+      return label;
+    }
+  }]);
+
+  return LabelFactory;
+}();
+
+exports.default = LabelFactory;
+},{}],"component/gallery/SelectFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var SelectFactory = /*#__PURE__*/function () {
+  function SelectFactory() {
+    _classCallCheck(this, SelectFactory);
+  }
+
+  _createClass(SelectFactory, null, [{
+    key: "create",
+    value: function create(nameClass) {
+      var select = document.createElement("select");
+      select.classList.add(nameClass);
+      return select;
+    }
+  }]);
+
+  return SelectFactory;
+}();
+
+exports.default = SelectFactory;
+},{}],"component/media/VideoFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var VideoFactory = /*#__PURE__*/function () {
+  function VideoFactory() {
+    _classCallCheck(this, VideoFactory);
+  }
+
+  _createClass(VideoFactory, null, [{
+    key: "create",
+    value: function create(_ref) {
+      var source = _ref.source,
+          altText = _ref.altText;
+      var videoGallery = document.createElement("video");
+      videoGallery.addEventListener('click', function () {
+        videoGallery.setAttribute("controls", "");
+      });
+      videoGallery.dataset.altText = altText; // photoFigure.appendChild(videoGallery)
+
+      var sourceVideoGallery = document.createElement("source");
+      sourceVideoGallery.src = source;
+      videoGallery.appendChild(sourceVideoGallery);
+      return videoGallery;
+    }
+  }]);
+
+  return VideoFactory;
+}();
+
+exports.default = VideoFactory;
+},{}],"component/gallery/DateTimeFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var DatetimeFactory = /*#__PURE__*/function () {
+  function DatetimeFactory() {
+    _classCallCheck(this, DatetimeFactory);
+  }
+
+  _createClass(DatetimeFactory, null, [{
+    key: "create",
+    value: function create(date) {
+      var dateTime = document.createElement("time");
+      dateTime.classList.add("date-time");
+      dateTime.setAttribute("datetime", date);
+      dateTime.innerHTML = date;
+      return dateTime;
+    }
+  }]);
+
+  return DatetimeFactory;
+}();
+
+exports.default = DatetimeFactory;
+},{}],"component/gallery/TitleMediaFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var TitleMediaFactory = /*#__PURE__*/function () {
+  function TitleMediaFactory() {
+    _classCallCheck(this, TitleMediaFactory);
+  }
+
+  _createClass(TitleMediaFactory, null, [{
+    key: "create",
+    value: function create(text) {
+      var title = document.createElement("h3");
+      title.classList.add("title-photo-gallery");
+      title.innerHTML = text;
+      return title;
+    }
+  }]);
+
+  return TitleMediaFactory;
+}();
+
+exports.default = TitleMediaFactory;
+},{}],"component/gallery/PricePhotoFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var PricePhotoFactory = /*#__PURE__*/function () {
+  function PricePhotoFactory() {
+    _classCallCheck(this, PricePhotoFactory);
+  }
+
+  _createClass(PricePhotoFactory, null, [{
+    key: "create",
+    value: function create(price) {
+      var spanPrice = document.createElement("span");
+      spanPrice.classList.add("price-photo");
+      spanPrice.innerHTML = price + "  €  ";
+      return spanPrice;
+    }
+  }]);
+
+  return PricePhotoFactory;
+}();
+
+exports.default = PricePhotoFactory;
+},{}],"component/gallery/CounterLikesFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CounterLikesFactory = /*#__PURE__*/function () {
+  function CounterLikesFactory() {
+    _classCallCheck(this, CounterLikesFactory);
+  }
+
+  _createClass(CounterLikesFactory, null, [{
+    key: "create",
+    value: function create(likes) {
+      var spanLikes = document.createElement("span");
+      spanLikes.classList.add("photo-likes");
+      spanLikes.innerHTML = likes + "  ";
+      var icon = document.createElement("i");
+      icon.classList.add("fas", "fa-heart");
+      icon.setAttribute("aria-label", "likes");
+      spanLikes.appendChild(icon);
+      spanLikes.addEventListener("click", function () {
+        spanLikes.innerText = likes++;
+        spanLikes.appendChild(icon);
+      });
+      return spanLikes;
+    }
+  }]);
+
+  return CounterLikesFactory;
+}();
+
+exports.default = CounterLikesFactory;
+},{}],"component/gallery/SortOptionFactory.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var SortOptionFactory = /*#__PURE__*/function () {
+  function SortOptionFactory() {
+    _classCallCheck(this, SortOptionFactory);
+  }
+
+  _createClass(SortOptionFactory, null, [{
+    key: "create",
+    value: function create() {
+      var optArray = ["Popularité", "Date", "Titre"];
+
+      for (var i = 0; i < optArray.length; i++) {
+        var optContent = array[i];
+        var option = document.createElement("option");
+        option.classList.add("occurency-list");
+        option.value = optContent;
+        option.text = optContent;
+        return option;
+      }
+    }
+  }]);
+
+  return SortOptionFactory;
+}();
+
+exports.default = SortOptionFactory;
 },{}],"component/gallery/GalleryFactory.js":[function(require,module,exports) {
 "use strict";
 
@@ -1246,11 +1576,25 @@ exports.default = void 0;
 
 var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
 
-var _CarouselFactory = require("../carousel/CarouselFactory");
+var _CarouselFactory = _interopRequireDefault(require("../carousel/CarouselFactory"));
 
-var _data = require("../../helpers/data");
+var _ImageFactory = require("../media/ImageFactory");
 
-var _ImageFactory = require("../image/ImageFactory");
+var _LabelFactory = _interopRequireDefault(require("./LabelFactory"));
+
+var _SelectFactory = _interopRequireDefault(require("./SelectFactory"));
+
+var _VideoFactory = _interopRequireDefault(require("../media/VideoFactory"));
+
+var _DateTimeFactory = _interopRequireDefault(require("./DateTimeFactory"));
+
+var _TitleMediaFactory = _interopRequireDefault(require("./TitleMediaFactory"));
+
+var _PricePhotoFactory = _interopRequireDefault(require("./PricePhotoFactory"));
+
+var _CounterLikesFactory = _interopRequireDefault(require("./CounterLikesFactory"));
+
+var _SortOptionFactory = _interopRequireDefault(require("./SortOptionFactory"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1270,20 +1614,20 @@ var GalleryFactory = /*#__PURE__*/function () {
   _createClass(GalleryFactory, null, [{
     key: "create",
     value: function create(photographer) {
+      // sorted by popularity by default
       var medias = _FishEyeDataFR.default.media;
       medias.sort(function (a, b) {
         return b.likes - a.likes;
       });
       var infoGallery = document.createElement("section");
       infoGallery.classList.add("gallery");
-      var label = document.createElement("label");
-      label.classList.add("label-list");
-      label.innerHTML = "Trier par";
-      document.querySelector(".main").appendChild(label);
-      var select = document.createElement("select");
-      select.classList.add("select-list");
-      document.querySelector(".main").appendChild(select);
-      var optArray = ["Popularité", "Date", "Titre"]; //filtering photo by occurency
+
+      var label = _LabelFactory.default.create("label-list", "Trier par");
+
+      var select = _SelectFactory.default.create("select-list");
+
+      var option = _SortOptionFactory.default.create(); //filtering photo by occurency
+
 
       select.addEventListener("change", function (e) {
         switch (e.target.value) {
@@ -1315,10 +1659,12 @@ var GalleryFactory = /*#__PURE__*/function () {
           return media.photographerId === photographer.id;
         }), infoGallery);
       });
-      GalleryFactory.createOptions(optArray, select);
       GalleryFactory.createPhotoGallery(medias.filter(function (media) {
         return media.photographerId === photographer.id;
       }), infoGallery);
+      document.querySelector(".main").appendChild(label);
+      document.querySelector(".main").appendChild(select);
+      select.appendChild(option);
       return infoGallery;
     }
   }, {
@@ -1328,19 +1674,6 @@ var GalleryFactory = /*#__PURE__*/function () {
       photos.forEach(function (photo) {
         photo.remove();
       });
-    } // creating option DOM method
-
-  }, {
-    key: "createOptions",
-    value: function createOptions(optArray, select) {
-      for (var i = 0; i < optArray.length; i++) {
-        var optContent = optArray[i];
-        var option = document.createElement("option");
-        option.classList.add("occurency-list");
-        option.value = optContent;
-        option.text = optContent;
-        select.appendChild(option);
-      }
     } // create photo gallery method
 
   }, {
@@ -1360,151 +1693,43 @@ var GalleryFactory = /*#__PURE__*/function () {
           });
 
           image.addEventListener("click", function () {
-            var carousel = _CarouselFactory.CarouselFactory.create({
+            carousel = _CarouselFactory.default.create({
               medias: medias,
-              currentIndex: index,
-              onClose: function onClose() {
-                document.querySelector(".main").removeChild(carousel);
-              }
+              currentIndex: index
             });
-
             document.querySelector(".main").appendChild(carousel);
           });
           mediaFigure.appendChild(image);
-        } else {//GalleryFactory.createVideo(path.video, photo.altText, photoFigure,)
+        } else {
+          var video = _VideoFactory.default.create({
+            source: "".concat(mediaPath, "/").concat(media.photographerId, "/").concat(media.video),
+            altText: media.altText
+          });
+
+          video.addEventListener("click", function () {
+            carousel = _CarouselFactory.default.create({
+              medias: medias,
+              currentIndex: index
+            });
+            document.querySelector(".main").appendChild(carousel);
+          });
+          mediaFigure.appendChild(video);
         }
 
-        mediaFigure.appendChild(mediaLegend); //GalleryFactory.createLegendTitle(photo.altText, photoLegend)
-        //GalleryFactory.createPrice(photo.price, photoLegend)
-        //GalleryFactory.createLikes(photo.likes, photoLegend)
-        //GalleryFactory.createDatePhoto(photo.date, photoLegend)
+        var dateTime = _DateTimeFactory.default.create(media.date);
 
+        var titlePhoto = _TitleMediaFactory.default.create(media.altText);
+
+        var pricePhoto = _PricePhotoFactory.default.create(media.price);
+
+        var likesPhoto = _CounterLikesFactory.default.create(media.likes);
+
+        mediaFigure.appendChild(mediaLegend);
+        mediaLegend.appendChild(titlePhoto);
+        mediaLegend.appendChild(dateTime);
+        mediaLegend.appendChild(pricePhoto);
+        mediaLegend.appendChild(likesPhoto);
         infoGallery.appendChild(mediaFigure);
-      });
-    }
-  }, {
-    key: "createDatePhoto",
-    value: function createDatePhoto(date, parent) {
-      var dateTime = document.createElement("time");
-      dateTime.classList.add("date-time");
-      dateTime.setAttribute("datetime", date);
-      dateTime.innerHTML = date;
-      parent.appendChild(dateTime);
-    }
-  }, {
-    key: "createLegendTitle",
-    value: function createLegendTitle(photo, parent) {
-      var title = document.createElement("h3");
-      title.classList.add("title-photo-gallery");
-      title.innerHTML = photo;
-      parent.appendChild(title);
-    } // lightbox open when clicking on a photo
-
-  }, {
-    key: "createLightBoxEvent",
-    value: function createLightBoxEvent(media, index, photographerId) {
-      var overlayGallery = document.createElement("div");
-      var containerLightBox = document.createElement("div");
-      containerLightBox.classList.add("container-lightbox");
-      containerLightBox.setAttribute("aria-label", "image-closeup-view");
-      var currentImage = document.createElement("img");
-      containerLightBox.appendChild(currentImage);
-      currentImage.src = GalleryFactory.definePath(photographerId, media[index]).image;
-      overlayGallery.classList.add("overlay-gallery");
-      document.querySelector(".main").appendChild(overlayGallery);
-      var indexImage = index;
-      overlayGallery.appendChild(containerLightBox);
-    } // close lightbox when click on "X"
-
-  }, {
-    key: "createCloseButton",
-    value: function createCloseButton(e, overlay, parent) {
-      var close = document.createElement("i");
-      close.classList.add("fas", "fa-times", "lightbox-close-btn");
-      close.addEventListener("click", function () {
-        GalleryFactory.createCloseLightBox(e.target, overlay);
-      });
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          GalleryFactory.createCloseLightBox(e.target, overlay);
-        }
-      });
-      parent.appendChild(close);
-    }
-  }, {
-    key: "createCloseLightBox",
-    value: function createCloseLightBox(eventTarget, overlay) {
-      overlay.remove();
-      eventTarget.classList.remove("lightbox");
-      eventTarget.classList.add("media-gallery");
-      eventTarget.removeAttribute("controls");
-    } // left navigation lightbox
-
-  }, {
-    key: "createLeftArrow",
-    value: function createLeftArrow(parent) {
-      var leftArrow = document.createElement('i');
-      leftArrow.classList.add("fas", "fa-chevron-left", "left-arrow");
-      parent.appendChild(leftArrow);
-      leftArrow.addEventListener('click', function (e) {});
-    } // right navigation lightbox
-
-  }, {
-    key: "createRightArrow",
-    value: function createRightArrow(parent) {
-      var rightArrow = document.createElement('i');
-      rightArrow.classList.add("fas", "fa-chevron-right", "right-arrow");
-      parent.appendChild(rightArrow);
-      rightArrow.addEventListener("click", function (e) {});
-    } // create gallery method
-
-  }, {
-    key: "createImage",
-    value: function createImage(source, altText) {
-      console.info(source);
-      var imageGallery = document.createElement("img");
-      imageGallery.classList.add("media-gallery");
-      imageGallery.setAttribute("src", source);
-      imageGallery.alt = altText;
-      imageGallery.dataset.altText = altText;
-      return imageGallery;
-    }
-  }, {
-    key: "createVideo",
-    value: function createVideo(source, altText, photoFigure) {
-      var videoGallery = document.createElement("video");
-      videoGallery.addEventListener('click', function () {
-        videoGallery.setAttribute("controls", "");
-      });
-      videoGallery.dataset.altText = altText;
-      photoFigure.appendChild(videoGallery);
-      var sourceVideoGallery = document.createElement("source");
-      sourceVideoGallery.src = source;
-      videoGallery.appendChild(sourceVideoGallery);
-    }
-  }, {
-    key: "createPrice",
-    value: function createPrice(photo, photoLegend) {
-      var spanPrice = document.createElement("span");
-      spanPrice.classList.add("price-photo");
-      spanPrice.innerHTML = photo + "  €  ";
-      photoLegend.appendChild(spanPrice);
-    } // like button with like increment event and price
-
-  }, {
-    key: "createLikes",
-    value: function createLikes(photo, photoLegend) {
-      var spanLikes = document.createElement("span");
-      spanLikes.classList.add("photo-likes");
-      spanLikes.innerHTML = photo + "  ";
-      var icon = document.createElement("i");
-      icon.classList.add("fas", "fa-heart");
-      icon.setAttribute("aria-label", "likes");
-      spanLikes.appendChild(icon);
-      photoLegend.appendChild(spanLikes);
-      spanLikes.addEventListener("click", function (e) {
-        e.currentTarget.innerText = photo++;
-        spanLikes.appendChild(icon);
       });
     }
   }]);
@@ -1513,7 +1738,7 @@ var GalleryFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = GalleryFactory;
-},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json","../carousel/CarouselFactory":"component/carousel/CarouselFactory.js","../../helpers/data":"helpers/data.js","../image/ImageFactory":"component/image/ImageFactory.js"}],"pages/ProfilPages.js":[function(require,module,exports) {
+},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json","../carousel/CarouselFactory":"component/carousel/CarouselFactory.js","../media/ImageFactory":"component/media/ImageFactory.js","./LabelFactory":"component/gallery/LabelFactory.js","./SelectFactory":"component/gallery/SelectFactory.js","../media/VideoFactory":"component/media/VideoFactory.js","./DateTimeFactory":"component/gallery/DateTimeFactory.js","./TitleMediaFactory":"component/gallery/TitleMediaFactory.js","./PricePhotoFactory":"component/gallery/PricePhotoFactory.js","./CounterLikesFactory":"component/gallery/CounterLikesFactory.js","./SortOptionFactory":"component/gallery/SortOptionFactory.js"}],"pages/ProfilPages.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1919,7 +2144,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57803" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54443" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

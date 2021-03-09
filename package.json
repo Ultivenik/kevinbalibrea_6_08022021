@@ -8,7 +8,7 @@
     "core-js": "^3.9.1",
     "node": "15.10.0",
     "npm-check-updates": "^11.1.10",
-    "parcel": "^2.0.0-beta.1",
+    "parcel": "^2.0.0-nightly.618",
     "parcel-bundler": "^1.12.4",
     "regenerator-runtime": "^0.13.7"
   },
@@ -21,8 +21,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "copy": "cp -r src/SamplePhotos src/logo.png dist",
-    "build": "parcel src/index.html"
+    "build": "parcel src/index.html",
+    "copy": "cp -r src/SamplePhotos src/logo.png dist"
   },
   "repository": {
     "type": "git",

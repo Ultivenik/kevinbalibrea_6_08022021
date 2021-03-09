@@ -1,27 +1,34 @@
 import ArrowFactory from './ArrowFactory'
+import CloseFactory from './CloseFactory';
+
 const mediaPath = "./../SamplePhotos"
 
 export default class CarouselFactory {
     static create({
         medias,
         currentIndex = 0,
-        onClose,
     }) {
         const carouselContainer = document.createElement("div")
         const containerLightBox = document.createElement("div")
         let index = currentIndex;
         let currentMedia = medias[index]
         const imageContainer = document.createElement("img")
-        const goToLeft = (evt) => {
+        const videoContainer = document.createElement("source")
+        const goToLeft = () => {
             if (index - 1 < 0) {
                 index = medias.length;
             } else {
                 index--
             }
             currentMedia = medias[index]
-            imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
+            if (imageContainer) {
+                imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
+            }
+            if (videoContainer) {
+                videoContainer.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
+            }
         }
-        const goToRight = (evt) => {
+        const goToRight = () => {
             if (index + 1 < 0) {
                 index = medias.length;
             } else {
@@ -30,6 +37,9 @@ export default class CarouselFactory {
             currentMedia = medias[index]
             imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
         }
+        const closeWindow = () =>{
+            carouselContainer.remove()
+        }
         const arrowLeft = ArrowFactory.create({
             left: true,
             onClick: goToLeft
@@ -37,6 +47,9 @@ export default class CarouselFactory {
         const arrowRight = ArrowFactory.create({
             right: true,
             onClick : goToRight
+        })
+        const closeButton = CloseFactory.create({
+            onClick: closeWindow
         })
         const keyboardEvents = (evt) => {
             switch(evt.key) {
@@ -47,6 +60,7 @@ export default class CarouselFactory {
                     goToRight()
                     break
                 case "Escape":
+                    closeWindow()
                     break
             }
         }
@@ -58,6 +72,7 @@ export default class CarouselFactory {
         containerLightBox.setAttribute("aria-label", "image-closeup-view")
         carouselContainer.classList.add("overlay-gallery")
         carouselContainer.appendChild(containerLightBox)
+        carouselContainer.appendChild(closeButton)
         carouselContainer.appendChild(arrowLeft)
         carouselContainer.appendChild(arrowRight)
         return carouselContainer

@@ -7,10 +7,10 @@ export default  class ArrowFactory {
         const arrowElement = document.createElement('button')
         arrowElement.addEventListener("click", onClick)
         if (left) {
-            arrowElement.classList.add("fas", "fa-chevron-left", "left-arrow")
+            arrowElement.innerHTML = "<i class= 'fas fa-chevron-right right-arrow'></i>"
         }
         if (right) {
-            arrowElement.classList.add("fas", "fa-chevron-right", "right-arrow")
+            arrowElement.innerHTML = "<i class= 'fas fa-chevron-left left-arrow'></i>"
         }
         return arrowElement
     }
