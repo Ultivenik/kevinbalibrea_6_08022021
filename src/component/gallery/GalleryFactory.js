@@ -23,8 +23,13 @@ export default class GalleryFactory{
         infoGallery.classList.add("gallery")
 
         const label = LabelFactory.create("label-list", "Trier par")
+        const optArray = ["Popularité", "Date", "Titre"]
         const select = SelectFactory.create("select-list")
-        const option = SortOptionFactory.create()
+        for (let i = 0; i < optArray.length; i++) {
+            const element = optArray[i];
+            const options = SortOptionFactory.create(element)
+            select.appendChild(options)
+        }
 
         //filtering photo by occurency
         select.addEventListener("change", (e) => {
@@ -55,7 +60,6 @@ export default class GalleryFactory{
 
         document.querySelector(".main").appendChild(label)
         document.querySelector(".main").appendChild(select)
-        select.appendChild(option)
 
         return infoGallery
     }
