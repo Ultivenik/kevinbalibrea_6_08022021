@@ -13,7 +13,8 @@ export default class CarouselFactory {
         let index = currentIndex;
         let currentMedia = medias[index]
         const imageContainer = document.createElement("img")
-        const videoContainer = document.createElement("source")
+        const videoContainer = document.createElement("video")
+        const sourceVideo = document.createElement("source")
         const goToLeft = () => {
             if (index - 1 < 0) {
                 index = medias.length;
@@ -23,9 +24,12 @@ export default class CarouselFactory {
             currentMedia = medias[index]
             if (imageContainer) {
                 imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
+                containerLightBox.appendChild(imageContainer)
             }
             if (videoContainer) {
-                videoContainer.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
+                sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
+                videoContainer.appendChild(sourceVideo)
+                containerLightBox.appendChild(videoContainer)
             }
         }
         const goToRight = () => {

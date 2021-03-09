@@ -1158,7 +1158,8 @@ var CarouselFactory = /*#__PURE__*/function () {
       var index = currentIndex;
       var currentMedia = medias[index];
       var imageContainer = document.createElement("img");
-      var videoContainer = document.createElement("source");
+      var videoContainer = document.createElement("video");
+      var sourceVideo = document.createElement("source");
 
       var goToLeft = function goToLeft() {
         if (index - 1 < 0) {
@@ -1171,10 +1172,13 @@ var CarouselFactory = /*#__PURE__*/function () {
 
         if (imageContainer) {
           imageContainer.setAttribute('src', "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.image));
+          containerLightBox.appendChild(imageContainer);
         }
 
         if (videoContainer) {
-          videoContainer.src = "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.video);
+          sourceVideo.src = "".concat(mediaPath, "/").concat(currentMedia.photographerId, "/").concat(currentMedia.video);
+          videoContainer.appendChild(sourceVideo);
+          containerLightBox.appendChild(videoContainer);
         }
       };
 
@@ -2144,7 +2148,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54443" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54867" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
