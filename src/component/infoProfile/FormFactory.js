@@ -34,18 +34,18 @@ export default class FormFactory
         }
         const sendingMessage = (e) =>{
             e.preventDefault()
-            const form = document.querySelector(".contact-form")
-            const firstNameInput = document.getElementById("firstname")
-            const lastNameInput = document.getElementById("lastname")
-            const emailInput = document.getElementById("email")
-            const textInput = document.getElementById("text")
+            const contactForm = document.querySelector(".contact-form")
+            const first = document.getElementById("firstname")
+            const last = document.getElementById("lastname")
+            const email = document.getElementById("email")
+            const text = document.getElementById("text")
             console.log(
-                `Nom de l'utilisateur: ${  firstNameInput.value  }\n` +
-                `Prénom de l'utilisateur: ${  lastNameInput.value  }\n` +
-                `E-mail de l'utilisateur: ${  emailInput.value  }\n` +
-                `Message de l'utilisateur: ${  textInput.value}`
+                `Nom de l'utilisateur: ${  first.value  }\n` +
+                `Prénom de l'utilisateur: ${  last.value  }\n` +
+                `E-mail de l'utilisateur: ${  email.value  }\n` +
+                `Message de l'utilisateur: ${  text.value}`
             )
-            form.reset()
+            contactForm.reset()
         }
         sendingBtn.addEventListener("click", sendingMessage)
         closeBtn.addEventListener("click", closeOverlay)

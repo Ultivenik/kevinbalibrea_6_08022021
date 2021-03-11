@@ -9,6 +9,7 @@ export default class ProfileTags
             profileSpan.innerHTML = `#${  tag}`
 
             parent.appendChild(profileSpan)
+            return profileSpan
         })
     }
 }

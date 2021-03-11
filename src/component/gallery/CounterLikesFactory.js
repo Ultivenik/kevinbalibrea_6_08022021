@@ -2,9 +2,10 @@ export default class CounterLikesFactory
 {
     static create(likes)
     {
+        const likesParam = likes
         const spanLikes = document.createElement("span")
         spanLikes.classList.add("photo-likes")
-        spanLikes.innerHTML = `${likes  }  `
+        spanLikes.innerHTML = `${likesParam}  `
 
         const icon = document.createElement("i")
         icon.classList.add("fas", "fa-heart")
@@ -13,7 +14,7 @@ export default class CounterLikesFactory
         spanLikes.appendChild(icon)
 
         spanLikes.addEventListener("click", () =>{
-            spanLikes.innerText = likes++
+            spanLikes.innerText = likesParam + likesParam
             spanLikes.appendChild(icon)
         })
         return spanLikes

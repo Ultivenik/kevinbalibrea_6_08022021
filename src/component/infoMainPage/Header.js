@@ -8,14 +8,24 @@ export default class Header
         const header = document.createElement("header")
         const logoLink = document.createElement('a')
         const logoImg = document.createElement('img')
-        const tags = Header.tags.map(tag =>{return tag})
+        const tagsContent = [
+            "Portrait",
+            "Art",
+            "Fashion",
+            "Architecture",
+            "Travel",
+            "Sport",
+            "Animals",
+            "Events",
+        ]
+        const tags = tagsContent.map(tag => tag )
 
         logoLink.href = "index.html"
         logoImg.src = "./logo.png"
         logoImg.alt = "Fisheye Home page"
         logoLink.setAttribute("aria-label", "ImageLink")
 
-        for (let i = 0; i < tags.length; i++) {
+        for (let i = 0; i < tags.length; i+=i) {
             const tag = tags[i];
             const spanTags = TagFactory.create({tag})
             headerNav.appendChild(spanTags)
@@ -30,16 +40,4 @@ export default class Header
 
         return header
     }
-    //tags reference
-    static tags =
-    [
-        "Portrait",
-        "Art",
-        "Fashion",
-        "Architecture",
-        "Travel",
-        "Sport",
-        "Animals",
-        "Events",
-    ]
 }

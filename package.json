@@ -6,13 +6,16 @@
     "babel": "6.23.0",
     "babelrc": "0.0.7",
     "core-js": "^3.9.1",
+    "corejs": "^1.0.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "node": "15.10.0",
     "npm-check-updates": "^11.1.10",
-    "parcel": "^2.0.0-nightly.618",
+    "parcel": "^1.12.4",
     "parcel-bundler": "^1.12.4",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "semver": "^7.3.4"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",

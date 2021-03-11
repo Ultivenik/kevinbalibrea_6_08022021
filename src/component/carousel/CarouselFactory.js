@@ -24,10 +24,9 @@ export default class CarouselFactory {
                     index = 0
                 }
             } else {
-                index--
+                index-= index
             }
             currentMedia = medias[index]
-            console.log(medias);
             CarouselFactory.isAnImage({
                 imageContainer,
                 videoContainer,
@@ -43,7 +42,7 @@ export default class CarouselFactory {
                     index = 0
                 }
             } else {
-                index++
+                index+= index
             }
             currentMedia = medias[index]
             CarouselFactory.isAnImage({
@@ -84,6 +83,8 @@ export default class CarouselFactory {
                 case "Escape":
                     closeWindow()
                     break
+                default:
+                    break
             }
         }
         window.addEventListener("keydown", keyboardEvents)
@@ -110,20 +111,25 @@ export default class CarouselFactory {
         imageContainer,
         videoContainer,
         sourceVideo,
-        mediaPath,
+        Path,
         currentMedia,
     })
     {
-            if (currentMedia.hasOwnProperty("image")) {
-                imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
-                videoContainer.style.display ="none"
-                imageContainer.style.display = "block"
-            }else{
-                sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
-                videoContainer.setAttribute("controls", "")
-                videoContainer.appendChild(sourceVideo)
-                imageContainer.style.display = "none"
-                videoContainer.style.display = "block"
-            }
+        const imageParam = imageContainer
+        const videoParam = videoContainer
+        const sourceParam = sourceVideo
+        const hasCurentMediaOwnProp = Object.prototype.hasOwnProperty.call(currentMedia, "image")
+
+        if (hasCurentMediaOwnProp) {
+            imageParam.setAttribute('src', `${Path}/${currentMedia.photographerId}/${currentMedia.image}`)
+            videoParam.style.display ="none"
+            imageParam.style.display = "block"
+        }else{
+            sourceParam.src = `${Path}/${currentMedia.photographerId}/${currentMedia.video}`
+            videoParam.setAttribute("controls", "")
+            videoParam.appendChild(sourceParam)
+            imageParam.style.display = "none"
+            videoParam.style.display = "block"
+        }
     }
 }

@@ -35,6 +35,7 @@ export default class TagFactory
                 idArray.push(photographer.id)
             }
             photographerProfile.style.removeProperty("display")
+            return photographerProfile
         })
         // if the profile haven't the clicked tag, it's deleted
         idArray.forEach(id => {

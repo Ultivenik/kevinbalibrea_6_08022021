@@ -25,7 +25,7 @@ export default class GalleryFactory{
         const label = LabelFactory.create("label-list", "Trier par")
         const optArray = ["Popularité", "Date", "Titre"]
         const select = SelectFactory.create("select-list")
-        for (let i = 0; i < optArray.length; i++) {
+        for (let i = 0; i < optArray.length; i+=i) {
             const element = optArray[i];
             const options = SortOptionFactory.create(element)
             select.appendChild(options)
@@ -36,21 +36,25 @@ export default class GalleryFactory{
             switch (e.target.value) {
                 case "Popularité":
                     medias.sort((a, b) => b.likes - a.likes)
-                    break;
+                    break
                 case "Date":
                     medias.sort((a, b) => {
-                        a = a.date.split('-');
-                        b = b.date.split('-');
-                        return a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+                        let aParam = a
+                        let bParam = b
+                        aParam = a.date.split('-')
+                        bParam = b.date.split('-')
+                        return aParam[0] - bParam[0] || aParam[1] - bParam[1] || aParam[2] - bParam[2]
                     })
-                    break;
+                    break
                 case "Titre":
                     medias.sort((a, b) => {
                         const aa = a.image !== undefined ? a.image : a.video
                         const bb = b.image !== undefined ? b.image : b.video
                         return aa > bb
                     })
-                    break;
+                    break
+                default:
+                    break
             }
             GalleryFactory.deletePhotoGallery()
             GalleryFactory.createPhotoGallery(medias.filter((media) => media.photographerId === photographer.id), infoGallery)
@@ -75,7 +79,7 @@ export default class GalleryFactory{
     // create photo gallery method
     static createPhotoGallery(medias, infoGallery)
     {
-        let carousel;
+        let carousel
         medias.map((media, index) =>{
                 const mediaFigure = document.createElement("figure")
                 mediaFigure.classList.add("photoFigure")
@@ -121,6 +125,7 @@ export default class GalleryFactory{
                 mediaLegend.appendChild(pricePhoto)
                 mediaLegend.appendChild(likesPhoto)
                 infoGallery.appendChild(mediaFigure)
+                return mediaFigure
             }
         )
     }
