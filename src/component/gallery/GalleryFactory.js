@@ -1,4 +1,4 @@
-import info from "./../../../FishEyeDataFR.json"
+import info from "../../../FishEyeDataFR.json"
 import CarouselFactory from '../carousel/CarouselFactory'
 import {ImageFactory} from '../media/ImageFactory'
 import LabelFactory from '../infoProfile/LabelFactory'
@@ -16,7 +16,7 @@ export default class GalleryFactory{
     static create(photographer)
     {
         // sorted by popularity by default
-        let medias = info.media
+        const medias = info.media
         medias.sort((a, b) => b.likes - a.likes)
 
         const infoGallery = document.createElement("section")
@@ -31,7 +31,7 @@ export default class GalleryFactory{
             select.appendChild(options)
         }
 
-        //filtering photo by occurency
+        // filtering photo by occurency
         select.addEventListener("change", (e) => {
             switch (e.target.value) {
                 case "Popularité":
@@ -46,8 +46,8 @@ export default class GalleryFactory{
                     break;
                 case "Titre":
                     medias.sort((a, b) => {
-                        let aa = a.image !== undefined ? a.image : a.video
-                        let bb = b.image !== undefined ? b.image : b.video
+                        const aa = a.image !== undefined ? a.image : a.video
+                        const bb = b.image !== undefined ? b.image : b.video
                         return aa > bb
                     })
                     break;
@@ -71,6 +71,7 @@ export default class GalleryFactory{
             photo.remove()
         })
     }
+
     // create photo gallery method
     static createPhotoGallery(medias, infoGallery)
     {

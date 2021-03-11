@@ -3,7 +3,7 @@ import MainPage from "./pages/MainPage"
 class App{
    static create()
    {
-      //Main page initialisation
+      // Main page initialisation
       MainPage.create()
    }
 }

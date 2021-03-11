@@ -4,7 +4,7 @@ export default class CounterLikesFactory
     {
         const spanLikes = document.createElement("span")
         spanLikes.classList.add("photo-likes")
-        spanLikes.innerHTML = likes + "  "
+        spanLikes.innerHTML = `${likes  }  `
 
         const icon = document.createElement("i")
         icon.classList.add("fas", "fa-heart")

@@ -34,16 +34,16 @@ export default class FormFactory
         }
         const sendingMessage = (e) =>{
             e.preventDefault()
-            let form = document.querySelector(".contact-form")
-            let firstNameInput = document.getElementById("firstname")
-            let lastNameInput = document.getElementById("lastname")
-            let emailInput = document.getElementById("email")
-            let textInput = document.getElementById("text")
+            const form = document.querySelector(".contact-form")
+            const firstNameInput = document.getElementById("firstname")
+            const lastNameInput = document.getElementById("lastname")
+            const emailInput = document.getElementById("email")
+            const textInput = document.getElementById("text")
             console.log(
-                "Nom de l'utilisateur: " + firstNameInput.value + "\n" +
-                "Prénom de l'utilisateur: " + lastNameInput.value + "\n" +
-                "E-mail de l'utilisateur: " + emailInput.value + "\n" +
-                "Message de l'utilisateur: " + textInput.value
+                `Nom de l'utilisateur: ${  firstNameInput.value  }\n` +
+                `Prénom de l'utilisateur: ${  lastNameInput.value  }\n` +
+                `E-mail de l'utilisateur: ${  emailInput.value  }\n` +
+                `Message de l'utilisateur: ${  textInput.value}`
             )
             form.reset()
         }

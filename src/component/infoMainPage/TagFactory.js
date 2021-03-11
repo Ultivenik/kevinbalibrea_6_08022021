@@ -1,4 +1,4 @@
-import info from './../../../FishEyeDataFR.json'
+import info from "../../../FishEyeDataFR.json"
 
 export default class TagFactory
 {
@@ -16,21 +16,21 @@ export default class TagFactory
 
         spanNav.appendChild(linkNav)
 
-        linkNav.innerHTML = "#" + tag
+        linkNav.innerHTML = `#${  tag}`
         linkNav.addEventListener('click', TagFactory.sortProfile)
         return spanNav
     }
 
-    //sorting profiles with hashtags
+    // sorting profiles with hashtags
     static sortProfile(e)
     {
         let tag = e.target.innerHTML
         tag = tag.toLowerCase().substring(1, tag.length)
-        let photographers = info.photographers.map(item=> {return item})
-        let idArray = []
+        const photographers = info.photographers.map(item=> item)
+        const idArray = []
         // if the tag on navbar is the same of profile tag the profile stay displayed
         photographers.map( photographer => {
-            let photographerProfile = document.querySelector(`#profile-${photographer.id}`)
+            const photographerProfile = document.querySelector(`#profile-${photographer.id}`)
             if (photographer.tags.includes(tag) === false) {
                 idArray.push(photographer.id)
             }
@@ -38,13 +38,13 @@ export default class TagFactory
         })
         // if the profile haven't the clicked tag, it's deleted
         idArray.forEach(id => {
-            let photographerCard = document.querySelector(`#profile-${id}`)
+            const photographerCard = document.querySelector(`#profile-${id}`)
             photographerCard.style.display = "none"
         })
         // make appear profile by clicking tag again
         e.target.addEventListener("click", () =>{
             idArray.forEach(id => {
-                let photographerCard = document.querySelector(`#profile-${id}`)
+                const photographerCard = document.querySelector(`#profile-${id}`)
                 if (photographerCard.style.display === "none") {
                     photographerCard.style.display = "block"
                 }else{

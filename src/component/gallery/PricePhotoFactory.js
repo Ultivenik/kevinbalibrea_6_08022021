@@ -4,7 +4,7 @@ export default class PricePhotoFactory
     {
         const spanPrice = document.createElement("span")
         spanPrice.classList.add("price-photo")
-        spanPrice.innerHTML = price + "  €  "
+        spanPrice.innerHTML = `${price  }  €  `
         return spanPrice
     }
 }

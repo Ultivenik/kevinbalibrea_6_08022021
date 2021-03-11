@@ -715,7 +715,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
+var _FishEyeDataFR = _interopRequireDefault(require("../../../FishEyeDataFR.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -741,10 +741,10 @@ var TagFactory = /*#__PURE__*/function () {
       linkNav.href = "#";
       linkNav.setAttribute("aria-label", "Tag");
       spanNav.appendChild(linkNav);
-      linkNav.innerHTML = "#" + tag;
+      linkNav.innerHTML = "#".concat(tag);
       linkNav.addEventListener('click', TagFactory.sortProfile);
       return spanNav;
-    } //sorting profiles with hashtags
+    } // sorting profiles with hashtags
 
   }, {
     key: "sortProfile",
@@ -791,7 +791,7 @@ var TagFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = TagFactory;
-},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/infoMainPage/Header.js":[function(require,module,exports) {
+},{"../../../FishEyeDataFR.json":"../FishEyeDataFR.json"}],"component/infoMainPage/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -952,7 +952,7 @@ var ProfileTags = /*#__PURE__*/function () {
         var profileSpan = document.createElement('span');
         profileSpan.setAttribute("role", "Tag");
         profileSpan.classList.add("tag");
-        profileSpan.innerHTML = "#" + tag;
+        profileSpan.innerHTML = "#".concat(tag);
         parent.appendChild(profileSpan);
       });
     }
@@ -1275,7 +1275,7 @@ var FormFactory = /*#__PURE__*/function () {
         var lastNameInput = document.getElementById("lastname");
         var emailInput = document.getElementById("email");
         var textInput = document.getElementById("text");
-        console.log("Nom de l'utilisateur: " + firstNameInput.value + "\n" + "Prénom de l'utilisateur: " + lastNameInput.value + "\n" + "E-mail de l'utilisateur: " + emailInput.value + "\n" + "Message de l'utilisateur: " + textInput.value);
+        console.log("Nom de l'utilisateur: ".concat(firstNameInput.value, "\n") + "Pr\xE9nom de l'utilisateur: ".concat(lastNameInput.value, "\n") + "E-mail de l'utilisateur: ".concat(emailInput.value, "\n") + "Message de l'utilisateur: ".concat(textInput.value));
         form.reset();
       };
 
@@ -1799,7 +1799,7 @@ var PricePhotoFactory = /*#__PURE__*/function () {
     value: function create(price) {
       var spanPrice = document.createElement("span");
       spanPrice.classList.add("price-photo");
-      spanPrice.innerHTML = price + "  €  ";
+      spanPrice.innerHTML = "".concat(price, "  \u20AC  ");
       return spanPrice;
     }
   }]);
@@ -1832,7 +1832,7 @@ var CounterLikesFactory = /*#__PURE__*/function () {
     value: function create(likes) {
       var spanLikes = document.createElement("span");
       spanLikes.classList.add("photo-likes");
-      spanLikes.innerHTML = likes + "  ";
+      spanLikes.innerHTML = "".concat(likes, "  ");
       var icon = document.createElement("i");
       icon.classList.add("fas", "fa-heart");
       icon.setAttribute("aria-label", "likes");
@@ -1891,7 +1891,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _FishEyeDataFR = _interopRequireDefault(require("./../../../FishEyeDataFR.json"));
+var _FishEyeDataFR = _interopRequireDefault(require("../../../FishEyeDataFR.json"));
 
 var _CarouselFactory = _interopRequireDefault(require("../carousel/CarouselFactory"));
 
@@ -1951,7 +1951,7 @@ var GalleryFactory = /*#__PURE__*/function () {
         var options = _SortOptionFactory.default.create(element);
 
         select.appendChild(options);
-      } //filtering photo by occurency
+      } // filtering photo by occurency
 
 
       select.addEventListener("change", function (e) {
@@ -2062,7 +2062,7 @@ var GalleryFactory = /*#__PURE__*/function () {
 }();
 
 exports.default = GalleryFactory;
-},{"./../../../FishEyeDataFR.json":"../FishEyeDataFR.json","../carousel/CarouselFactory":"component/carousel/CarouselFactory.js","../media/ImageFactory":"component/media/ImageFactory.js","../infoProfile/LabelFactory":"component/infoProfile/LabelFactory.js","./SelectFactory":"component/gallery/SelectFactory.js","../media/VideoFactory":"component/media/VideoFactory.js","./DateTimeFactory":"component/gallery/DateTimeFactory.js","./PricePhotoFactory":"component/gallery/PricePhotoFactory.js","./CounterLikesFactory":"component/gallery/CounterLikesFactory.js","./SortOptionFactory":"component/gallery/SortOptionFactory.js","../infoMainPage/TitleFactory":"component/infoMainPage/TitleFactory.js"}],"pages/ProfilPages.js":[function(require,module,exports) {
+},{"../../../FishEyeDataFR.json":"../FishEyeDataFR.json","../carousel/CarouselFactory":"component/carousel/CarouselFactory.js","../media/ImageFactory":"component/media/ImageFactory.js","../infoProfile/LabelFactory":"component/infoProfile/LabelFactory.js","./SelectFactory":"component/gallery/SelectFactory.js","../media/VideoFactory":"component/media/VideoFactory.js","./DateTimeFactory":"component/gallery/DateTimeFactory.js","./PricePhotoFactory":"component/gallery/PricePhotoFactory.js","./CounterLikesFactory":"component/gallery/CounterLikesFactory.js","./SortOptionFactory":"component/gallery/SortOptionFactory.js","../infoMainPage/TitleFactory":"component/infoMainPage/TitleFactory.js"}],"pages/ProfilPages.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2089,7 +2089,7 @@ var ProfilPages = /*#__PURE__*/function () {
 
   _createClass(ProfilPages, null, [{
     key: "changePage",
-    value: //Change page method at clicking on profile
+    value: // Change page method at clicking on profile
     function changePage(photographer) {
       document.querySelector(".main").innerHTML = "";
       document.querySelector("nav").remove();
@@ -2103,7 +2103,7 @@ var ProfilPages = /*#__PURE__*/function () {
       var infoProfile = _InfoProfileFactory.default.create(photographer);
 
       document.querySelector(".main").appendChild(infoProfile);
-    } //display photo gallery with pictures features
+    } // display photo gallery with pictures features
 
   }, {
     key: "displayGallery",
@@ -2142,7 +2142,7 @@ var ContainerProfilesFactory = /*#__PURE__*/function () {
     value: function create(photographer) {
       var figure = document.createElement("figure");
       figure.classList.add("profile");
-      figure.id = "profile-" + photographer.id;
+      figure.id = "profile-".concat(photographer.id);
       return figure;
     }
   }]);
@@ -2268,7 +2268,7 @@ var Main = /*#__PURE__*/function () {
       var section = Main.createSectionProfiles();
       parent.appendChild(title);
       parent.appendChild(section);
-    } //method template main landing page
+    } // method template main landing page
 
   }, {
     key: "createSectionProfiles",
@@ -2279,7 +2279,7 @@ var Main = /*#__PURE__*/function () {
         return Main.createMainProfiles(photographerInfo, sectionContainer);
       });
       return sectionContainer;
-    } //method template profiles
+    } // method template profiles
 
   }, {
     key: "createMainProfiles",
@@ -2300,7 +2300,7 @@ var Main = /*#__PURE__*/function () {
 
       var quote = _Infofactory.default.create("quote", "text", photographer.tagline);
 
-      var price = _Infofactory.default.create("price", "text", photographer.price + '€');
+      var price = _Infofactory.default.create("price", "text", "".concat(photographer.price, "\u20AC"));
 
       parent.appendChild(figure);
       figure.appendChild(avatar);
@@ -2317,8 +2317,6 @@ var Main = /*#__PURE__*/function () {
   }, {
     key: "createEventChangePage",
     value: function createEventChangePage(profileLink) {
-      var photographersInfo = _FishEyeDataFR.default.photographers;
-
       var getPhotographerById = function getPhotographerById(id) {
         return photographersInfo.find(function (photographer) {
           return photographer.id === Number(id);
@@ -2400,7 +2398,7 @@ var App = /*#__PURE__*/function () {
   _createClass(App, null, [{
     key: "create",
     value: function create() {
-      //Main page initialisation
+      // Main page initialisation
       _MainPage.default.create();
     }
   }]);
@@ -2438,7 +2436,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56713" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50971" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

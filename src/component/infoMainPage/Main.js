@@ -20,21 +20,20 @@ export default class Main
         parent.appendChild(title)
         parent.appendChild(section)
     }
-    //method template main landing page
+
+    // method template main landing page
     static createSectionProfiles()
     {
         const sectionContainer = document.createElement("section")
         sectionContainer.classList.add("profiles")
 
-        photographersInfo.map(photographerInfo =>{
-            return (
+        photographersInfo.map(photographerInfo =>(
                 Main.createMainProfiles(photographerInfo, sectionContainer)
-            )
-        })
+            ))
         return sectionContainer
     }
 
-    //method template profiles
+    // method template profiles
     static createMainProfiles(photographer, parent)
     {
         const figure = ContainerProfilesFactory.create(photographer)
@@ -45,7 +44,7 @@ export default class Main
         const imgAvatar = AvatarFactory.create("img-profile-link", photographer)
         const city = InfoFactory.create("city", "text", `${photographer.city} ${photographer.country}`)
         const quote = InfoFactory.create("quote", "text", photographer.tagline)
-        const price = InfoFactory.create("price", "text", photographer.price + '€')
+        const price = InfoFactory.create("price", "text", `${photographer.price  }€`)
 
         parent.appendChild(figure)
         figure.appendChild(avatar)
@@ -61,12 +60,7 @@ export default class Main
     // Access to profiles pages with clicking on profile link
     static createEventChangePage(profileLink)
     {
-        const photographersInfo = info.photographers
-        const getPhotographerById = (id) =>{
-            return photographersInfo.find((photographer) =>{
-                return photographer.id === Number(id)
-            })
-        }
+        const getPhotographerById = (id) =>photographersInfo.find((photographer) =>photographer.id === Number(id))
         profileLink.addEventListener('click', (evt) =>{
             const id = evt.currentTarget.getAttribute("data-portraitId")
             ProfilPages.changePage(getPhotographerById(id))

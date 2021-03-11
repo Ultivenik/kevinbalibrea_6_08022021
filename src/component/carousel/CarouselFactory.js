@@ -105,6 +105,7 @@ export default class CarouselFactory {
         carouselContainer.appendChild(arrowRight)
         return carouselContainer
     }
+
     static isAnImage({
         imageContainer,
         videoContainer,
