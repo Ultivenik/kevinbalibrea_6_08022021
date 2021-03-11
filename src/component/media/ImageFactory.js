@@ -1,4 +1,5 @@
-export default class ImageFactory {
+export default class ImageFactory
+{
     static create({
         source,
         text,
