@@ -1,11 +1,13 @@
 export default class CloseFactory
 {
     static create({
-        onClick
+        onClick,
+        nameClass
     })
     {
         let close = document.createElement("button")
-        close.innerHTML = "<i class='fas fa-times lightbox-close-btn'></i>"
+        close.classList.add("btn-lightbox", nameClass)
+        close.innerHTML = "<i class='fas fa-times'></i>"
         close.addEventListener('click', onClick)
         return close
     }

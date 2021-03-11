@@ -1,24 +1,15 @@
-import HeaderFactory from './../component/infoMainPage/HeaderFactory'
-import MainFactory from './../component/infoMainPage/MainFactory'
+import Header from '../component/infoMainPage/Header'
+import Main from '../component/infoMainPage/Main'
 
 export default class MainPage {
     static create()
     {
-        MainPage.displayHeaderFactory()
-        MainPage.displayMainFactory()
-    }
+        Header.create()
 
-    static displayHeaderFactory()
-    {
-        HeaderFactory.create()
-    }
-
-    static displayMainFactory()
-    {
         const main = document.createElement("main")
         main.classList.add("main")
         document.body.appendChild(main)
 
-        MainFactory.create(main)
+        Main.create(main)
     }
 }

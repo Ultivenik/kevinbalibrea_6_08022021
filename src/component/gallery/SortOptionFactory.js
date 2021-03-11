@@ -4,10 +4,10 @@ export default class SortOptionFactory
         optContent,
     )
     {
-            const option = document.createElement("option")
-            option.classList.add("occurency-list")
-            option.value = optContent
-            option.text = optContent
-            return option
+        const option = document.createElement("option")
+        option.classList.add("occurency-list")
+        option.value = optContent
+        option.text = optContent
+        return option
     }
 }

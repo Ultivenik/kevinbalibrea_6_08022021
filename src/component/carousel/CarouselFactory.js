@@ -1,3 +1,4 @@
+import TitleFactory from '../infoMainPage/TitleFactory';
 import ArrowFactory from './ArrowFactory'
 import CloseFactory from './CloseFactory';
 
@@ -15,6 +16,7 @@ export default class CarouselFactory {
         const imageContainer = document.createElement("img")
         const videoContainer = document.createElement("video")
         const sourceVideo = document.createElement("source")
+        const titleImage = TitleFactory.create("h3", currentIndex.altText, "title-photo-gallery")
         const goToLeft = () => {
             if (index - 1 < 0) {
                 index = medias.length
@@ -25,6 +27,7 @@ export default class CarouselFactory {
                 index--
             }
             currentMedia = medias[index]
+            console.log(medias);
             CarouselFactory.isAnImage({
                 imageContainer,
                 videoContainer,
@@ -56,14 +59,19 @@ export default class CarouselFactory {
         }
         const arrowLeft = ArrowFactory.create({
             left: true,
-            onClick: goToLeft
+            onClick: goToLeft,
+            right:false,
+            nameClass: "left-arrow"
         })
         const arrowRight = ArrowFactory.create({
             right: true,
-            onClick : goToRight
+            onClick : goToRight,
+            left:false,
+            nameClass: "right-arrow"
         })
         const closeButton = CloseFactory.create({
-            onClick: closeWindow
+            onClick: closeWindow,
+            nameClass: "lightbox-close-btn"
         })
         const keyboardEvents = (evt) => {
             switch(evt.key) {
@@ -85,9 +93,12 @@ export default class CarouselFactory {
         videoContainer.appendChild(sourceVideo)
         containerLightBox.appendChild(imageContainer)
         containerLightBox.appendChild(videoContainer)
+        containerLightBox.appendChild(titleImage)
         containerLightBox.classList.add("container-lightbox")
         containerLightBox.setAttribute("aria-label", "image-closeup-view")
         carouselContainer.classList.add("overlay-gallery")
+        imageContainer.classList.add("lightbox-media")
+        videoContainer.classList.add("lightbox-media")
         carouselContainer.appendChild(containerLightBox)
         carouselContainer.appendChild(closeButton)
         carouselContainer.appendChild(arrowLeft)
@@ -103,12 +114,10 @@ export default class CarouselFactory {
     })
     {
             if (currentMedia.hasOwnProperty("image")) {
-                console.log('taratata');
                 imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
                 videoContainer.style.display ="none"
                 imageContainer.style.display = "block"
             }else{
-                console.log('torototo');
                 sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
                 videoContainer.setAttribute("controls", "")
                 videoContainer.appendChild(sourceVideo)

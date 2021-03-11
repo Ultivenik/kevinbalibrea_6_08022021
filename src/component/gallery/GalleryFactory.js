@@ -1,14 +1,14 @@
 import info from "./../../../FishEyeDataFR.json"
 import CarouselFactory from '../carousel/CarouselFactory'
 import {ImageFactory} from '../media/ImageFactory'
-import LabelFactory from './LabelFactory'
+import LabelFactory from '../infoProfile/LabelFactory'
 import SelectFactory from "./SelectFactory"
 import VideoFactory from "../media/VideoFactory"
 import DatetimeFactory from "./DateTimeFactory"
-import TitleMediaFactory from "./TitleMediaFactory"
 import PricePhotoFactory from "./PricePhotoFactory"
 import CounterLikesFactory from "./CounterLikesFactory"
 import SortOptionFactory from "./SortOptionFactory"
+import TitleFactory from "../infoMainPage/TitleFactory"
 
 const mediaPath = "./../SamplePhotos"
 
@@ -110,7 +110,7 @@ export default class GalleryFactory{
                     mediaFigure.appendChild(video)
                 }
                 const dateTime = DatetimeFactory.create(media.date)
-                const titlePhoto = TitleMediaFactory.create(media.altText)
+                const titlePhoto = TitleFactory.create("h3", media.altText, "title-photo-gallery")
                 const pricePhoto = PricePhotoFactory.create(media.price)
                 const likesPhoto = CounterLikesFactory.create(media.likes)
 

@@ -10,7 +10,6 @@ export default class VideoFactory
             videoGallery.setAttribute("controls", "")
         })
         videoGallery.dataset.altText = altText
-        // photoFigure.appendChild(videoGallery)
 
         const sourceVideoGallery = document.createElement("source")
         sourceVideoGallery.src = source

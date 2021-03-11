@@ -1,7 +1,6 @@
-import info from './../../../FishEyeDataFR.json'
 import TagFactory from './TagFactory'
 
-export default class HeaderFactory
+export default class Header
 {
     static create()
     {
@@ -9,7 +8,7 @@ export default class HeaderFactory
         const header = document.createElement("header")
         const logoLink = document.createElement('a')
         const logoImg = document.createElement('img')
-        const tags = HeaderFactory.tags.map(tag =>{return tag})
+        const tags = Header.tags.map(tag =>{return tag})
 
         logoLink.href = "index.html"
         logoImg.src = "./logo.png"
