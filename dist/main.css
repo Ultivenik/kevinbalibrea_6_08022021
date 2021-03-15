@@ -208,11 +208,11 @@ body{
 .container-total-likes{
     background: #DB8876;
     position: fixed;
-    right: 20%;
+    right: 15%;
     bottom: 0;
     padding: .5%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     width: 12%;
     display: flex;
     justify-content: space-between;

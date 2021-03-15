@@ -46,17 +46,16 @@ export default class FormFactory
             const text = document.getElementById("text")
             // eslint-disable-next-line
             console.log(
-                `Nom de l'utilisateur: ${  first.value  }\n` +
-                `Prénom de l'utilisateur: ${  last.value  }\n` +
-                `E-mail de l'utilisateur: ${  email.value  }\n` +
-                `Message de l'utilisateur: ${  text.value}`
+                `Nom de l'utilisateur: ${  first.value  }\n`
+                + `Prénom de l'utilisateur: ${  last.value  }\n`
+                + `E-mail de l'utilisateur: ${  email.value  }\n`
+                + `Message de l'utilisateur: ${  text.value}`
             )
             contactForm.reset()
         }
         sendingBtn.addEventListener("click", sendingMessage)
         closeBtn.addEventListener("click", closeOverlay)
         window.addEventListener("keydown", keyClose)
-
 
         overlay.appendChild(form)
         form.appendChild(titleForm)

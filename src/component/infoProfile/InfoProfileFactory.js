@@ -28,6 +28,8 @@ export default class InfoProfileFactory
             FormFactory.create(photographer)
         })
 
+        profileButton.setAttribute("aria-label", "Contact Me")
+        profileButton.setAttribute("role", "Buttons")
         infoProfile.appendChild(profileName)
         infoProfile.appendChild(profileLocation)
         infoProfile.appendChild(profileQuote)

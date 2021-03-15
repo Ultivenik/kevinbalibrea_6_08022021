@@ -4,7 +4,7 @@ export default class ContainerProfilesFactory
     {
         const figure = document.createElement("figure")
         figure.classList.add("profile")
-        figure.id = `profile-${  photographer.id}`
+        figure.id = `profile-${photographer.id}`
 
         return figure
     }

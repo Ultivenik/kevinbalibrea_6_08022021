@@ -2,14 +2,13 @@ export default class VideoFactory
 {
     static create({
         source,
-        altText
+        text
     })
     {
         const videoGallery = document.createElement("video")
-        videoGallery.addEventListener('click', () =>{
-            videoGallery.setAttribute("controls", "")
-        })
-        videoGallery.dataset.altText = altText
+        videoGallery.setAttribute("aria-label", `${text}`)
+        videoGallery.controls = true
+        videoGallery.dataset.altText = text
 
         const sourceVideoGallery = document.createElement("source")
         sourceVideoGallery.src = source

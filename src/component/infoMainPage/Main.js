@@ -44,7 +44,7 @@ export default class Main
         const imgAvatar = AvatarFactory.create("img-profile-link", photographer)
         const city = InfoFactory.create("city", "text", `${photographer.city} ${photographer.country}`)
         const quote = InfoFactory.create("quote", "text", photographer.tagline)
-        const price = InfoFactory.create("price", "text", `${photographer.price  }€`)
+        const price = InfoFactory.create("price", "text", `${photographer.price} € / jour `)
 
         parent.appendChild(figure)
         figure.appendChild(avatar)

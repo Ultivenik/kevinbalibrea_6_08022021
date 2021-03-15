@@ -1,10 +1,9 @@
-import TitleFactory from '../infoMainPage/TitleFactory';
 import ArrowFactory from './ArrowFactory'
 import CloseFactory from './CloseFactory';
 
 const mediaPath = "./../SamplePhotos"
 
-export default class CarouselFactory {
+export default class LightboxFactory {
     static create({
         medias,
         currentIndex = 0,
@@ -16,7 +15,13 @@ export default class CarouselFactory {
         const imageContainer = document.createElement("img")
         const videoContainer = document.createElement("video")
         const sourceVideo = document.createElement("source")
-        const titleImage = TitleFactory.create("h3", currentIndex.altText, "title-photo-gallery")
+        const titleImage = document.createElement("h3")
+        LightboxFactory.isAnImage({
+            imageContainer,
+            videoContainer,
+            sourceVideo,
+            currentMedia
+        })
         const goToLeft = () => {
             if (index - 1 < 0) {
                 index = medias.length
@@ -27,12 +32,13 @@ export default class CarouselFactory {
                 index-=1
             }
             currentMedia = medias[index]
-            CarouselFactory.isAnImage({
+            LightboxFactory.isAnImage({
                 imageContainer,
                 videoContainer,
                 sourceVideo,
                 currentMedia
             })
+            titleImage.innerHTML = currentMedia.altText
         }
         const goToRight = () => {
             if (index + 1 < 0) {
@@ -44,15 +50,17 @@ export default class CarouselFactory {
                 index+=1
             }
             currentMedia = medias[index]
-            CarouselFactory.isAnImage({
+            LightboxFactory.isAnImage({
                 imageContainer,
                 videoContainer,
                 sourceVideo,
                 currentMedia
             })
+            titleImage.innerHTML = currentMedia.altText
         }
         const closeWindow = () =>{
             carouselContainer.remove()
+            videoContainer.removeAttribute("controls")
         }
         const arrowLeft = ArrowFactory.create({
             left: true,
@@ -85,21 +93,27 @@ export default class CarouselFactory {
         }
         window.addEventListener("keydown", keyboardEvents)
 
-        imageContainer.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
+        imageContainer.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
         sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
         videoContainer.appendChild(sourceVideo)
         containerLightBox.appendChild(imageContainer)
         containerLightBox.appendChild(videoContainer)
         containerLightBox.appendChild(titleImage)
-        containerLightBox.classList.add("container-lightbox")
-        containerLightBox.setAttribute("aria-label", "image-closeup-view")
-        carouselContainer.classList.add("overlay-gallery")
-        imageContainer.classList.add("lightbox-media")
-        videoContainer.classList.add("lightbox-media")
+
         carouselContainer.appendChild(containerLightBox)
         carouselContainer.appendChild(closeButton)
         carouselContainer.appendChild(arrowLeft)
         carouselContainer.appendChild(arrowRight)
+        containerLightBox.classList.add("container-lightbox")
+        carouselContainer.classList.add("overlay-gallery")
+        imageContainer.classList.add("lightbox-media")
+        videoContainer.classList.add("lightbox-media")
+        titleImage.classList.add("title-photo-gallery")
+        containerLightBox.setAttribute("aria-label", "image-closeup-view")
+        containerLightBox.setAttribute("role", "Dialog")
+        titleImage.setAttribute("role", "Text")
+        videoContainer.controls = true
+        titleImage.innerHTML = currentMedia.altText
         return carouselContainer
     }
 
@@ -115,15 +129,19 @@ export default class CarouselFactory {
         const sourceParam = sourceVideo
 
         if (currentMedia.image) {
-            imageParam.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
-            videoParam.style.display ="none"
+            imageParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
+            videoParam.style.display= "none"
             imageParam.style.display = "block"
+            imageParam.alt = currentMedia.altText
+            imageParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
+            videoParam.setAttribute("role", "Image link")
         }else{
             sourceParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
-            videoParam.setAttribute("controls", "")
             videoParam.appendChild(sourceParam)
-            imageParam.style.display = "none"
+            imageParam.style.display= "none"
             videoParam.style.display = "block"
+            videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
+            videoParam.setAttribute("role", "Video link")
         }
 
     }

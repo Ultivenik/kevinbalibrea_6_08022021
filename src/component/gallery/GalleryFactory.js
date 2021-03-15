@@ -1,5 +1,5 @@
 import info from "../../../FishEyeDataFR.json"
-import CarouselFactory from '../carousel/CarouselFactory'
+import LightboxFactory from '../carousel/LightboxFactory'
 import ImageFactory from '../media/ImageFactory'
 import LabelFactory from '../infoProfile/LabelFactory'
 import SelectFactory from "./SelectFactory"
@@ -10,6 +10,8 @@ import CounterLikesFactory from "./CounterLikesFactory"
 import SortOptionFactory from "./SortOptionFactory"
 import TitleFactory from "../infoMainPage/TitleFactory"
 import IconFactory from "./IconFactory"
+import TotalLikesFactory from "./TotalLikesFactory"
+import TotalPriceFactory from "./TotalPriceFactory"
 
 const mediaPath = "./../SamplePhotos"
 
@@ -18,10 +20,16 @@ export default class GalleryFactory{
     {
         // sorted by popularity by default
         const medias = info.media
+        const photographers = info.photographers
         medias.sort((a, b) => b.likes - a.likes)
 
         const infoGallery = document.createElement("section")
         infoGallery.classList.add("gallery")
+
+        const containerTotalLikes = document.createElement("div")
+        containerTotalLikes.classList.add("container-total-likes")
+        const totalLikes = TotalLikesFactory.create(medias.filter((media) => media.photographerId === photographer.id))
+        const totalPrice = TotalPriceFactory.create(photographers.filter((photo) => photo.price === photographer.price))
 
         const label = LabelFactory.create("label-list", "Trier par", "category")
         const optArray = ["Popularité", "Date", "Titre"]
@@ -58,18 +66,24 @@ export default class GalleryFactory{
                     break
             }
             GalleryFactory.deletePhotoGallery()
-            GalleryFactory.createPhotoGallery(medias.filter((media) => media.photographerId === photographer.id), infoGallery)
+            GalleryFactory.createPhotoGallery(
+                medias.filter((media) => media.photographerId === photographer.id),
+                infoGallery
+            )
         })
 
-        GalleryFactory.createPhotoGallery(medias.filter((media) => media.photographerId === photographer.id), infoGallery)
-
-        document.querySelector(".container-total-likes").appendChild(
-            PricePhotoFactory.create(photographer.price)
+        GalleryFactory.createPhotoGallery(
+            medias.filter((media) => media.photographerId === photographer.id),
+            infoGallery
         )
 
         document.querySelector(".main").appendChild(label)
         document.querySelector(".main").appendChild(select)
-
+        document.querySelector(".main").appendChild(containerTotalLikes)
+        containerTotalLikes.appendChild(totalLikes)
+        containerTotalLikes.appendChild(totalPrice)
+        containerTotalLikes.setAttribute("role", "Text")
+        label.setAttribute("role", "Input label")
         return infoGallery
     }
 
@@ -85,7 +99,6 @@ export default class GalleryFactory{
     static createPhotoGallery(medias, infoGallery)
     {
         let carousel
-        let sum = []
         medias.map((media, index) =>{
             const mediaFigure = document.createElement("figure")
             mediaFigure.classList.add("photoFigure")
@@ -99,7 +112,7 @@ export default class GalleryFactory{
                     text: media.altText,
                 })
                 image.addEventListener("click", () => {
-                    carousel = CarouselFactory.create({
+                    carousel = LightboxFactory.create({
                         medias,
                         currentIndex: index,
                     })
@@ -109,10 +122,10 @@ export default class GalleryFactory{
             }else{
                 const video = VideoFactory.create({
                     source : `${mediaPath}/${media.photographerId}/${media.video}`,
-                    altText: media.altText
+                    text: media.altText
                 })
                 video.addEventListener("click", () =>{
-                    carousel = CarouselFactory.create({
+                    carousel = LightboxFactory.create({
                         medias,
                         currentIndex: index
                     })
@@ -127,8 +140,6 @@ export default class GalleryFactory{
             const iconLike = IconFactory.create()
             likesPhoto.addEventListener("click", CounterLikesFactory.eventLikes(likesPhoto, iconLike, media.likes))
 
-            sum.push(Number(likesPhoto.innerText))
-
             mediaFigure.appendChild(mediaLegend)
             mediaLegend.appendChild(titlePhoto)
             mediaLegend.appendChild(dateTime)
@@ -138,14 +149,5 @@ export default class GalleryFactory{
             infoGallery.appendChild(mediaFigure)
             return mediaFigure
         })
-
-        // span wich contain the total of likes foe each profile
-        let containerTotalLikes = document.createElement("div")
-        containerTotalLikes.classList.add("container-total-likes")
-        let totalLikes = CounterLikesFactory.create("total-likes" ,sum.reduce((a, b) => a + b))
-        totalLikes.appendChild(IconFactory.create())
-        containerTotalLikes.appendChild(totalLikes)
-        document.querySelector(".main").appendChild(containerTotalLikes)
     }
 }
-

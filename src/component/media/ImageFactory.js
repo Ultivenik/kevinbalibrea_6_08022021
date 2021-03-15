@@ -8,7 +8,8 @@ export default class ImageFactory
 
         const image = document.createElement("img")
         image.classList.add(className)
-        image.setAttribute("src", source)
+        image.setAttribute("aria-label", `${text}`)
+        image.src = source
         image.alt = text
         image.dataset.altText = text
         return image
