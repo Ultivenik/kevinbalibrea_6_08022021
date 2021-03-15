@@ -164,7 +164,6 @@ class LightboxFactory {
         }
         const closeWindow = () =>{
             carouselContainer.remove()
-            videoContainer.removeAttribute("controls")
         }
         const arrowLeft = _ArrowFactory__WEBPACK_IMPORTED_MODULE_0__.default.create({
             left: true,
@@ -246,17 +245,7 @@ class LightboxFactory {
             videoParam.style.display = "block"
             videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             videoParam.setAttribute("role", "Video link")
-            LightboxFactory.eventVideo(videoParam )
         }
-
-    }
-    static eventVideo(video)
-    {
-        video.addEventListener("keydown", (e) =>{
-            if (e.key === " ") {
-                video.play()
-            }
-        })
     }
 }
 

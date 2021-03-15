@@ -75,12 +75,6 @@ export default class LightboxFactory {
             onClick: closeWindow,
             nameClass: "lightbox-close-btn"
         })
-        const played = (e) => {
-            e.play()
-        }
-        const paused = (e) =>{
-            e.pause
-        }
         const keyboardEvents = (evt) => {
             switch(evt.key) {
                 case "ArrowLeft":
@@ -148,6 +142,5 @@ export default class LightboxFactory {
             videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             videoParam.setAttribute("role", "Video link")
         }
-
     }
 }
