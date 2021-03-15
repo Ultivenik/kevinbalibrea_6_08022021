@@ -60,7 +60,6 @@ export default class LightboxFactory {
         }
         const closeWindow = () =>{
             carouselContainer.remove()
-            videoContainer.removeAttribute("controls")
         }
         const arrowLeft = ArrowFactory.create({
             left: true,
@@ -76,6 +75,12 @@ export default class LightboxFactory {
             onClick: closeWindow,
             nameClass: "lightbox-close-btn"
         })
+        const played = (e) => {
+            e.play()
+        }
+        const paused = (e) =>{
+            e.pause
+        }
         const keyboardEvents = (evt) => {
             switch(evt.key) {
                 case "ArrowLeft":

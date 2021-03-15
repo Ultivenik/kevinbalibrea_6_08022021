@@ -246,8 +246,17 @@ class LightboxFactory {
             videoParam.style.display = "block"
             videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             videoParam.setAttribute("role", "Video link")
+            LightboxFactory.eventVideo(videoParam )
         }
 
+    }
+    static eventVideo(video)
+    {
+        video.addEventListener("keydown", (e) =>{
+            if (e.key === " ") {
+                video.play()
+            }
+        })
     }
 }
 
@@ -1385,7 +1394,6 @@ class VideoFactory
     {
         const videoGallery = document.createElement("video")
         videoGallery.setAttribute("aria-label", `${text}`)
-        videoGallery.controls = true
         videoGallery.dataset.altText = text
 
         const sourceVideoGallery = document.createElement("source")
