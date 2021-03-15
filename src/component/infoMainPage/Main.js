@@ -9,6 +9,7 @@ import TitleFactory from './TitleFactory'
 import AvatarFactory from './AvatarFactory'
 
 const photographersInfo = info.photographers
+const path = "/dist/SamplePhotos/Photographers_ID_Photos/"
 
 export default class Main
 {
@@ -41,7 +42,7 @@ export default class Main
         const title = TitleFactory.create("h2", photographer.name, "name")
         const avatar = LinkPageAvatarFactory.create(photographer, info.profile)
         Main.createEventChangePage(avatar)
-        const imgAvatar = AvatarFactory.create("img-profile-link", photographer)
+        const imgAvatar = AvatarFactory.create("img-profile-link", photographer, path)
         const city = InfoFactory.create("city", "text", `${photographer.city} ${photographer.country}`)
         const quote = InfoFactory.create("quote", "text", photographer.tagline)
         const price = InfoFactory.create("price", "text", `${photographer.price} € / jour `)

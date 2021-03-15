@@ -5,6 +5,8 @@ import TitleFactory from "../infoMainPage/TitleFactory"
 import ButtonFactory from "./ButtonFactory"
 import FormFactory from "./FormFactory"
 
+const path = "/dist/SamplePhotos/Photographers_ID_Photos/"
+
 export default class InfoProfileFactory
 {
     static create(photographer)
@@ -22,7 +24,7 @@ export default class InfoProfileFactory
         const profileLocation = InfoFactory.create("city", "text", `${photographer.city} ${photographer.country}`)
         const profileQuote = InfoFactory.create("quote", "text", photographer.tagline)
         const profileButton = ButtonFactory.create("btn-contact", "Contactez-moi")
-        const profileAvatar = AvatarFactory.create("img-profile-link", photographer)
+        const profileAvatar = AvatarFactory.create("img-profile-link", photographer, path)
 
         profileButton.addEventListener('click', () => {
             FormFactory.create(photographer)

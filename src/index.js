@@ -1,5 +1,5 @@
-import MainPage from "./pages/MainPage"
 import './style.css'
+import MainPage from "./pages/MainPage"
 
 class App{
    static create()

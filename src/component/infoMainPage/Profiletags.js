@@ -7,7 +7,7 @@ export default class ProfileTags
             profileSpan.setAttribute("role", "Links")
             profileSpan.setAttribute("aria-label", "Tag")
             profileSpan.classList.add(`tag`)
-            profileSpan.innerHTML = `#${  tag}`
+            profileSpan.innerHTML = `#${tag}`
 
             parent.appendChild(profileSpan)
             return profileSpan

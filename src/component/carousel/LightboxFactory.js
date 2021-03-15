@@ -1,7 +1,7 @@
 import ArrowFactory from './ArrowFactory'
-import CloseFactory from './CloseFactory';
+import CloseFactory from './CloseFactory'
 
-const mediaPath = "./../SamplePhotos"
+const mediaPath = "/dist/SamplePhotos"
 
 export default class LightboxFactory {
     static create({

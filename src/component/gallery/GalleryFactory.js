@@ -13,7 +13,7 @@ import IconFactory from "./IconFactory"
 import TotalLikesFactory from "./TotalLikesFactory"
 import TotalPriceFactory from "./TotalPriceFactory"
 
-const mediaPath = "./../SamplePhotos"
+const mediaPath = "/dist/SamplePhotos"
 
 export default class GalleryFactory{
     static create(photographer)

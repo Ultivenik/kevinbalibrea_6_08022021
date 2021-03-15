@@ -20,17 +20,9 @@ module.exports = {
             }
         },
         {
-            test: /\.(png|jpe?g|gif|svg|mp4)$/i,
-            use: [
-                {
-                    loader: 'file-loader',
-                    options: {
-                        name: '[path]/[name].[hash].[ext]',
-                        outputPath: './src/SamplePhotos/',
-                        context: "src"
-                    },
-                },
-            ],
+            test: /\.js$/,
+            enforce: "pre",
+            use: ["source-map-loader"],
         },
         {
             test: /\.css$/i,
@@ -38,6 +30,7 @@ module.exports = {
         },
     ],
   },
+  devtool: "source-map",
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
@@ -50,6 +43,7 @@ module.exports = {
             patterns: [
                 { from: "src/SamplePhotos", to: "SamplePhotos" },
                 { from: "src/logo.png", to: "logo.png" },
+                { from: "./FishEyeDataFR.json", to: "FishEyeDataFR.json" },
             ],
         })
     ],
