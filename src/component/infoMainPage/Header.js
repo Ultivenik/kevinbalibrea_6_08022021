@@ -25,7 +25,7 @@ export default class Header
         logoImg.alt = "Fisheye Home page"
         logoLink.setAttribute("aria-label", "ImageLink")
 
-        for (let i = 0; i < tags.length; i+=i) {
+        for (let i = 0; i < tags.length; i+=1) {
             const tag = tags[i];
             const spanTags = TagFactory.create({tag})
             headerNav.appendChild(spanTags)

@@ -205,6 +205,21 @@ body{
     object-fit: cover;
     object-position: 100% 33%;
 }
+.container-total-likes{
+    background: #DB8876;
+    position: fixed;
+    right: 20%;
+    bottom: 0;
+    padding: .5%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 12%;
+    display: flex;
+    justify-content: space-between;
+}
+.container-total-likes .price-photo, .container-total-likes .total-likes{
+    padding: 2%;
+}
 .photoFigure video{
     width: 100%;
 }
@@ -341,5 +356,3 @@ body{
     padding: 5%;
     margin: 3% 0px;
 }
-
-/*# sourceMappingURL=/style.e308ff8e.css.map */

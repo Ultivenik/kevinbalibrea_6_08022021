@@ -24,15 +24,14 @@ export default class CarouselFactory {
                     index = 0
                 }
             } else {
-                index-= index
+                index-=1
             }
             currentMedia = medias[index]
             CarouselFactory.isAnImage({
                 imageContainer,
                 videoContainer,
                 sourceVideo,
-                mediaPath,
-                currentMedia,
+                currentMedia
             })
         }
         const goToRight = () => {
@@ -42,15 +41,14 @@ export default class CarouselFactory {
                     index = 0
                 }
             } else {
-                index+= index
+                index+=1
             }
             currentMedia = medias[index]
             CarouselFactory.isAnImage({
                 imageContainer,
                 videoContainer,
                 sourceVideo,
-                mediaPath,
-                currentMedia,
+                currentMedia
             })
         }
         const closeWindow = () =>{
@@ -59,13 +57,11 @@ export default class CarouselFactory {
         const arrowLeft = ArrowFactory.create({
             left: true,
             onClick: goToLeft,
-            right:false,
             nameClass: "left-arrow"
         })
         const arrowRight = ArrowFactory.create({
             right: true,
             onClick : goToRight,
-            left:false,
             nameClass: "right-arrow"
         })
         const closeButton = CloseFactory.create({
@@ -111,25 +107,24 @@ export default class CarouselFactory {
         imageContainer,
         videoContainer,
         sourceVideo,
-        Path,
-        currentMedia,
+        currentMedia
     })
     {
         const imageParam = imageContainer
         const videoParam = videoContainer
         const sourceParam = sourceVideo
-        const hasCurentMediaOwnProp = Object.prototype.hasOwnProperty.call(currentMedia, "image")
 
-        if (hasCurentMediaOwnProp) {
-            imageParam.setAttribute('src', `${Path}/${currentMedia.photographerId}/${currentMedia.image}`)
+        if (currentMedia.image) {
+            imageParam.setAttribute('src', `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`)
             videoParam.style.display ="none"
             imageParam.style.display = "block"
         }else{
-            sourceParam.src = `${Path}/${currentMedia.photographerId}/${currentMedia.video}`
+            sourceParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
             videoParam.setAttribute("controls", "")
             videoParam.appendChild(sourceParam)
             imageParam.style.display = "none"
             videoParam.style.display = "block"
         }
+
     }
 }

@@ -28,6 +28,11 @@ export default class FormFactory
         const message = LabelFactory.create("label-form", "Votre message", "text")
         const messageInput = TextAreaFactory.create("text")
         const sendingBtn = ButtonFactory.create("btn-contact", "Envoyer")
+        const keyClose = (e) =>{
+            if (e.key === "Escape") {
+                overlay.remove()
+            }
+        }
         const closeOverlay = (e) =>{
             e.preventDefault()
             overlay.remove()
@@ -39,6 +44,7 @@ export default class FormFactory
             const last = document.getElementById("lastname")
             const email = document.getElementById("email")
             const text = document.getElementById("text")
+            // eslint-disable-next-line
             console.log(
                 `Nom de l'utilisateur: ${  first.value  }\n` +
                 `Prénom de l'utilisateur: ${  last.value  }\n` +
@@ -49,6 +55,8 @@ export default class FormFactory
         }
         sendingBtn.addEventListener("click", sendingMessage)
         closeBtn.addEventListener("click", closeOverlay)
+        window.addEventListener("keydown", keyClose)
+
 
         overlay.appendChild(form)
         form.appendChild(titleForm)

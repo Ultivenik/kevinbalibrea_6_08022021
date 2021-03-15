@@ -12,5 +12,5 @@ export default class ImageFactory
         image.alt = text
         image.dataset.altText = text
         return image
-        }
+    }
 }

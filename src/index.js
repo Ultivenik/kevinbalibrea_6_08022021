@@ -1,4 +1,5 @@
 import MainPage from "./pages/MainPage"
+import './style.css'
 
 class App{
    static create()
