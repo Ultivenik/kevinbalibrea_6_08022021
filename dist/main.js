@@ -117,6 +117,8 @@ class LightboxFactory {
         let index = currentIndex;
         let currentMedia = medias[index]
         const imageContainer = document.createElement("img")
+        const o = imageContainer.height
+        console.log(o);
         const videoContainer = document.createElement("video")
         const sourceVideo = document.createElement("source")
         const titleImage = document.createElement("h3")
@@ -690,6 +692,30 @@ class ContainerProfilesFactory
 
 /***/ }),
 
+/***/ "./src/component/infoMainPage/ContainerTagFactory.js":
+/*!***********************************************************!*\
+  !*** ./src/component/infoMainPage/ContainerTagFactory.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ContainerTagFactory)
+/* harmony export */ });
+class ContainerTagFactory
+{
+    static create()
+    {
+        const containerTag = document.createElement("div")
+        containerTag.classList.add("container-tag")
+        containerTag.setAttribute("aria-label", "Tag")
+        containerTag.setAttribute("role", "Links")
+        return containerTag
+    }
+}
+
+/***/ }),
+
 /***/ "./src/component/infoMainPage/Header.js":
 /*!**********************************************!*\
   !*** ./src/component/infoMainPage/Header.js ***!
@@ -735,6 +761,8 @@ class Header
         }
 
         header.classList.add("header")
+        headerNav.classList.add("tag-navigation")
+        logoImg.classList.add("logo")
 
         document.body.prepend(header)
         logoLink.appendChild(logoImg)
@@ -841,6 +869,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Profiletags__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Profiletags */ "./src/component/infoMainPage/Profiletags.js");
 /* harmony import */ var _TitleFactory__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TitleFactory */ "./src/component/infoMainPage/TitleFactory.js");
 /* harmony import */ var _AvatarFactory__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AvatarFactory */ "./src/component/infoMainPage/AvatarFactory.js");
+/* harmony import */ var _ContainerTagFactory__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ContainerTagFactory */ "./src/component/infoMainPage/ContainerTagFactory.js");
+
 
 
 
@@ -889,6 +919,7 @@ class Main
         const city = _Infofactory__WEBPACK_IMPORTED_MODULE_3__.default.create("city", "text", `${photographer.city} ${photographer.country}`)
         const quote = _Infofactory__WEBPACK_IMPORTED_MODULE_3__.default.create("quote", "text", photographer.tagline)
         const price = _Infofactory__WEBPACK_IMPORTED_MODULE_3__.default.create("price", "text", `${photographer.price} € / jour `)
+        const containerTag = _ContainerTagFactory__WEBPACK_IMPORTED_MODULE_9__.default.create()
 
         parent.appendChild(figure)
         figure.appendChild(avatar)
@@ -898,7 +929,8 @@ class Main
         figcaption.appendChild(city)
         figcaption.appendChild(quote)
         figcaption.appendChild(price)
-        _Profiletags__WEBPACK_IMPORTED_MODULE_6__.default.create(figcaption, photographer)
+        figcaption.appendChild(containerTag)
+        _Profiletags__WEBPACK_IMPORTED_MODULE_6__.default.create(containerTag, photographer)
     }
 
     // Access to profiles pages with clicking on profile link
@@ -1188,11 +1220,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ InfoProfileFactory)
 /* harmony export */ });
 /* harmony import */ var _infoMainPage_AvatarFactory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../infoMainPage/AvatarFactory */ "./src/component/infoMainPage/AvatarFactory.js");
-/* harmony import */ var _infoMainPage_Infofactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../infoMainPage/Infofactory */ "./src/component/infoMainPage/Infofactory.js");
-/* harmony import */ var _infoMainPage_Profiletags__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../infoMainPage/Profiletags */ "./src/component/infoMainPage/Profiletags.js");
-/* harmony import */ var _infoMainPage_TitleFactory__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../infoMainPage/TitleFactory */ "./src/component/infoMainPage/TitleFactory.js");
-/* harmony import */ var _ButtonFactory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ButtonFactory */ "./src/component/infoProfile/ButtonFactory.js");
-/* harmony import */ var _FormFactory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormFactory */ "./src/component/infoProfile/FormFactory.js");
+/* harmony import */ var _infoMainPage_ContainerTagFactory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../infoMainPage/ContainerTagFactory */ "./src/component/infoMainPage/ContainerTagFactory.js");
+/* harmony import */ var _infoMainPage_Infofactory__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../infoMainPage/Infofactory */ "./src/component/infoMainPage/Infofactory.js");
+/* harmony import */ var _infoMainPage_Profiletags__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../infoMainPage/Profiletags */ "./src/component/infoMainPage/Profiletags.js");
+/* harmony import */ var _infoMainPage_TitleFactory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../infoMainPage/TitleFactory */ "./src/component/infoMainPage/TitleFactory.js");
+/* harmony import */ var _ButtonFactory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ButtonFactory */ "./src/component/infoProfile/ButtonFactory.js");
+/* harmony import */ var _FormFactory__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FormFactory */ "./src/component/infoProfile/FormFactory.js");
+
 
 
 
@@ -1214,15 +1248,16 @@ class InfoProfileFactory
         const infoProfile = document.createElement("section")
         infoProfile.classList.add("profileID")
 
-        const profileName = _infoMainPage_TitleFactory__WEBPACK_IMPORTED_MODULE_3__.default.create("h1", photographer.name, "name")
+        const profileName = _infoMainPage_TitleFactory__WEBPACK_IMPORTED_MODULE_4__.default.create("h1", photographer.name, "name")
         profileName.setAttribute("role", "header")
-        const profileLocation = _infoMainPage_Infofactory__WEBPACK_IMPORTED_MODULE_1__.default.create("city", "text", `${photographer.city} ${photographer.country}`)
-        const profileQuote = _infoMainPage_Infofactory__WEBPACK_IMPORTED_MODULE_1__.default.create("quote", "text", photographer.tagline)
-        const profileButton = _ButtonFactory__WEBPACK_IMPORTED_MODULE_4__.default.create("btn-contact", "Contactez-moi")
+        const profileLocation = _infoMainPage_Infofactory__WEBPACK_IMPORTED_MODULE_2__.default.create("city", "text", `${photographer.city} ${photographer.country}`)
+        const profileQuote = _infoMainPage_Infofactory__WEBPACK_IMPORTED_MODULE_2__.default.create("quote", "text", photographer.tagline)
+        const profileButton = _ButtonFactory__WEBPACK_IMPORTED_MODULE_5__.default.create("btn-contact", "Contactez-moi")
         const profileAvatar = _infoMainPage_AvatarFactory__WEBPACK_IMPORTED_MODULE_0__.default.create("img-profile-link", photographer, path)
+        const containerTags = _infoMainPage_ContainerTagFactory__WEBPACK_IMPORTED_MODULE_1__.default.create()
 
         profileButton.addEventListener('click', () => {
-            _FormFactory__WEBPACK_IMPORTED_MODULE_5__.default.create(photographer)
+            _FormFactory__WEBPACK_IMPORTED_MODULE_6__.default.create(photographer)
         })
 
         profileButton.setAttribute("aria-label", "Contact Me")
@@ -1232,7 +1267,8 @@ class InfoProfileFactory
         infoProfile.appendChild(profileQuote)
         infoProfile.appendChild(profileButton)
         infoProfile.appendChild(profileAvatar)
-        _infoMainPage_Profiletags__WEBPACK_IMPORTED_MODULE_2__.default.create(infoProfile, photographer)
+        infoProfile.appendChild(containerTags)
+        _infoMainPage_Profiletags__WEBPACK_IMPORTED_MODULE_3__.default.create(containerTags, photographer)
 
         return infoProfile
     }
@@ -1384,7 +1420,13 @@ class VideoFactory
         const videoGallery = document.createElement("video")
         videoGallery.setAttribute("aria-label", `${text}`)
         videoGallery.dataset.altText = text
-
+        videoGallery.addEventListener("keydown", (e) =>{
+            if(e.key === " "){
+                videoGallery.play()
+            }else{
+                videoGallery.pause()
+            }
+        })
         const sourceVideoGallery = document.createElement("source")
         sourceVideoGallery.src = source
         videoGallery.appendChild(sourceVideoGallery)

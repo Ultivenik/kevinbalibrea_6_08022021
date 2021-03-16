@@ -13,6 +13,8 @@ export default class LightboxFactory {
         let index = currentIndex;
         let currentMedia = medias[index]
         const imageContainer = document.createElement("img")
+        const o = imageContainer.height
+        console.log(o);
         const videoContainer = document.createElement("video")
         const sourceVideo = document.createElement("source")
         const titleImage = document.createElement("h3")

@@ -32,6 +32,8 @@ export default class Header
         }
 
         header.classList.add("header")
+        headerNav.classList.add("tag-navigation")
+        logoImg.classList.add("logo")
 
         document.body.prepend(header)
         logoLink.appendChild(logoImg)

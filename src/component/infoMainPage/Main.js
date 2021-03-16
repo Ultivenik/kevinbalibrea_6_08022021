@@ -7,6 +7,7 @@ import LinkPageAvatarFactory from './LinkPageAvatarFactory'
 import ProfileTags from './Profiletags'
 import TitleFactory from './TitleFactory'
 import AvatarFactory from './AvatarFactory'
+import ContainerTagFactory from './ContainerTagFactory'
 
 const photographersInfo = info.photographers
 const path = "/dist/SamplePhotos/Photographers_ID_Photos/"
@@ -46,6 +47,7 @@ export default class Main
         const city = InfoFactory.create("city", "text", `${photographer.city} ${photographer.country}`)
         const quote = InfoFactory.create("quote", "text", photographer.tagline)
         const price = InfoFactory.create("price", "text", `${photographer.price} € / jour `)
+        const containerTag = ContainerTagFactory.create()
 
         parent.appendChild(figure)
         figure.appendChild(avatar)
@@ -55,7 +57,8 @@ export default class Main
         figcaption.appendChild(city)
         figcaption.appendChild(quote)
         figcaption.appendChild(price)
-        ProfileTags.create(figcaption, photographer)
+        figcaption.appendChild(containerTag)
+        ProfileTags.create(containerTag, photographer)
     }
 
     // Access to profiles pages with clicking on profile link

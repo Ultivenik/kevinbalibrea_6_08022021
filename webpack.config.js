@@ -43,7 +43,6 @@ module.exports = {
             patterns: [
                 { from: "src/SamplePhotos", to: "SamplePhotos" },
                 { from: "src/logo.png", to: "logo.png" },
-                { from: "./FishEyeDataFR.json", to: "FishEyeDataFR.json" },
             ],
         })
     ],

@@ -1,4 +1,5 @@
 import AvatarFactory from "../infoMainPage/AvatarFactory"
+import ContainerTagFactory from "../infoMainPage/ContainerTagFactory"
 import InfoFactory from "../infoMainPage/Infofactory"
 import ProfileTags from "../infoMainPage/Profiletags"
 import TitleFactory from "../infoMainPage/TitleFactory"
@@ -25,6 +26,7 @@ export default class InfoProfileFactory
         const profileQuote = InfoFactory.create("quote", "text", photographer.tagline)
         const profileButton = ButtonFactory.create("btn-contact", "Contactez-moi")
         const profileAvatar = AvatarFactory.create("img-profile-link", photographer, path)
+        const containerTags = ContainerTagFactory.create()
 
         profileButton.addEventListener('click', () => {
             FormFactory.create(photographer)
@@ -37,7 +39,8 @@ export default class InfoProfileFactory
         infoProfile.appendChild(profileQuote)
         infoProfile.appendChild(profileButton)
         infoProfile.appendChild(profileAvatar)
-        ProfileTags.create(infoProfile, photographer)
+        infoProfile.appendChild(containerTags)
+        ProfileTags.create(containerTags, photographer)
 
         return infoProfile
     }
