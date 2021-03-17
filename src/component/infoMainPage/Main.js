@@ -10,7 +10,7 @@ import AvatarFactory from './AvatarFactory'
 import ContainerTagFactory from './ContainerTagFactory'
 
 const photographersInfo = info.photographers
-const path = "kevinbalibrea_6_08022021/dist/SamplePhotos/Photographers_ID_Photos/"
+const path = "/kevinbalibrea_6_08022021/dist/SamplePhotos/Photographers_ID_Photos/"
 
 export default class Main
 {
