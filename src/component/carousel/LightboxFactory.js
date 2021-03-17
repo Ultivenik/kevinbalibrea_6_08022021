@@ -16,12 +16,6 @@ export default class LightboxFactory {
         const videoContainer = document.createElement("video")
         const sourceVideo = document.createElement("source")
         const titleImage = document.createElement("h3")
-        LightboxFactory.isAnImage({
-            imageContainer,
-            videoContainer,
-            sourceVideo,
-            currentMedia
-        })
         const goToLeft = () => {
             if (index - 1 < 0) {
                 index = medias.length
@@ -36,7 +30,8 @@ export default class LightboxFactory {
                 imageContainer,
                 videoContainer,
                 sourceVideo,
-                currentMedia
+                currentMedia,
+                containerLightBox
             })
             titleImage.innerHTML = currentMedia.altText
         }
@@ -54,7 +49,8 @@ export default class LightboxFactory {
                 imageContainer,
                 videoContainer,
                 sourceVideo,
-                currentMedia
+                currentMedia,
+                containerLightBox
             })
             titleImage.innerHTML = currentMedia.altText
         }
@@ -91,14 +87,18 @@ export default class LightboxFactory {
             }
         }
         window.addEventListener("keydown", keyboardEvents)
+        LightboxFactory.isAnImage({
+            imageContainer,
+            videoContainer,
+            sourceVideo,
+            currentMedia,
+            containerLightBox
+        })
 
         imageContainer.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
         sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
         videoContainer.appendChild(sourceVideo)
-        containerLightBox.appendChild(imageContainer)
-        containerLightBox.appendChild(videoContainer)
         containerLightBox.appendChild(titleImage)
-
         carouselContainer.appendChild(containerLightBox)
         carouselContainer.appendChild(closeButton)
         carouselContainer.appendChild(arrowLeft)
@@ -113,6 +113,7 @@ export default class LightboxFactory {
         titleImage.setAttribute("role", "Text")
         videoContainer.controls = true
         titleImage.innerHTML = currentMedia.altText
+
         return carouselContainer
     }
 
@@ -120,7 +121,8 @@ export default class LightboxFactory {
         imageContainer,
         videoContainer,
         sourceVideo,
-        currentMedia
+        currentMedia,
+        containerLightBox
     })
     {
         const imageParam = imageContainer
@@ -129,18 +131,25 @@ export default class LightboxFactory {
 
         if (currentMedia.image) {
             imageParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
-            videoParam.style.display= "none"
-            imageParam.style.display = "block"
             imageParam.alt = currentMedia.altText
             imageParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             imageParam.setAttribute("role", "Image link")
         }else{
             sourceParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
             videoParam.appendChild(sourceParam)
-            imageParam.style.display= "none"
-            videoParam.style.display = "block"
             videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             videoParam.setAttribute("role", "Video link")
+            videoParam.controls = true
+        }
+        if (currentMedia.image) {
+            containerLightBox.prepend(imageParam)
+            if (videoParam) {
+                videoParam.remove()
+            }else{
+                imageParam.remove()
+            }
+        }else{
+            containerLightBox.prepend(videoParam)
         }
     }
 }
