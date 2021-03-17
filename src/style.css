@@ -362,7 +362,7 @@ body{
     }
     .profileID button{
         position: absolute;
-        bottom: 66%;
+        bottom: 64%;
         padding: 1% 0.7%;
         font-size: 1em;
         border-radius: 5px;
@@ -392,6 +392,7 @@ body{
     }
     .photoLegend{
         font-size: 1em;
+        margin-top: 2%;
     }
     .photo-likes, .price-photo {
         flex: 1;
