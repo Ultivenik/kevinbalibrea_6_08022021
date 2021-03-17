@@ -6,7 +6,7 @@ import TitleFactory from "../infoMainPage/TitleFactory"
 import ButtonFactory from "./ButtonFactory"
 import FormFactory from "./FormFactory"
 
-const path = "/dist/SamplePhotos/Photographers_ID_Photos/"
+const path = "/kevinbalibrea_6_08022021/dist/SamplePhotos/Photographers_ID_Photos/"
 
 export default class InfoProfileFactory
 {
