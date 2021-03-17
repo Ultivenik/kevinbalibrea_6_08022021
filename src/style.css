@@ -269,6 +269,9 @@ body{
     justify-content: center;
     align-items: center;
 }
+.container-lightbox .title-photo-gallery{
+    font-weight: normal;
+}
 .lightbox-media{
    display: block;
     width: 18em;
@@ -349,7 +352,7 @@ body{
         font-size: 1em;
     }
     .profileID .container-tag{
-        margin: 0;
+        margin: 2% 0;
     }
     .profileID .container-tag .tag::first-letter{
         text-transform: initial;
@@ -359,10 +362,11 @@ body{
     }
     .profileID button{
         position: absolute;
-        bottom: 53%;
+        bottom: 66%;
         padding: 1% 0.7%;
         font-size: 1em;
         border-radius: 5px;
+        left: 35%;
     }
     .profileID img{
         width: 13em;
@@ -410,9 +414,6 @@ body{
     .contact-form .btn-contact{
         margin: 3% 0;
         padding: 5% 8%;
-    }
-    .btn-contact{
-        left: 40%;
     }
     .overlay-gallery{
         overflow: scroll;
