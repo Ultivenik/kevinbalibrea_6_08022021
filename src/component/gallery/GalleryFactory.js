@@ -107,18 +107,23 @@ export default class GalleryFactory{
             mediaLegend.classList.add("photoLegend")
 
             if (media.image) {
+                const linkImage = document.createElement("a")
+                linkImage.classList.add("link-image")
+                linkImage.href = "#"
+                linkImage.setAttribute("role", "Image link")
                 const image = ImageFactory.create({
                     source: `${mediaPath}/${media.photographerId}/${media.image}`,
                     text: media.altText,
                 })
-                image.addEventListener("click", () => {
+                linkImage.addEventListener("click", () => {
                     carousel = LightboxFactory.create({
                         medias,
                         currentIndex: index
                     })
                     document.querySelector(".main").appendChild(carousel)
                 })
-                mediaFigure.appendChild(image)
+                linkImage.appendChild(image)
+                mediaFigure.appendChild(linkImage)
             }else{
                 const video = VideoFactory.create({
                     source : `${mediaPath}/${media.photographerId}/${media.video}`,
@@ -140,6 +145,10 @@ export default class GalleryFactory{
             const iconLike = IconFactory.create()
             likesPhoto.addEventListener("click", CounterLikesFactory.eventLikes(likesPhoto, iconLike, media.likes))
 
+            titlePhoto.setAttribute("role", "Text")
+            pricePhoto.setAttribute("role", "Text")
+            likesPhoto.setAttribute("role", "Text")
+            iconLike.setAttribute("role", "Image")
             mediaFigure.appendChild(mediaLegend)
             mediaLegend.appendChild(titlePhoto)
             mediaLegend.appendChild(dateTime)

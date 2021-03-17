@@ -392,6 +392,9 @@ body{
     .photo-likes, .price-photo {
         flex: 1;
     }
+    .photo-likes{
+        cursor: pointer;
+    }
     .title-photo-gallery{
         flex: 2;
         font-weight: normal;
@@ -408,8 +411,15 @@ body{
         margin: 3% 0;
         padding: 5% 8%;
     }
+    .overlay-gallery{
+        overflow: scroll;
+    }
+    .link-image{
+        display: block;
+        height: 87%;
+    }
     .lightbox-media{
-        width: 70em;
+        width: 40em;
     }
     .btn-lightbox{
         font-size: 3em;

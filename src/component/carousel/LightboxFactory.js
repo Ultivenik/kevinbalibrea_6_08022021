@@ -31,9 +31,9 @@ export default class LightboxFactory {
                 videoContainer,
                 sourceVideo,
                 currentMedia,
-                containerLightBox
+                containerLightBox,
+                titleImage
             })
-            titleImage.innerHTML = currentMedia.altText
         }
         const goToRight = () => {
             if (index + 1 < 0) {
@@ -50,9 +50,9 @@ export default class LightboxFactory {
                 videoContainer,
                 sourceVideo,
                 currentMedia,
-                containerLightBox
+                containerLightBox,
+                titleImage
             })
-            titleImage.innerHTML = currentMedia.altText
         }
         const closeWindow = () =>{
             carouselContainer.remove()
@@ -92,7 +92,8 @@ export default class LightboxFactory {
             videoContainer,
             sourceVideo,
             currentMedia,
-            containerLightBox
+            containerLightBox,
+            titleImage
         })
 
         imageContainer.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
@@ -113,7 +114,6 @@ export default class LightboxFactory {
         titleImage.setAttribute("role", "Text")
         videoContainer.controls = true
         titleImage.innerHTML = currentMedia.altText
-
         return carouselContainer
     }
 
@@ -122,34 +122,35 @@ export default class LightboxFactory {
         videoContainer,
         sourceVideo,
         currentMedia,
-        containerLightBox
+        containerLightBox,
+        titleImage
     })
     {
         const imageParam = imageContainer
         const videoParam = videoContainer
         const sourceParam = sourceVideo
-
+        const titleParam = titleImage
+        //Give the right attribute to the right media
         if (currentMedia.image) {
             imageParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
             imageParam.alt = currentMedia.altText
             imageParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             imageParam.setAttribute("role", "Image link")
+            titleImage.innerHTML = currentMedia.altText
         }else{
             sourceParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
             videoParam.appendChild(sourceParam)
             videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             videoParam.setAttribute("role", "Video link")
             videoParam.controls = true
+            titleImage.innerHTML = currentMedia.altText
         }
+        //Avoid displaying video and image in same time
         if (currentMedia.image) {
-            containerLightBox.prepend(imageParam)
-            if (videoParam) {
-                videoParam.remove()
-            }else{
-                imageParam.remove()
-            }
-        }else{
-            containerLightBox.prepend(videoParam)
+            containerLightBox.replaceChildren(imageParam, titleParam)
+        }
+        if (currentMedia.video) {
+            containerLightBox.replaceChildren(videoParam, titleParam)
         }
     }
 }
