@@ -316,7 +316,7 @@ body{
         padding: .3% 2%;
     }
     .main-title{
-        top: 8%;
+        top: 1.1em;
         font-size: 2.5em;
     }
     .container-total-likes{
@@ -333,7 +333,7 @@ body{
         justify-content: space-between;
     }
     .profiles{
-        margin-top: 3%;
+        margin-top: 10%;
     }
     .profile{
         width: 33%;
@@ -434,5 +434,3 @@ body{
         scale: 1;
     }
 }
-
-/*# sourceMappingURL=main.css.map*/

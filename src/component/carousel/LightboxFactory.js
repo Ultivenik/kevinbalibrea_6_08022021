@@ -13,8 +13,6 @@ export default class LightboxFactory {
         let index = currentIndex;
         let currentMedia = medias[index]
         const imageContainer = document.createElement("img")
-        const o = imageContainer.height
-        console.log(o);
         const videoContainer = document.createElement("video")
         const sourceVideo = document.createElement("source")
         const titleImage = document.createElement("h3")
@@ -135,7 +133,7 @@ export default class LightboxFactory {
             imageParam.style.display = "block"
             imageParam.alt = currentMedia.altText
             imageParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
-            videoParam.setAttribute("role", "Image link")
+            imageParam.setAttribute("role", "Image link")
         }else{
             sourceParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
             videoParam.appendChild(sourceParam)

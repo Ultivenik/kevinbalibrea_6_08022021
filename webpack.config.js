@@ -30,7 +30,7 @@ module.exports = {
         },
     ],
   },
-  devtool: "source-map",
+  devtool: "eval",
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, './src/index.html'),
@@ -43,6 +43,7 @@ module.exports = {
             patterns: [
                 { from: "src/SamplePhotos", to: "SamplePhotos" },
                 { from: "src/logo.png", to: "logo.png" },
+                { from: "src/favicon.ico", to: "favicon.ico" },
             ],
         })
     ],

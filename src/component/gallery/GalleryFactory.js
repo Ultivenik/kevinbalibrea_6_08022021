@@ -114,7 +114,7 @@ export default class GalleryFactory{
                 image.addEventListener("click", () => {
                     carousel = LightboxFactory.create({
                         medias,
-                        currentIndex: index,
+                        currentIndex: index
                     })
                     document.querySelector(".main").appendChild(carousel)
                 })
