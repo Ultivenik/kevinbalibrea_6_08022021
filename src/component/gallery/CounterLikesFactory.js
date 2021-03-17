@@ -5,7 +5,7 @@ export default class CounterLikesFactory
         let likesParam = likes
         const spanLikes = document.createElement("span")
         spanLikes.classList.add(classAdd)
-        spanLikes.innerHTML = `${likesParam}  `
+        spanLikes.innerHTML = `${likesParam} `
         return spanLikes
     }
     static eventLikes(Likes,icon, likesParam)

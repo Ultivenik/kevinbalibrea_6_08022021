@@ -188,6 +188,9 @@ body{
     justify-content: space-between;
     color: #901C1C;
 }
+.photo-likes i{
+    width: 1%;
+}
 .date-time{
     text-align: center;
 }
