@@ -1,4 +1,4 @@
-export default class IconFactory
+    export default class IconFactory
 {
     static create()
     {

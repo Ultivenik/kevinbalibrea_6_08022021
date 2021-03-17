@@ -130,7 +130,7 @@ export default class LightboxFactory {
         const videoParam = videoContainer
         const sourceParam = sourceVideo
         const titleParam = titleImage
-        //Give the right attribute to the right media
+        // Give the right attribute to the right media
         if (currentMedia.image) {
             imageParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
             imageParam.alt = currentMedia.altText
@@ -145,7 +145,7 @@ export default class LightboxFactory {
             videoParam.controls = true
             titleImage.innerHTML = currentMedia.altText
         }
-        //Avoid displaying video and image in same time
+        // Avoid displaying video and image in same time
         if (currentMedia.image) {
             containerLightBox.replaceChildren(imageParam, titleParam)
         }

@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require("copy-webpack-plugin")
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -45,6 +46,13 @@ module.exports = {
                 { from: "src/logo.png", to: "logo.png" },
                 { from: "src/favicon.ico", to: "favicon.ico" },
             ],
-        })
+        }),
+        new ImageMinimizerPlugin({
+            severityError: 'warning',
+            minimizerOptions: {
+                plugins: ['gifsicle'],
+            },
+            loader: false,
+        }),
     ],
 }

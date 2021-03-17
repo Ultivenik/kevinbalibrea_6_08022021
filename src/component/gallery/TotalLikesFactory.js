@@ -9,7 +9,7 @@ export default class TotalLikesFactory
         media.map(total =>{
             sum.push(total.likes)
         })
-        const totalLikes = CounterLikesFactory.create("total-likes", sum.reduce((a, b) => a+ b))
+        const totalLikes = CounterLikesFactory.create("total-likes", sum.reduce((a, b) => a + b))
         const icon = IconFactory.create()
         totalLikes.appendChild(icon)
         return totalLikes

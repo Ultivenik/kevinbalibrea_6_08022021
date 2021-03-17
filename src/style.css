@@ -271,7 +271,7 @@ body{
 }
 .lightbox-media{
    display: block;
-    width: 30em;
+    width: 18em;
     animation: lightbox 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s 1 normal none;
 }
 .btn-lightbox{
@@ -410,6 +410,9 @@ body{
     .contact-form .btn-contact{
         margin: 3% 0;
         padding: 5% 8%;
+    }
+    .btn-contact{
+        left: 40%;
     }
     .overlay-gallery{
         overflow: scroll;
