@@ -57,8 +57,8 @@ export default class GalleryFactory{
                     break
                 case "Titre":
                     medias.sort((a, b) => {
-                        const aa = a.image !== undefined ? a.image : a.video
-                        const bb = b.image !== undefined ? b.image : b.video
+                        const aa = a.altText
+                        const bb = b.altText
                         return aa > bb
                     })
                     break
