@@ -6,6 +6,7 @@ export default class LabelFactory
         Label.classList.add(nameClass)
         Label.innerHTML = content
         Label.setAttribute("for", id)
+        Label.tabIndex = 0
         return Label
     }
 }

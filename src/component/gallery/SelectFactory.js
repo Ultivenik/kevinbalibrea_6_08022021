@@ -7,7 +7,7 @@ export default class SelectFactory
     {
         const select = document.createElement("select")
         select.classList.add(nameClass)
-        select.id = id 
+        select.id = id
         return select
     }
 }

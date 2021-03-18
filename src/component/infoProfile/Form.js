@@ -4,6 +4,7 @@ export default class Form
     {
         const form = document.createElement("form")
         form.classList.add("contact-form")
+        form.tabIndex = 0
         return form
     }
 }

@@ -1,9 +1,9 @@
 export default class CounterLikesFactory
 {
-    static create(classAdd, likes)
+    static create(type, classAdd, likes)
     {
         let likesParam = likes
-        const spanLikes = document.createElement("span")
+        const spanLikes = document.createElement(type)
         spanLikes.classList.add(classAdd)
         spanLikes.innerHTML = `${likesParam} `
         return spanLikes

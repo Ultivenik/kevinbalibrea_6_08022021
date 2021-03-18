@@ -1,7 +1,8 @@
 import ArrowFactory from './ArrowFactory'
 import CloseFactory from './CloseFactory'
 
-const mediaPath = "/kevinbalibrea_6_08022021/dist/SamplePhotos"
+// const mediaPath = "/kevinbalibrea_6_08022021/dist/SamplePhotos"
+const mediaPath = "/dist/SamplePhotos"
 
 export default class LightboxFactory {
     static create({
@@ -96,9 +97,15 @@ export default class LightboxFactory {
             titleImage
         })
 
-        imageContainer.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
-        sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
-        videoContainer.appendChild(sourceVideo)
+        if (currentMedia.image) {
+            imageContainer.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.image}`
+        }
+        if(currentMedia.video){
+            sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
+            videoContainer.controls = true
+            videoContainer.appendChild(sourceVideo)
+            videoContainer.tabIndex = 0
+        }
         containerLightBox.appendChild(titleImage)
         carouselContainer.appendChild(containerLightBox)
         carouselContainer.appendChild(closeButton)
@@ -106,14 +113,15 @@ export default class LightboxFactory {
         carouselContainer.appendChild(arrowRight)
         containerLightBox.classList.add("container-lightbox")
         carouselContainer.classList.add("overlay-gallery")
+        carouselContainer.id = "lightbox"
         imageContainer.classList.add("lightbox-media")
         videoContainer.classList.add("lightbox-media")
         titleImage.classList.add("title-photo-gallery")
         containerLightBox.setAttribute("aria-label", "image-closeup-view")
         containerLightBox.setAttribute("role", "Dialog")
         titleImage.setAttribute("role", "Text")
-        videoContainer.controls = true
         titleImage.innerHTML = currentMedia.altText
+        titleImage.tabIndex = 0
         return carouselContainer
     }
 
@@ -136,6 +144,8 @@ export default class LightboxFactory {
             imageParam.alt = currentMedia.altText
             imageParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             imageParam.setAttribute("role", "Image link")
+            imageParam.tabIndex = 0
+
             titleImage.innerHTML = currentMedia.altText
         }else{
             sourceParam.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
@@ -143,6 +153,7 @@ export default class LightboxFactory {
             videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             videoParam.setAttribute("role", "Video link")
             videoParam.controls = true
+            videoParam.tabIndex = 0
             titleImage.innerHTML = currentMedia.altText
         }
         // Avoid displaying video and image in same time

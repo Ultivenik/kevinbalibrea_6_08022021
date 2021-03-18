@@ -4,7 +4,6 @@ import ImageFactory from '../media/ImageFactory'
 import LabelFactory from '../infoProfile/LabelFactory'
 import SelectFactory from "./SelectFactory"
 import VideoFactory from "../media/VideoFactory"
-import DatetimeFactory from "./DateTimeFactory"
 import PricePhotoFactory from "./PricePhotoFactory"
 import CounterLikesFactory from "./CounterLikesFactory"
 import SortOptionFactory from "./SortOptionFactory"
@@ -13,7 +12,8 @@ import IconFactory from "./IconFactory"
 import TotalLikesFactory from "./TotalLikesFactory"
 import TotalPriceFactory from "./TotalPriceFactory"
 
-const mediaPath = "/kevinbalibrea_6_08022021/dist/SamplePhotos"
+// const mediaPath = "/kevinbalibrea_6_08022021/dist/SamplePhotos"
+const mediaPath = "/dist/SamplePhotos"
 
 export default class GalleryFactory{
     static create(photographer)
@@ -34,6 +34,7 @@ export default class GalleryFactory{
         const label = LabelFactory.create("label-list", "Trier par", "category")
         const optArray = ["Popularité", "Date", "Titre"]
         const select = SelectFactory.create("select-list", "category")
+        select.setAttribute("aria-label", "Order by")
         for (let i = 0; i < optArray.length; i+=1) {
             const element = optArray[i];
             const options = SortOptionFactory.create(element)
@@ -109,7 +110,7 @@ export default class GalleryFactory{
             if (media.image) {
                 const linkImage = document.createElement("a")
                 linkImage.classList.add("link-image")
-                linkImage.href = "#"
+                linkImage.href = "#lightbox"
                 linkImage.setAttribute("role", "Image link")
                 const image = ImageFactory.create({
                     source: `${mediaPath}/${media.photographerId}/${media.image}`,
@@ -138,11 +139,10 @@ export default class GalleryFactory{
                 })
                 mediaFigure.appendChild(video)
             }
-            const dateTime = DatetimeFactory.create(media.date)
             const titlePhoto = TitleFactory.create("h3", media.altText, "title-photo-gallery")
             const pricePhoto = PricePhotoFactory.create(media.price)
-            const likesPhoto = CounterLikesFactory.create("photo-likes", media.likes)
-            const iconLike = IconFactory.create()
+            const likesPhoto = CounterLikesFactory.create("button", "photo-likes", media.likes)
+            const iconLike = IconFactory.create("fa-heart", "label", "likes")
             likesPhoto.addEventListener("click", CounterLikesFactory.eventLikes(likesPhoto, iconLike, media.likes))
 
             titlePhoto.setAttribute("role", "Text")
@@ -151,7 +151,6 @@ export default class GalleryFactory{
             iconLike.setAttribute("role", "Image")
             mediaFigure.appendChild(mediaLegend)
             mediaLegend.appendChild(titlePhoto)
-            mediaLegend.appendChild(dateTime)
             mediaLegend.appendChild(pricePhoto)
             mediaLegend.appendChild(likesPhoto)
             likesPhoto.appendChild(iconLike)
