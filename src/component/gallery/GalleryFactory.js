@@ -37,7 +37,7 @@ export default class GalleryFactory{
         select.setAttribute("aria-label", "Order by")
         for (let i = 0; i < optArray.length; i+=1) {
             const element = optArray[i];
-            const options = SortOptionFactory.create(element)
+            const options = SortOptionFactory.create(element, "occurency-list")
             select.appendChild(options)
         }
 
