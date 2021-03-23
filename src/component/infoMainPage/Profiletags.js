@@ -8,7 +8,6 @@ export default class ProfileTags
             profileSpan.setAttribute("aria-label", "Tag")
             profileSpan.classList.add(`tag`)
             profileSpan.innerHTML = `#${tag}`
-            profileSpan.tabIndex = 0
 
             parent.appendChild(profileSpan)
             return profileSpan

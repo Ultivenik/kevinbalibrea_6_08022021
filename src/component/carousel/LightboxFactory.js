@@ -37,7 +37,7 @@ export default class LightboxFactory {
             })
         }
         const goToRight = () => {
-            if (index + 1 < 0) {
+            if (index - 1 > 0) {
                 index = medias.length
                 if (index === medias.length) {
                     index = 0
@@ -144,7 +144,6 @@ export default class LightboxFactory {
             imageParam.alt = currentMedia.altText
             imageParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             imageParam.setAttribute("role", "Image link")
-            imageParam.tabIndex = 0
 
             titleImage.innerHTML = currentMedia.altText
         }else{
@@ -153,7 +152,7 @@ export default class LightboxFactory {
             videoParam.setAttribute("aria-label", `${currentMedia.altText}, closeup view`)
             videoParam.setAttribute("role", "Video link")
             videoParam.controls = true
-            videoParam.tabIndex = 0
+
             titleImage.innerHTML = currentMedia.altText
         }
         // Avoid displaying video and image in same time
@@ -162,6 +161,11 @@ export default class LightboxFactory {
         }
         if (currentMedia.video) {
             containerLightBox.replaceChildren(videoParam, titleParam)
+        }
+        if (imageParam.naturalHeight > 2800 && window.screen.width > 1200) {
+            imageParam.style.width = "34em"
+        }else{
+            imageParam.style.width = ""
         }
     }
 }

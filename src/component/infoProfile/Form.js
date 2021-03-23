@@ -1,10 +1,9 @@
 export default class Form
 {
-    static create()
+    static create(nameClass)
     {
         const form = document.createElement("form")
-        form.classList.add("contact-form")
-        form.tabIndex = 0
+        form.classList.add(nameClass)
         return form
     }
 }

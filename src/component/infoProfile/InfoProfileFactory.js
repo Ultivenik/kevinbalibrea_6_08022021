@@ -26,11 +26,13 @@ export default class InfoProfileFactory
         const profileLocation = InfoFactory.create("city", "text", `${photographer.city} ${photographer.country}`)
         const profileQuote = InfoFactory.create("quote", "text", photographer.tagline)
         const profileButton = ButtonFactory.create("btn-contact", "Contactez-moi")
+        profileButton.tabIndex = 0
         const profileAvatar = AvatarFactory.create("img-profile-link", photographer, path)
         const containerTags = ContainerTagFactory.create()
 
         profileButton.addEventListener('click', () => {
             FormFactory.create(photographer)
+            document.querySelector("#firstname").focus()
         })
 
         profileButton.setAttribute("aria-label", "Contact Me")

@@ -11,7 +11,6 @@ export default class CloseFactory
         close.setAttribute("role", "Button")
         close.innerHTML = "<i class='fas fa-times'></i>"
         close.addEventListener('click', onClick)
-        close.addEventListener("keydown", onClick)
         return close
     }
 }

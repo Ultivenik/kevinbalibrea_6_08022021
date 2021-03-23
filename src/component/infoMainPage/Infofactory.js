@@ -6,7 +6,6 @@ export default  class InfoFactory
         profileInfo.classList.add(nameClass)
         profileInfo.setAttribute("role", role)
         profileInfo.innerHTML = content
-        profileInfo.tabIndex = 0
 
         return profileInfo
     }

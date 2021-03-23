@@ -18,7 +18,6 @@ export default class Main
     static create(parent)
     {
         const title = TitleFactory.create("h1" ,"Nos photographes", "main-title")
-        title.tabIndex = 0
         const section = Main.createSectionProfiles()
 
         parent.appendChild(title)
@@ -50,9 +49,6 @@ export default class Main
         const quote = InfoFactory.create("quote", "text", photographer.tagline)
         const price = InfoFactory.create("price", "text", `${photographer.price} € / jour `)
         const containerTag = ContainerTagFactory.create()
-        city.tabIndex = 0
-        price.tabIndex = 0
-        quote.tabIndex = 0
 
         parent.appendChild(figure)
         figure.appendChild(avatar)

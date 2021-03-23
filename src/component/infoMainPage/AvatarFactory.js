@@ -6,7 +6,6 @@ export default class AvatarFactory
         IDImg.classList.add(nameClass, `img-${photographer.id}`)
         IDImg.src = path + photographer.portrait
         IDImg.alt = `photo profil de ${photographer.name}`
-        IDImg.tabIndex = 0
 
         return IDImg
     }
