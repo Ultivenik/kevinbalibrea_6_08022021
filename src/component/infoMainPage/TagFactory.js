@@ -17,7 +17,7 @@ export default class TagFactory
         spanNav.appendChild(linkNav)
 
         linkNav.innerHTML = `#${  tag}`
-        linkNav.addEventListener('click', TagFactory.sortProfile)
+        linkNav.addEventListener("click", TagFactory.sortProfile)
         return spanNav
     }
 
@@ -28,6 +28,14 @@ export default class TagFactory
         tag = tag.toLowerCase().substring(1, tag.length)
         const photographers = info.photographers.map(item=> item)
         const idArray = []
+        // changing color tag
+        if (e.target.style.color !== "white") {
+            e.target.style.color = "white"
+            e.target.parentNode.style.background = "#901c1c"
+        }else{
+            e.target.style.color = "#901c1c"
+            e.target.parentNode.style.background = "white"
+        }
         // if the tag on navbar is the same of profile tag the profile stay displayed
         photographers.map( photographer => {
             const photographerProfile = document.querySelector(`#profile-${photographer.id}`)
