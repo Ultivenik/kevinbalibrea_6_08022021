@@ -38,6 +38,8 @@ export default class FormFactory
             e.preventDefault()
             overlay.remove()
         }
+
+        // display the values of the form in the console
         const sendingMessage = (e) =>{
             e.preventDefault()
             const contactForm = document.querySelector(".contact-form")
