@@ -16,7 +16,7 @@ export default class Header
             "Travel",
             "Sport",
             "Animals",
-            "Events",
+            "Events"
         ]
         const tags = tagsContent.map(tag => tag )
 

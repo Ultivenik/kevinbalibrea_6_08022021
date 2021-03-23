@@ -21,8 +21,6 @@ export default class FormFactory
         const closeBtn = ButtonFactory.create("btn-close", "<i class='fas fa-times'></i>")
         const firstName = LabelFactory.create("label-form", "Prenom", "firstname")
         const firstNameInput = InputFactory.create("text", "firstname")
-        firstNameInput.tabIndex = 0
-        firstNameInput.focus()
         const lastName = LabelFactory.create("label-form", "Nom", "lastname")
         const lastNameInput = InputFactory.create("text", "lastname")
         const mail = LabelFactory.create("label-form", "Email", "email")

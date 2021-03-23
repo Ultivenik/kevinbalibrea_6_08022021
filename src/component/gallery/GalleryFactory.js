@@ -25,11 +25,13 @@ export default class GalleryFactory{
         const infoGallery = document.createElement("section")
         infoGallery.classList.add("gallery")
 
+        // building the totalLikes element of a profile
         const containerTotalLikes = document.createElement("div")
         containerTotalLikes.classList.add("container-total-likes")
         const totalLikes = TotalLikesFactory.create(medias.filter((media) => media.photographerId === photographer.id))
         const totalPrice = TotalPriceFactory.create(photographers.filter((photo) => photo.price === photographer.price))
 
+        // building the sorting element DOM (label + select/options)
         const label = LabelFactory.create("label-list", "Trier par", "category")
         const optArray = ["Popularité", "Date", "Titre"]
         const select = SelectFactory.create("select-list", "category")
@@ -84,6 +86,7 @@ export default class GalleryFactory{
         containerTotalLikes.appendChild(totalPrice)
         containerTotalLikes.setAttribute("role", "Text")
         label.setAttribute("role", "Input label")
+
         return infoGallery
     }
 

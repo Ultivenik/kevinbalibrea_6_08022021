@@ -3,6 +3,7 @@ import IconFactory from "./IconFactory"
 
 export default class TotalLikesFactory
  {
+     // return the result of the sum of all likes of a profile
      static create(media)
      {
         let sum = []

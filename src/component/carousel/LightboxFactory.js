@@ -103,7 +103,6 @@ export default class LightboxFactory {
             sourceVideo.src = `${mediaPath}/${currentMedia.photographerId}/${currentMedia.video}`
             videoContainer.controls = true
             videoContainer.appendChild(sourceVideo)
-            videoContainer.tabIndex = 0
         }
         containerLightBox.appendChild(titleImage)
         carouselContainer.appendChild(containerLightBox)
@@ -120,10 +119,10 @@ export default class LightboxFactory {
         containerLightBox.setAttribute("role", "Dialog")
         titleImage.setAttribute("role", "Text")
         titleImage.innerHTML = currentMedia.altText
-        titleImage.tabIndex = 0
         return carouselContainer
     }
 
+    // method to check what media is in the lightbox while navigation
     static isAnImage({
         imageContainer,
         videoContainer,
@@ -161,6 +160,8 @@ export default class LightboxFactory {
         if (currentMedia.video) {
             containerLightBox.replaceChildren(videoParam, titleParam)
         }
+
+        // resizing images to avoid overflows and depending on the screen width
         if (imageParam.naturalHeight > 2800 && window.screen.width > 1200) {
             imageParam.style.width = "34em"
         }else{
