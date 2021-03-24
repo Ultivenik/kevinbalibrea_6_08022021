@@ -17,11 +17,8 @@ export default class LightboxFactory {
         const sourceVideo = document.createElement("source")
         const titleImage = document.createElement("h3")
         const goToLeft = () => {
-            if (index - 1 < 0) {
-                index = medias.length
-                if (index === medias.length) {
-                    index = 0
-                }
+            if (index - 1 === 0) {
+                index = medias.length -1
             } else {
                 index-=1
             }
@@ -36,11 +33,8 @@ export default class LightboxFactory {
             })
         }
         const goToRight = () => {
-            if (index - 1 > 0) {
-                index = medias.length
-                if (index === medias.length) {
-                    index = 0
-                }
+            if (index + 1 === medias.length) {
+                index = 0
             } else {
                 index+=1
             }
